@@ -17,6 +17,6 @@ public class LinkedListExample {
         Integer poll = numbers.poll();// jei elemento nėra, gražina null
         Integer pop = numbers.pop();// jei nėra elemento, exception
 
-        numbers.
+
     }
 }
