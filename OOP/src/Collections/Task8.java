@@ -19,9 +19,9 @@ public class Task8 {
             names.remove("Andrius");
         }
         System.out.println(names);
-        System.out.println(names.size());
         names.clear();
         System.out.println(names);
         System.out.println(names.size());
+
     }
 }
