@@ -4,6 +4,7 @@ public class VarargsExample {
     public static void main(String[] args) {
         VarargsExample example = new VarargsExample();
         example.print(5,"Aleksandras", "5", "Teta");
+        example.print(5,"Aleksandras");
 
     }
    /* private void print(String name){
