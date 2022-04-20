@@ -19,9 +19,28 @@ public class LoginService {
             return;
         }
         credentials.put(userName, DigestUtils.sha512Hex(password));
+        System.out.println("Registracija sėkminga.");
     }
 
-    public void userLogin(){
+    public void userLogin(Scanner scanner){
+        System.out.println("Įveskite prisijungimo vardą:\n");
+        String userName = scanner.nextLine();
+        System.out.println("Įveskite slaptažodį:\n");
+        String password = scanner.nextLine();
+
+        String userPassword = credentials.get(userName);
+        if(userPassword == null){
+            System.out.println("Tokio vartotojo nėra.");
+            return;;
+        }
+
+
+        if(userPassword.equals(DigestUtils.sha512Hex(password))){
+            System.out.println("Neteisingas slaptažodis");
+            return;
+        }
+
+        System.out.printf("Sveikiname %s prisijungus \n", userName);
 
     }
 
