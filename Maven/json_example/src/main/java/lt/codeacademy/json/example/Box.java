@@ -26,4 +26,12 @@ public class Box implements Serializable {
     public void setSize(int size) {
         this.size = size;
     }
+
+    @Override
+    public String toString() {
+        return "Box{" +
+                "name='" + name + '\'' +
+                ", size=" + size +
+                '}';
+    }
 }
