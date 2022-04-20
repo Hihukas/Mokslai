@@ -31,7 +31,7 @@ public class LoginService {
         String userPassword = credentials.get(userName);
         if(userPassword == null){
             System.out.println("Tokio vartotojo nėra.");
-            return;;
+            return;
         }
 
 
