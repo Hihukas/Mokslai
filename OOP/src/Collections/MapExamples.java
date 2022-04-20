@@ -1,9 +1,6 @@
 package Collections;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class MapExamples {
     public static void main(String[] args) {
@@ -37,17 +34,17 @@ public class MapExamples {
         System.out.println(cities);
 
 
-        Map<String, String> names2 = Map.of("k1","v1", "k2", "v2");
+        Map<String, String> names2 = Map.of("k1", "v1", "k2", "v2");
         System.out.println(names2.get("k2"));
 
-        for(String key: names2.keySet()){
+        for (String key : names2.keySet()) {
             System.out.printf("%s-%s\n", key, names2.get(key));
         }
-        for(String value: names2.values()){
+        for (String value : names2.values()) {
             System.out.println(value);
         }
 
-        for(Map.Entry<String, String> entry: names2.entrySet()){
+        for (Map.Entry<String, String> entry : names2.entrySet()) {
             System.out.printf("%s-%s\n", entry.getKey(), entry.getValue());
         }
 
@@ -69,10 +66,12 @@ public class MapExamples {
 
         System.out.println(persons2);
 
-
-
-
-
+        Set<Map.Entry<Person, Integer>> entries = persons2.entrySet();
+        Iterator<Map.Entry<Person, Integer>> iterator = entries.iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<Person, Integer> entry = iterator.next();
+            System.out.printf("%s-%s\n", entry.getKey(), entry.getValue());
+        }
 
     }
 }
