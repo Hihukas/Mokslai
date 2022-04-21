@@ -22,4 +22,8 @@ public class Person {
     public String getPersonCode() {
         return personCode;
     }
+
+    public String printInfo(){
+        return String.format("Vardas: %s  Pavardė: %s Personal code:%s", name, surname, personCode);
+    }
 }
