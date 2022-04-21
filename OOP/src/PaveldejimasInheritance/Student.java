@@ -11,4 +11,10 @@ public class Student extends Person {
     public String getUniversity() {
         return university;
     }
+
+    @Override
+    public String getPersonCode() {
+        String code = super.getPersonCode();
+        return code.substring(0, code.length() / 2);
+    }
 }
