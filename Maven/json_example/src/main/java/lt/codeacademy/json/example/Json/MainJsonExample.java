@@ -20,7 +20,7 @@ public class MainJsonExample {
             file.createNewFile();
         }
 
-        Person person = new Person("Andrius", "Baltrūnas", 33, new Address("Vilnius", "LT", "Savanorių pr."));
+        Person person = new Person("Andrius", null, 33, new Address("Vilnius", "LT", "Savanorių pr."));
         Person secondPerson = new Person("Aleksandras", "Dudėnas", 31, new Address("Klaipėda", "LT", "Turgaus a."));
         mapper.writeValue(file, person);
 
