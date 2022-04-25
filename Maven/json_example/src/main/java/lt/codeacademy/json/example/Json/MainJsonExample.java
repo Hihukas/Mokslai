@@ -1,5 +1,6 @@
 package lt.codeacademy.json.example.Json;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
@@ -33,5 +34,10 @@ public class MainJsonExample {
 
         List<Person> persons = List.of(person, secondPerson, person);
         mapper.writeValue(file, persons);
+
+        persons = mapper.readValue(file, new TypeReference<>() {});
+        persons.forEach(System.out::println);
+
+
     }
 }
