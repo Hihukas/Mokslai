@@ -1,4 +1,4 @@
-package lt.codeacademy.json.example;
+package lt.codeacademy.json.example.Serializable;
 
 import java.io.Serializable;
 

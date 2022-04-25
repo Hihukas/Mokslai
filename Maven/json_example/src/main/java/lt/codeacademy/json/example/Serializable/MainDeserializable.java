@@ -1,8 +1,7 @@
-package lt.codeacademy.json.example;
+package lt.codeacademy.json.example.Serializable;
 
 import java.io.EOFException;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.ObjectInputStream;
 
 public class MainDeserializable {
