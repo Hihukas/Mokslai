@@ -44,6 +44,8 @@ public class FunctionExample {
         customFunctionInterface.doSomething(50, 50, 40);
 
         example.createFunctionInterface().doSomething(40, 50, 10);
+        example.testMyFunctionInterface((a, b, c)-> System.out.println(a/c*b));
+        example.testMyFunctionInterface((a, b, c)-> System.out.println(a*c-b));
     }
 
     public void testSupplier(Supplier<Integer> supplier){
@@ -54,4 +56,7 @@ public class FunctionExample {
         return (v1, v2, v3) -> System.out.println(v1 - v2 * v3);
     }
 
+    private void testMyFunctionInterface (CustomFunctionInterface function){
+        function.doSomething(50, 70, 80);
+    }
 }
