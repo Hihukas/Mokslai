@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 public class MainJsonExample {
     public static void main(String[] args) throws IOException {
@@ -38,6 +39,8 @@ public class MainJsonExample {
         persons = mapper.readValue(file, new TypeReference<>() {});
         persons.forEach(System.out::println);
 
+        Map<String, Object> personMap = mapper.readValue(personAssString, new TypeReference<>(){});
+        System.out.println(personMap.get("name"));
 
     }
 }
