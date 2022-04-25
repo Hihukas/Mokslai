@@ -46,8 +46,15 @@ public class FunctionExample {
         example.createFunctionInterface().doSomething(40, 50, 10);
         example.testMyFunctionInterface((a, b, c)-> System.out.println(a/c*b));
         example.testMyFunctionInterface((a, b, c)-> System.out.println(a*c-b));
+
+        BiFunction<Integer, Integer, Integer> myFunction = example::sum;
+        int value = myFunction.apply(50, 70);
+        System.out.println(value);
     }
 
+    private int sum(int a, int b){
+        return a+b;
+    }
     public void testSupplier(Supplier<Integer> supplier){
         System.out.println(supplier.get());
     }
