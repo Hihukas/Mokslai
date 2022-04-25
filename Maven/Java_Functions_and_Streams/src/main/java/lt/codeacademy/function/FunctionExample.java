@@ -1,9 +1,6 @@
 package lt.codeacademy.function;
 
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
+import java.util.function.*;
 
 public class FunctionExample {
     public static void main(String[] args) {
@@ -33,9 +30,28 @@ public class FunctionExample {
         }else{
             System.out.println("Nepavyko");
         }
+
+        BiConsumer<Integer, Integer> biConsumer = (x,y) -> System.out.println(x*y);
+        biConsumer.accept(50, 80);
+
+        BiPredicate<String, String> biPredicate = (v1, v2) -> v1 !=null && v1.equals(v2);
+        System.out.println(biPredicate.test("a", "a"));
+
+        BiFunction<Integer, Integer, String> biFunction = (x, y) -> String.valueOf(x*y);
+        System.out.println(biFunction.apply(50, 10));
+
+        CustomFunctionInterface customFunctionInterface =(v1, v2, v3) -> System.out.println(v1 +v2 +v3);
+        customFunctionInterface.doSomething(50, 50, 40);
+
+        example.createFunctionInterface().doSomething(40, 50, 10);
     }
 
     public void testSupplier(Supplier<Integer> supplier){
         System.out.println(supplier.get());
     }
+
+    private CustomFunctionInterface createFunctionInterface(){
+        return (v1, v2, v3) -> System.out.println(v1 - v2 * v3);
+    }
+
 }
