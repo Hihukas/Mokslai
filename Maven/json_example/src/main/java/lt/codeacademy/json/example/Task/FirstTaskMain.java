@@ -20,7 +20,7 @@ public class FirstTaskMain {
             file.createNewFile();
         }
 
-        Payment payment = new Payment(new Sender("Aleksandras", "Dudenas"), new Receiver("Mindaugas", "Šimkevičius"));
+        Payment payment = new Payment(new Sender("Antanas", "Antanaitis"), new Receiver("Jonas", "Jonaitis"));
 
         // Payment payment = new Payment(new Sender("Aleksandras", "Dudėnas"), new Receiver("Mindaugas", "Šimkevičius"));
         mapper.writeValue(file, payment);
