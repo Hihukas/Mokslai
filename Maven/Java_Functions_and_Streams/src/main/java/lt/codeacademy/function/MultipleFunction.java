@@ -7,11 +7,11 @@ public class MultipleFunction {
 
 
 
-        Function<String, Function<String, String>> multipleFunction = value -> {
+        /*Function<String, Function<String, String>> multipleFunction = value -> {
             Function<String, String> otherFunction = value2 -> value + " " + value2;
             return otherFunction;
-        };
-
+        };*/
+        Function<String, Function<String, String>> multipleFunction = value -> value2 -> value + " " + value2;
         String result = multipleFunction.apply("Pirmas").apply("Antras");
     }
 }
