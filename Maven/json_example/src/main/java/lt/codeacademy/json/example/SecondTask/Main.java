@@ -23,8 +23,8 @@ public class Main {
             file.createNewFile();
         }
 
-        List<Company> companies = main.generateCompanies();
-        objectMapper.writeValue(file, companies);
+       // List<Company> companies = main.generateCompanies();
+        objectMapper.writeValue(file, main.generateCompanies());
     }
 
     private List<Company> generateCompanies(){
