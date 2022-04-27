@@ -33,13 +33,13 @@ public class TaskTwo {
     }
 
     private Function<List<String>, List<String>> upperCaseNames() {
-       /*  return names -> {
+       return names -> {
          List<String> newArray = new ArrayList<>();
           for(String name: names){
-              newArray.add(name.toUpperCase())
+              newArray.add(name.toUpperCase());
           }
           return newArray;
-        };*/
-        return names -> names.stream().map(String::toUpperCase).collect(Collectors.toList());
+        };
+       // return names -> names.stream().map(String::toUpperCase).collect(Collectors.toList());
     }
 }
