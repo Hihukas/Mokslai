@@ -15,5 +15,11 @@ public class BoxMain {
         if(box.getObject() instanceof String value){
             System.out.println(value);
         }
+
+        GenericBox<Integer> genericBox = new GenericBox<>();
+        genericBox.setObject(50);
+        //genericBox.setObject("50"); negalima String, kadangi priima tik Integer
+        System.out.println(genericBox.getObject());
+
     }
 }
