@@ -43,6 +43,11 @@ public class BoxMain {
         Integer integer = main.testGenericMethod2(50);
 
         String o = main.testGenericMethod3();
+
+
+        Pair<String, String> p1 = new MyPair<>("As", "Tu");
+        Pair<String, String> p2 = new MyPair<>("TU", "jis");
+        System.out.println(PairComperator.compare(p1, p2));
     }
 
     private <E> void testGenericMethod(E type) {
