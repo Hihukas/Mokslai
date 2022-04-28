@@ -21,5 +21,10 @@ public class BoxMain {
         //genericBox.setObject("50"); negalima String, kadangi priima tik Integer
         System.out.println(genericBox.getObject());
 
+        Pair<String, Integer> pairExample = new MyPair<>("Andrius", 33);
+        Pair<Double, Integer> pairExample2 = new MyPair<>(55.5, 55);
+        System.out.println(pairExample.getKey());
+        System.out.println(pairExample.getValue());
+
     }
 }
