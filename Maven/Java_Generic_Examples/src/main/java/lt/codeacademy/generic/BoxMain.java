@@ -48,6 +48,10 @@ public class BoxMain {
         Pair<String, String> p1 = new MyPair<>("As", "Tu");
         Pair<String, String> p2 = new MyPair<>("TU", "jis");
         System.out.println(PairComperator.compare(p1, p2));
+
+        Calculator<Integer> calculator = new Calculator<>(50, 50);
+        Number sum = calculator.sum();
+        System.out.println(sum);
     }
 
     private <E> void testGenericMethod(E type) {
