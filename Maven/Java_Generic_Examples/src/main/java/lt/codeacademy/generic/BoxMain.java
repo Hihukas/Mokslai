@@ -6,13 +6,13 @@ public class BoxMain {
         box.setObject(50);
 
         //Integer value = (Integer) box.getObject(); visada turi būti patikrinimas prieš castinimą
-        if(box.getObject() instanceof Integer value) {
+        if (box.getObject() instanceof Integer value) {
             System.out.println(value);
         }
         box.setObject("50");
 
         //value = (Integer) box.getObject(); ClassCastException
-        if(box.getObject() instanceof String value){
+        if (box.getObject() instanceof String value) {
             System.out.println(value);
         }
 
@@ -32,5 +32,32 @@ public class BoxMain {
         rawGenericBox.setObject("50");
 
         //Integer v =(Integer) rawGenericBox.getObject(); ClassCastException
+
+        BoxMain main = new BoxMain();
+
+        main.testGenericMethod("test");
+        main.testGenericMethod(50);
+        main.testGenericMethod(true);
+        main.testGenericMethod(genericBox);
+
+        Integer integer = main.testGenericMethod2(50);
+
+        String o = main.testGenericMethod3();
+    }
+
+    private <E> void testGenericMethod(E type) {
+
+    }
+
+    private <E> E testGenericMethod2(E e) {
+        return e;
+    }
+
+    private <K, V> void testGenericMethod3(K k, V v) {
+
+    }
+
+    private <E> E testGenericMethod3() {
+        return null;
     }
 }
