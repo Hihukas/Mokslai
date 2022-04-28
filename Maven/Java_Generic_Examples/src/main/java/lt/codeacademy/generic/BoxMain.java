@@ -26,5 +26,11 @@ public class BoxMain {
         System.out.println(pairExample.getKey());
         System.out.println(pairExample.getValue());
 
+        //Raw tipas (nerekomenduojama)
+        GenericBox rawGenericBox = new GenericBox();
+        rawGenericBox.setObject(50);
+        rawGenericBox.setObject("50");
+
+        //Integer v =(Integer) rawGenericBox.getObject(); ClassCastException
     }
 }
