@@ -1,5 +1,8 @@
 package lt.codeacademy.generic;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BoxMain {
     public static void main(String[] args) {
         Box box = new Box();
@@ -52,8 +55,31 @@ public class BoxMain {
         Calculator<Integer> calculator = new Calculator<>(50, 50);
         Number sum = calculator.sum();
         System.out.println(sum);
+
+        GenericBox<Number> numberBox = new GenericBox<>();
+        GenericBox<Integer> interBox = new GenericBox<>();
+        //numberBox = interBox; negalima
+        main.testGenericMethod(numberBox);
+        main.testGenericMethod(interBox);
+
+        List<Integer> intList = List.of(12, 3, 66);
+        List<Double> doubleList = List.of(55.5, 88.5, 88.5);
+
+        main.printList(intList);
+       // main.printList(doubleList);
     }
 
+    /*private void printList(List<? extends Number> list){
+        list.forEach(System.out::println);
+    }*/
+
+     private void printList(List<? super Integer> list){
+        list.forEach(System.out::println);
+    }
+
+    private void testParameter(GenericBox<Number> box){
+
+    }
     private <E> void testGenericMethod(E type) {
 
     }
