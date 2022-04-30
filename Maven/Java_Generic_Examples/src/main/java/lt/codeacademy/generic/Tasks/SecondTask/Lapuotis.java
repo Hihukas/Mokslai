@@ -10,6 +10,6 @@ public class Lapuotis implements Medis{
 
     @Override
     public void turi() {
-        System.out.printf("%s turi lapus.\n", treeType);
+        System.out.printf("%s turi lapus.\n", treeType.getName());
     }
 }

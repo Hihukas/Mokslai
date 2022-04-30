@@ -10,6 +10,6 @@ public class Spygliuotis implements Medis{
 
     @Override
     public void turi() {
-        System.out.printf("%s turi spyglius\n", treeType);
+        System.out.printf("%s turi spyglius\n", treeType.getName());
     }
 }
