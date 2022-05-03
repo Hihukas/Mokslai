@@ -38,7 +38,7 @@ public class LithuanianOfficialIdProvider implements OfficialIdProvider {
         } else {
             s = numbers[0] * 3 + numbers[1] * 4 + numbers[2] * 5 + numbers[3] * 6 + numbers[4] * 7 + numbers[5] * 8 + numbers[6] * 9 + numbers[7] + numbers[8] * 2 + numbers[9] * 3;
             k = s % 11;
-            if(k != 10){
+            if (k != 10) {
                 return k;
             }
         }
