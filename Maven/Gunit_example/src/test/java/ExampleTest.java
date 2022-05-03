@@ -5,14 +5,15 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.UUID;
 
-@ExtendWith({MockitoExtension.class})
+//@ExtendWith({MockitoExtension.class})
 public class ExampleTest {
 
-    @InjectMocks
+    //@InjectMocks
     private Example example;
 
     @Mock
@@ -21,6 +22,9 @@ public class ExampleTest {
 
     @BeforeEach
     void setUp(){
+        MockitoAnnotations.openMocks(this);
+        example = new Example(userService);
+
         id = UUID.randomUUID();
     }
 
