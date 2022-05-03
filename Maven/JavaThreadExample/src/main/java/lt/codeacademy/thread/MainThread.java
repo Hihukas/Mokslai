@@ -4,6 +4,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.IntStream;
 
 public class MainThread {
     public static void main(String[] args) throws InterruptedException {
@@ -22,7 +23,7 @@ public class MainThread {
         Thread t3 = new Thread(new SecondRunnable());
         t3.start();*/
 
-        AtomicInteger atomicInteger = new AtomicInteger(0);
+        /*AtomicInteger atomicInteger = new AtomicInteger(0);
         ExecutorService executorService = Executors.newCachedThreadPool();
         executorService.execute(new ThirdRunnable(atomicInteger));
         executorService.execute(new ThirdRunnable(atomicInteger));
@@ -34,7 +35,15 @@ public class MainThread {
             TimeUnit.SECONDS.sleep(3);
         }
 
-        System.out.println("Programa darbą baigė.");
+        System.out.println("Programa darbą baigė.");*/
+
+       Long sum = IntStream.range(1, 7)
+                .parallel()
+                .mapToObj(SumCallable::new)
+                .map(SumCallable::call)
+                .reduce(0L, Long::sum);
+
+        System.out.printf("suma: %s\n", sum);
 
     }
 }
