@@ -7,9 +7,10 @@ import java.util.TreeMap;
 
 public class Menu {
 
-    String userName;
-    String userPassword;
-    private final Scanner scanner = new Scanner(System.in);
+    private String userName;
+    private String userPassword;
+
+     private final Scanner scanner = new Scanner(System.in);
     private final Map<String, String> users = new TreeMap<>();
 
     public void chooseAction() {
@@ -43,25 +44,25 @@ public class Menu {
         System.out.println("Sveikiname prisiregistravus.");
     }
 
-    public void login(Scanner scanner){
+    public void login(Scanner scanner) {
         System.out.println("Įveskite prisijungimo vardą:");
         String userName = scanner.nextLine();
         System.out.println("Įveskite slaptažodį:");
         String password = scanner.nextLine();
 
         String doesUserPasswordExists = users.get(userName);
-        if(doesUserPasswordExists == null){
+        if (doesUserPasswordExists == null) {
             System.out.println("Tokio vartotojo nėra.");
             return;
         }
 
-        if(doesUserPasswordExists.equals(DigestUtils.sha512Hex(password))){
+        if (doesUserPasswordExists.equals(DigestUtils.sha512Hex(password))) {
             System.out.println("Neteisingas slaptažodis.");
             return;
         }
 
         System.out.printf("Sveikiname %s prisijungus \n", userName);
-        }
+    }
 
     private String userName(Scanner scanner) {
         while (true) {

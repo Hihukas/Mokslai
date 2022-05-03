@@ -32,7 +32,7 @@ public class ExampleTest {
     }
 
     @Test
-    void testGetUserByIdWhenIdIsNull1() {
+    void testGetUserByIdWhenIdIsNull3() {
         IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> example.getUserById(null));
 
         assertEquals("Missing user id", illegalArgumentException.getMessage());
