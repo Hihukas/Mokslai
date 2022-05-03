@@ -32,7 +32,13 @@ public class ExampleTest {
     }
 
     @Test
-    void testGetUserByIdWhenIdIsNull3() {
+    void testGetUserByIdWhens() {
+        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> example.getUserById(null));
+
+        assertEquals("Missing user id", illegalArgumentException.getMessage());
+    }
+    @Test
+    void testGetUserByIdWhenIdIs() {
         IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> example.getUserById(null));
 
         assertEquals("Missing user id", illegalArgumentException.getMessage());
@@ -80,8 +86,7 @@ public class ExampleTest {
         assertFalse(isUserCreated);
     }
 
-
-    @Test
+   @Test
     void testCreaterNewUserWhenUserAgeIsLess() {
         boolean isUserCreated = example.createrNewUser(new User(5));
 
