@@ -1,9 +1,14 @@
 package lt.codeacademy.thread;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class MainThread {
     public static void main(String[] args) throws InterruptedException {
         //Thread thread = new Thread(); sukūrimas
-        System.out.println("Programa pradėjo darbą.");
+        /*System.out.println("Programa pradėjo darbą.");
         Thread.sleep(5000);
 
 
@@ -13,6 +18,21 @@ public class MainThread {
 
         Thread t2 = new MyThread();
         t2.start();
+
+        Thread t3 = new Thread(new SecondRunnable());
+        t3.start();*/
+
+        AtomicInteger atomicInteger = new AtomicInteger(0);
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        executorService.execute(new ThirdRunnable(atomicInteger));
+        executorService.execute(new ThirdRunnable(atomicInteger));
+        executorService.execute(new ThirdRunnable(atomicInteger));
+
+        executorService.shutdown();
+        while (!executorService.isTerminated()){
+            System.out.printf("%s still running\n", Thread.currentThread().getName());
+            TimeUnit.SECONDS.sleep(3);
+        }
 
         System.out.println("Programa darbą baigė.");
 
