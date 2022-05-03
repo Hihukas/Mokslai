@@ -1,4 +1,5 @@
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
@@ -7,8 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.UUID;
@@ -19,13 +18,13 @@ public class ExampleTest {
     @InjectMocks
     private Example example;
 
-   @Mock
+    @Mock
     private UserService userService;
     private UUID id;
 
     @BeforeEach
-    void setUp(){
-       // MockitoAnnotations.openMocks(this);
+    void setUp() {
+        // MockitoAnnotations.openMocks(this);
         //UserService userService = Mockito.mock(UserService.class);
         //example = new Example(userService);
 
@@ -33,14 +32,39 @@ public class ExampleTest {
     }
 
     @Test
-    void testCreateNewUserWhenUserServiceThrowException(){
+    void testGetUserByIdWhenIdIsNull1() {
+        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> example.getUserById(null));
+
+        assertEquals("Missing user id", illegalArgumentException.getMessage());
+    }
+
+    @Test
+    void testGetUserByIdWhenIdIsNull() {
+        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> example.getUserById(null));
+
+        assertEquals("Missing user id", illegalArgumentException.getMessage());
+    }
+
+    @Test
+    void testGetUserById() {
+        UUID id = UUID.randomUUID();
+        when(userService.getUserById(eq(id))).thenReturn(new User(50));
+
+        User user = example.getUserById(id);
+
+        assertNotNull(user);
+        assertEquals(50, user.age());
+    }
+
+    @Test
+    void testCreateNewUserWhenUserServiceThrowException() {
         doThrow(IllegalArgumentException.class).when(userService).getUsername();
 
         assertThrows(IllegalArgumentException.class, () -> example.createrNewUser(null));
     }
 
     @Test
-    void testCreateNewUser(){
+    void testCreateNewUser() {
         when(userService.getUsername()).thenReturn("DummyName");
 
         boolean isUserCreated = example.createrNewUser(new User(12));
@@ -49,7 +73,7 @@ public class ExampleTest {
     }
 
     @Test
-    void testCreateNewUserWhenUserNameIsNull(){
+    void testCreateNewUserWhenUserNameIsNull() {
         when(userService.getUsername()).thenReturn(null);
         boolean isUserCreated = example.createrNewUser(new User(11));
 
@@ -58,10 +82,10 @@ public class ExampleTest {
 
 
     @Test
-    void testCreaterNewUserWhenUserAgeIsLess(){
-       boolean isUserCreated = example.createrNewUser(new User(5));
+    void testCreaterNewUserWhenUserAgeIsLess() {
+        boolean isUserCreated = example.createrNewUser(new User(5));
 
-       assertFalse(isUserCreated);
+        assertFalse(isUserCreated);
     }
 
     @Test
