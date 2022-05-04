@@ -1,5 +1,4 @@
-public class Student {
-    private Title title;
+public class Student extends Person{
     private int id;
     private String name;
     private String surname;
@@ -7,19 +6,10 @@ public class Student {
     public Student() {
     }
 
-    public Student(Title title, int id, String name, String surname) {
-        this.title = title;
+    public Student(int id, String name, String surname) {
         this.id = id;
         this.name = name;
         this.surname = surname;
-    }
-
-    public Title getTitle() {
-        return title;
-    }
-
-    public void setTitle(Title title) {
-        this.title = title;
     }
 
     public int getId() {
@@ -49,7 +39,6 @@ public class Student {
     @Override
     public String toString() {
         return "Student{" +
-                "title=" + title +
                 ", id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +

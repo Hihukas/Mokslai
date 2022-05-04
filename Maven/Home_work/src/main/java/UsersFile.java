@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class UsersFile {
-    public void usersFileCreate(Map<String, String> users) throws IOException {
+    public void usersFileCreate(Map<?, ?> users) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 

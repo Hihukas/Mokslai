@@ -7,9 +7,11 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
         Map<String, String> users = new HashMap<>();
+        Map<Title, Teacher> teacher = new HashMap<>();
+        teacher.put(Title.TEACHER, new Teacher());
         UsersFile usersFile = new UsersFile();
         Menu menu = new MainMenu();
         menu.menu(scanner, users);
-        usersFile.usersFileCreate(users);
+        usersFile.usersFileCreate(teacher);
     }
 }
