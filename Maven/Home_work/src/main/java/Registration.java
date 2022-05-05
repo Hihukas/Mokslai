@@ -14,7 +14,7 @@ public class Registration {
         System.out.println("Sveikiname prisiregistravus.");
     }
 
-    private String userName(Scanner scanner, Map<String, String> users) {
+    public String userName(Scanner scanner, Map<String, String> users) {
         while (true) {
             System.out.println("Įveskite prisijungimo vardą:");
             String userName = scanner.nextLine();
