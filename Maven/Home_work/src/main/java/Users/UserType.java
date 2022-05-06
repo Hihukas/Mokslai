@@ -1,6 +1,6 @@
 package Users;
 
-public enum Title {
+public enum UserType {
     STUDENT,
     TEACHER
 }

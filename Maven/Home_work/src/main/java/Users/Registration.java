@@ -1,7 +1,10 @@
+package Users;
+
 import java.util.Map;
 import java.util.Scanner;
 
 public class Registration {
+
     public void registration(Scanner scanner, Map<String, String> users) {
         String userName = userName(scanner, users);
         System.out.println("Įveskite slaptažodį:");

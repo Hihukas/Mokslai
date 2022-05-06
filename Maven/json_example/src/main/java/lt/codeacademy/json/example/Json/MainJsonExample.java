@@ -16,13 +16,15 @@ public class MainJsonExample {
         mapper.enable(SerializationFeature.INDENT_OUTPUT); // Suformatuoja į Json kalbą
 
         File file = new File("persons.json");
-        if (!file.exists()) {
-            file.createNewFile();
-        }
 
-        Person person = new Person("Andrius", null, 33, new Address("Vilnius", "LT", "Savanorių pr."));
-        Person secondPerson = new Person("Aleksandras", "Dudėnas", 31, new Address("Klaipėda", "LT", "Turgaus a."));
-        mapper.writeValue(file, person);
+            if (!file.exists()) {
+                file.createNewFile();
+
+
+            Person person = new Person("Andrius", null, 33, new Address("Vilnius", "LT", "Savanorių pr."));
+            Person secondPerson = new Person("Aleksandras", "Dudėnas", 31, new Address("Klaipėda", "LT", "Turgaus a."));
+            mapper.writeValue(file, person);
+
 
         person = mapper.readValue(file, Person.class);
         System.out.println(person);
@@ -41,6 +43,8 @@ public class MainJsonExample {
 
         Map<String, Object> personMap = mapper.readValue(personAssString, new TypeReference<>(){});
         System.out.println(personMap.get("name"));
+
+
 
     }
 }

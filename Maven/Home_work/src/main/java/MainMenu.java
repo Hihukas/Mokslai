@@ -1,3 +1,5 @@
+import Users.Registration;
+
 import java.util.Map;
 import java.util.Scanner;
 

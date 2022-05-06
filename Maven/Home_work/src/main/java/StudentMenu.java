@@ -7,9 +7,9 @@ public class StudentMenu implements Menu {
         /*String action;
         do {
             System.out.println("""
-                    Pasirinkite norimą laikytį testą:
-                    [1] - 
-                    [2] - 
+                    Pasirinkite norimą atlikti veiksmą:
+                    [1] - Laikyti testą.
+                    [2] - Testų rezultatai.
                     [3] - Išeiti.
                     """);
             action = scanner.nextLine();
