@@ -11,26 +11,27 @@ import java.util.List;
 import java.util.Scanner;
 
 public class LoginFrame {
-    public void print() throws IOException {
+    public void print() throws IOException, InterruptedException {
+//        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
         Scanner scanner = new Scanner(System.in);
-        System.out.println("""
-                Sveikiname prisijungę prie sistemos!
-                                
-                Įveskite vartotojo vardą:
-                """);
+        System.out.println("Įveskite vartotojo vardą: ");
         String userName = scanner.nextLine();
         System.out.println("Įveskite slaptažodį:");
         String password = scanner.nextLine();
         User user = login(userName, password);
         switch (user.getUserType()) {
             case STUDENT -> {
-                System.out.println("open Student View");
+                System.out.println("Sveikiname prisijungus!");
+                StudentFrame frame = new StudentFrame();
+                frame.print();
             }
             case TEACHER -> {
-                System.out.println("open lector View");
+                System.out.println("Sveikiname prisijungus!");
+                TeacherFrame frame = new TeacherFrame();
+                frame.print();
             }
             default -> {
-                System.out.println("wrong login name try again");
+                System.out.println("Neteisingas vartotojo vardas arba slaptažodis. Bandykite dar kartą.");
                 LoginFrame frame = new LoginFrame();
                 frame.print();
             }
@@ -42,7 +43,8 @@ public class LoginFrame {
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 
         File file = new File("Users.json");
-        List<User> usersList = objectMapper.readValue(file, new TypeReference<>() {});
+        List<User> usersList = objectMapper.readValue(file, new TypeReference<>() {
+        });
 
         return usersList.stream()
                 .filter(u -> u.getUsername().equals(userName) && u.getPassword().equals(password))

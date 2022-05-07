@@ -3,7 +3,7 @@ package Exams;
 import java.util.List;
 import java.util.UUID;
 
-public class Exam {
+public class Exam{
     private UUID id;
     private ExamType examType;
     private String name;

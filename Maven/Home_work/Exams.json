@@ -3,15 +3,15 @@
   "examType" : "TEST",
   "name" : "OOP",
   "question" : [ {
-    "question" : "1. Klausimas?",
+    "question" : "1. Klausimas?\nAtsakymų variantai:",
     "answers" : [ "a", "b", "c" ],
     "correctAnswer" : "b"
   }, {
-    "question" : "2. Klausimas?",
+    "question" : "2. Klausimas?\nAtsakymų variantai:",
     "answers" : [ "a", "b", "c" ],
     "correctAnswer" : "a"
   }, {
-    "question" : "2. Klausimas?",
+    "question" : "3. Klausimas?\nAtsakymų variantai:",
     "answers" : [ "a", "b", "c" ],
     "correctAnswer" : "c"
   } ]
@@ -20,15 +20,15 @@
   "examType" : "TEST",
   "name" : "OOP2",
   "question" : [ {
-    "question" : "1. Klausimas?",
+    "question" : "1. Klausimas?\nAtsakymų variantai:",
     "answers" : [ "a", "b", "c" ],
     "correctAnswer" : "a"
   }, {
-    "question" : "2. Klausimas?",
+    "question" : "2. Klausimas?\nAtsakymų variantai:",
     "answers" : [ "a", "b", "c" ],
     "correctAnswer" : "b"
   }, {
-    "question" : "2. Klausimas?",
+    "question" : "3. Klausimas?\nAtsakymų variantai:",
     "answers" : [ "a", "b", "c" ],
     "correctAnswer" : "c"
   } ]

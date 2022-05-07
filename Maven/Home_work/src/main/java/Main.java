@@ -1,20 +1,15 @@
-import Users.Registration;
-import Users.UsersFile;
 import v2.frame.*;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
 //        Scanner scanner = new Scanner(System.in);
 //        Menu menu = new MainMenu();
 //        Map<String, String> users = new HashMap<>();
 //        menu.menu(scanner, users);
-       // LandingFrame frame = new LandingFrame();
-       // frame.print();
+//        LandingFrame frame = new LandingFrame();
+//        frame.print();
 
 //        LoginFrame frame = new LoginFrame();
 //        frame.print();
@@ -28,8 +23,14 @@ public class Main {
 //        TeacherFrame frame = new TeacherFrame();
 //        frame.print();
 
-        TestsFrame frame = new TestsFrame();
-        frame.print();
+//        ExamsFrame frame = new ExamsFrame();
+//        frame.print();
+
+//        LandingFrame frame = new LandingFrame();
+//        frame.print();
+
+        ExamCreateFrame examCreateFrame = new ExamCreateFrame();
+        examCreateFrame.print();
 
     }
 }

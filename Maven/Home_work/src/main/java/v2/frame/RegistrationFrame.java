@@ -21,7 +21,8 @@ public class RegistrationFrame {
 
         File file = new File("Users.json");
 
-        List<User> usersList = objectMapper.readValue(file, new TypeReference<>() {});
+        List<User> usersList = objectMapper.readValue(file, new TypeReference<>() {
+        });
 
         RegistrationFrame registrationFrame = new RegistrationFrame();
 
@@ -42,10 +43,12 @@ public class RegistrationFrame {
 
         switch (UserType.STUDENT) {
             case STUDENT -> {
-                System.out.println("open Student View");
+                System.out.println("Sveikiname prisijungus!");
+                StudentFrame frame = new StudentFrame();
+                frame.print();
             }
             default -> {
-                System.out.println("Prisijungti nepavyko.");
+                System.out.println("Prisiregistruoti nepavyko. Bandykite dar kartą.");
                 RegistrationFrame frame = new RegistrationFrame();
                 frame.print();
             }
@@ -57,7 +60,8 @@ public class RegistrationFrame {
             System.out.println("Sukurkite vartotojo vardą:");
             String userName = scanner.nextLine();
 
-            boolean userNameAlreadyExists = usersList.stream().anyMatch(u -> u.getUsername().equals(userName));
+            boolean userNameAlreadyExists = usersList.stream()
+                    .anyMatch(u -> u.getUsername().equals(userName));
 
             if (userNameAlreadyExists) {
                 System.out.println("Toks vartotojo vardas jau egzistuoja.");
