@@ -8,11 +8,11 @@
     "correctAnswer" : 2
   }, {
     "question" : "Klausimas?\nAtsakymų variantai:",
-    "answers" : [ "a", "b", "c" ],
+    "answers" : [ "c", "b", "a" ],
     "correctAnswer" : 1
   }, {
     "question" : "Klausimas?\nAtsakymų variantai:",
-    "answers" : [ "a", "b", "c" ],
+    "answers" : [ "b", "a", "c" ],
     "correctAnswer" : 3
   } ]
 }, {
@@ -25,11 +25,11 @@
     "correctAnswer" : 1
   }, {
     "question" : "Klausimas?\nAtsakymų variantai:",
-    "answers" : [ "a", "b", "c" ],
+    "answers" : [ "c", "b", "a" ],
     "correctAnswer" : 2
   }, {
     "question" : "Klausimas?\nAtsakymų variantai:",
-    "answers" : [ "a", "b", "c" ],
+    "answers" : [ "b", "a", "c" ],
     "correctAnswer" : 3
   } ]
 } ]

@@ -4,6 +4,7 @@ import lt.codeacademy.Users.User;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import lt.codeacademy.Users.UserType;
 
 import java.io.File;
 import java.util.List;
@@ -20,15 +21,20 @@ public class LoginWindow extends AbstractWindow {
         String password = scanner.nextLine();
 
         User user = login(userName, password);
-        //getState().setUser(user);
+        Enum<UserType> userType = user.getUserType();
+
 
         switch (user.getUserType()) {
             case STUDENT -> {
-                System.out.println("Sveikiname prisijungus, studente!");
-                StudentWindow studentWindow = new StudentWindow();
+                System.out.println("\nSveikiname prisijungus, studente!\n");
+                StudentWindow studentWindow = new StudentWindow(userType);
                 studentWindow.window();
             }
-            case LECTOR -> System.out.println("Sveikiname prisijungus, dėstytojau!");
+            case LECTOR -> {
+                System.out.println("\nSveikiname prisijungus, dėstytojau!\n");
+                TeacherWindow teacherWindow = new TeacherWindow(userType);
+                teacherWindow.window();
+            }
             default -> {
                 System.out.println("Neteisingas vartotojo vardas arba slaptažodis. Bandykite dar kartą.");
                 LoginWindow frame = new LoginWindow();

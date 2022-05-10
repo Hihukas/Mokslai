@@ -1,20 +1,14 @@
 package lt.codeacademy.Windows;
 
 import lt.codeacademy.Exams.Exam;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import lt.codeacademy.Exams.Question;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.IntStream;
 
 public class QuestionsWindow extends AbstractWindow {
     private Exam exam;
-//
-//    private List<Integer> questionsAnswers = new LinkedList<>();
-//
-//    private final Scanner scanner = new Scanner(System.in);
-//
-//    private ObjectMapper objectMapper = new ObjectMapper();
+    private List<Integer> questionsAnswers = new LinkedList<>();
 
     public QuestionsWindow(Exam exam) {
         this.exam = exam;
@@ -22,9 +16,9 @@ public class QuestionsWindow extends AbstractWindow {
 
     @Override
     public void window() throws Exception {
-        System.out.printf("Pasirinktas egzaminas:\nID: %s\nTipas: %s\nPavadinimas: %s\n", exam.getId(), exam.getExamType(), exam.getName());
-//        exam.getQuestions().forEach(question -> printQuestion(question.getQuestion(), question.getAnswers()));
-//        StudentAnswers studentAnswer = createStudentAnswersObject();
+        System.out.printf("\nPasirinktas egzaminas:\nID: %s\nEgzamino tipas: %s\nPavadinimas: %s\n", exam.getId(), exam.getExamType(), exam.getName());
+        exam.getQuestions().forEach(question -> printQuestion(question.getQuestion(), question.getAnswers()));
+//        StudentAnswers studentAnswer = new StudentAnswers();
 //        saveAnswersToState(studentAnswer);
 ////        saveAnswersToFile(studentAnswer);
 //        System.out.println("Aciu uz atsakymus jie issaugoti, Jusu rezultatas:" + calcTestResult());
@@ -43,6 +37,7 @@ public class QuestionsWindow extends AbstractWindow {
 //
 //    private void saveAnswersToFile(StudentAnswers studentAnswer) {
 //        try {
+//        ObjectMapper objectMapper = new ObjectMapper();
 //            File file = new File("answers/StudentsAnswers.json");
 //            objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 //            objectMapper.writeValue(file, studentAnswer);
@@ -60,21 +55,24 @@ public class QuestionsWindow extends AbstractWindow {
 //        return studentAnswers;
 //    }
 //
-//    private void printQuestion(String question, List<String> answers) {
-//
-//        System.out.println(question);
-//        System.out.println("--------------------------------------------------");
-//        IntStream.range(0, answers.size())
-//                .mapToObj(i -> (i + 1) + ". " + answers.get(i))
-//                .forEach(System.out::println);
-//        System.out.println("--------------------------------------------------");
-//
-//        System.out.println("Iveskite teisinga atsakymo numeri:");
-//        int answerInput = scanner.nextInt();
+
+    }
+
+    private void printQuestion(String question, List<String> answers) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("\n" + question);
+
+        IntStream.range(0, answers.size())
+                .mapToObj(i -> (i + 1) + ". " + answers.get(i))
+                .forEach(System.out::println);
+
+        System.out.println("\nĮveskite teisingą atsakymo numerį:");
+//       try{ int answerInput = scanner.nextInt();} catch (InputMismatchException || NoSuchElementException e)
 //        if (answerInput < 1 || answerInput > answers.size()) {
-//            throw new RuntimeException("Illegal input value of :" + answerInput);
+//            System.out.println("Tokio atsakymo nėra!");
 //        }
 //        questionsAnswers.add(answerInput);
-//
+
     }
 }

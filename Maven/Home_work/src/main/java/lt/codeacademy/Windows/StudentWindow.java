@@ -1,8 +1,16 @@
 package lt.codeacademy.Windows;
 
+import lt.codeacademy.Users.UserType;
+
 import java.util.Scanner;
 
 public class StudentWindow extends AbstractWindow {
+
+    private Enum<UserType> userType;
+
+    public StudentWindow(Enum<UserType> userType) {
+        this.userType = userType;
+    }
     @Override
     public void window() throws Exception {
         String input;
@@ -17,14 +25,14 @@ public class StudentWindow extends AbstractWindow {
             input = scanner.nextLine();
             switch (input) {
                 case "1" -> {
-                    ExamsWindow examsWindow = new ExamsWindow();
+                    ExamsWindow examsWindow = new ExamsWindow(userType);
                     examsWindow.window();
                 }
                 case "2" -> System.out.println("open results");
                 case "3" -> System.out.println("Programa baigia darbą.");
                 default -> {
                     System.out.println("Tokio veiksmo nėra. Pasirinkite iš naujo.");
-                    StudentWindow frame = new StudentWindow();
+                    StudentWindow frame = new StudentWindow(userType);
                     frame.window();
                 }
             }
