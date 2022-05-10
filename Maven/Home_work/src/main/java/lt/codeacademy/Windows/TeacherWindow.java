@@ -1,4 +1,4 @@
-package lt.codeacademy.Frames;
+package lt.codeacademy.Windows;
 
 import java.util.Scanner;
 

@@ -10,6 +10,18 @@ public class User {
     private String name;
     private String surname;
 
+    public User() {
+    }
+
+    public User(UUID id, UserType userType, String username, String password, String name, String surname) {
+        this.id = id;
+        this.userType = userType;
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.surname = surname;
+    }
+
     public UUID getId() {
         return id;
     }

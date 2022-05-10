@@ -1,35 +1,28 @@
-package lt.codeacademy.Frames;
+package lt.codeacademy.Windows;
 
-import lt.codeacademy.Answers.StudentAnswers;
 import lt.codeacademy.Exams.Exam;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 
-import java.io.File;
-import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.IntStream;
 
-public class QuestionsFrame  {
+public class QuestionsWindow extends AbstractWindow {
     private Exam exam;
-
-    private List<Integer> questionsAnswers = new LinkedList<>();
-
-    private final Scanner scanner = new Scanner(System.in);
-
-    private ObjectMapper objectMapper = new ObjectMapper();
-
-//    public QuestionsFrame(State state, Exam exam) {
-//        super(state);
-//        this.exam = exam;
-//    }
 //
-//    @Override
-//    public void window() throws Exception {
-//        System.out.printf("Pasirinktas egzaminas:\nID: %s\nTipas: %s\nPavadinimas: %s\n", exam.getId(), exam.getExamType(), exam.getName());
+//    private List<Integer> questionsAnswers = new LinkedList<>();
+//
+//    private final Scanner scanner = new Scanner(System.in);
+//
+//    private ObjectMapper objectMapper = new ObjectMapper();
+
+    public QuestionsWindow(Exam exam) {
+        this.exam = exam;
+    }
+
+    @Override
+    public void window() throws Exception {
+        System.out.printf("Pasirinktas egzaminas:\nID: %s\nTipas: %s\nPavadinimas: %s\n", exam.getId(), exam.getExamType(), exam.getName());
 //        exam.getQuestions().forEach(question -> printQuestion(question.getQuestion(), question.getAnswers()));
 //        StudentAnswers studentAnswer = createStudentAnswersObject();
 //        saveAnswersToState(studentAnswer);
@@ -83,5 +76,5 @@ public class QuestionsFrame  {
 //        }
 //        questionsAnswers.add(answerInput);
 //
-//    }
+    }
 }

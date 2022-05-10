@@ -1,4 +1,4 @@
-package lt.codeacademy.Frames;
+package lt.codeacademy.Windows;
 
 import lt.codeacademy.Answers.StudentAnswers;
 import lt.codeacademy.Exams.Exam;

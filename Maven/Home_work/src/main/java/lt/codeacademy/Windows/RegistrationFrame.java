@@ -1,16 +1,4 @@
-package lt.codeacademy.Frames;
-
-import lt.codeacademy.Users.User;
-import lt.codeacademy.Users.UserType;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-import java.util.Scanner;
-import java.util.UUID;
+package lt.codeacademy.Windows;
 
 public class RegistrationFrame  {
 //

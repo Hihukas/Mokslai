@@ -9,6 +9,16 @@ public class Exam{
     private String name;
     private List<Question> questions;
 
+    public Exam() {
+    }
+
+    public Exam(UUID id, ExamType examType, String name, List<Question> questions) {
+        this.id = id;
+        this.examType = examType;
+        this.name = name;
+        this.questions = questions;
+    }
+
     public UUID getId() {
         return id;
     }

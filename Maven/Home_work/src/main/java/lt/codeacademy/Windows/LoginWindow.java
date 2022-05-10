@@ -1,4 +1,4 @@
-package lt.codeacademy.Frames;
+package lt.codeacademy.Windows;
 
 import lt.codeacademy.Users.User;
 import com.fasterxml.jackson.core.type.TypeReference;
