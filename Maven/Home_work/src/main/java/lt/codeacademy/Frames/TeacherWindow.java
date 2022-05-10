@@ -1,10 +1,11 @@
-package v2.frame;
+package lt.codeacademy.Frames;
 
-import java.io.IOException;
 import java.util.Scanner;
 
-public class TeacherFrame {
-    public void print() throws IOException {
+public class TeacherWindow extends AbstractWindow {
+
+
+    public void window() throws Exception {
         Scanner scanner = new Scanner(System.in);
         System.out.println("""
                 Pasirinkite norimą atlikti veiksmą:
@@ -18,14 +19,14 @@ public class TeacherFrame {
             case "1" -> System.out.println("open tests");
             case "2" -> System.out.println("open tests");
             case "3" -> {
-                ExamsFrame frame = new ExamsFrame();
-                frame.print();
+                ExamsWindow frame = new ExamsWindow();
+                frame.window();
             }
             case "4" -> System.out.println("Programa baigia darbą.");
             default -> {
                 System.out.println("Tokio veiksmo nėra. Pasirinkite iš naujo.");
-                TeacherFrame frame = new TeacherFrame();
-                frame.print();
+                TeacherWindow frame = new TeacherWindow();
+                frame.window();
             }
         }
     }

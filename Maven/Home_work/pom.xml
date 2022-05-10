@@ -20,9 +20,9 @@
             <version>2.13.2.2</version>
         </dependency>
         <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <version>1.15</version>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>2.13.2.2</version>
         </dependency>
     </dependencies>
 
@@ -35,7 +35,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>Main</mainClass>
+                            <mainClass>lt.codeacademy.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

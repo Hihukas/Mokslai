@@ -1,17 +1,16 @@
-package Exams;
+package lt.codeacademy.Exams;
 
-import java.io.Serializable;
 import java.util.List;
 
 public class Question {
     private String question;
     private List<String> answers;
-    private String correctAnswer;
+    private int correctAnswer;
 
     public Question() {
     }
 
-    public Question(String question, List<String> answers, String correctAnswer) {
+    public Question(String question, List<String> answers, int correctAnswer) {
         this.question = question;
         this.answers = answers;
         this.correctAnswer = correctAnswer;
@@ -33,20 +32,11 @@ public class Question {
         this.answers = answers;
     }
 
-    public String getCorrectAnswer() {
+    public int getCorrectAnswer() {
         return correctAnswer;
     }
 
-    public void setCorrectAnswer(String correctAnswer) {
+    public void setCorrectAnswer(int correctAnswer) {
         this.correctAnswer = correctAnswer;
-    }
-
-    @Override
-    public String toString() {
-        return "Question{" +
-                "question='" + question + '\'' +
-                ", answers=" + answers +
-                ", correctAnswer='" + correctAnswer + '\'' +
-                '}';
     }
 }

@@ -1,7 +1,6 @@
-package v2.frame;
+package lt.codeacademy.Frames;
 
-import Exams.Exam;
-import Exams.ExamType;
+import lt.codeacademy.Exams.Exam;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -11,15 +10,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.UUID;
 
 
-public class ExamCreateFrame {
-    public void print() throws IOException {
+public class ExamCreateWindow extends AbstractWindow {
+
+
+    public void window() throws IOException {
         Scanner scanner = new Scanner(System.in);
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-        File file = new File("Exams.json");
+        File file = new File("lt.codeacademy.Exams.json");
         List<Exam> exams = objectMapper.readValue(file, new TypeReference<>() {
         });
         System.out.println("Įveskite egzamino temą:");
