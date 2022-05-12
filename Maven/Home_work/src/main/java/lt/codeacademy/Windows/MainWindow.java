@@ -24,7 +24,10 @@ public class MainWindow extends AbstractWindow {
                     RegistrationWindow registrationWindow = new RegistrationWindow();
                     registrationWindow.window();
                 }
-                case "3" -> System.out.println("Programa baigia darbą.");
+                case "3" -> {
+                    System.out.println("Programa baigia darbą.");
+                    System.exit(0);
+                }
                 default -> System.out.println("Tokio veiksmo nėra. Pasirinkite iš naujo.\n");
             }
         } while (!(input.equals("1") || input.equals("2") || input.equals("3")));

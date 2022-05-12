@@ -8,9 +8,7 @@ import lt.codeacademy.Users.User;
 import lt.codeacademy.Users.UserType;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.IntStream;
 
 public class ExamResultWindow extends AbstractWindow {
@@ -24,8 +22,6 @@ public class ExamResultWindow extends AbstractWindow {
 
     @Override
     public void window() throws Exception {
-
-
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 
@@ -33,11 +29,19 @@ public class ExamResultWindow extends AbstractWindow {
         List<StudentsAnswers> studentsAnswersList = objectMapper.readValue(file, new TypeReference<>() {
         });
 
+        List<StudentsAnswers> oneStudentsAnswersList =new ArrayList<>();
+
+        for(StudentsAnswers id: studentsAnswersList){
+            if(id.getUser().getId().equals(user.getId())){
+                oneStudentsAnswersList.add(id);
+            }
+        }
+
         System.out.println("Egzaminų sąrašas:");
 
-        IntStream.range(0, studentsAnswersList.size())
+        IntStream.range(0, oneStudentsAnswersList.size())
                 .mapToObj(i -> {
-                    StudentsAnswers e = studentsAnswersList.get(i);
+                    StudentsAnswers e = oneStudentsAnswersList.get(i);
                     return (i + 1) + " Egzamino ID: " + e.getExam().getId() +
                             ", Egzamino pavadinimas: " + e.getExam().getName() +
                             ", Egzamino tipas: " + e.getExam().getExamType() +

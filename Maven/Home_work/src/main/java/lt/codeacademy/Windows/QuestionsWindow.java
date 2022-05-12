@@ -41,8 +41,8 @@ public class QuestionsWindow extends AbstractWindow {
         testResult();
 
         Thread.sleep(5000);
-        StudentWindow frame = new StudentWindow(userType, user);
-        frame.window();
+        StudentWindow window = new StudentWindow(userType, user);
+        window.window();
     }
 
     private String testResult() {

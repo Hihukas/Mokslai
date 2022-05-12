@@ -51,7 +51,7 @@ public class RegistrationWindow extends AbstractWindow {
 
         switch (UserType.STUDENT) {
             case STUDENT -> {
-                System.out.println("Sveikiname prisijungus,Studente!\n");
+                System.out.println("Sveikiname prisijungus, Studente!\n");
                 StudentWindow window = new StudentWindow(UserType.STUDENT, user);
                 window.window();
             }
@@ -72,7 +72,7 @@ public class RegistrationWindow extends AbstractWindow {
                     .anyMatch(u -> u.getUsername().equals(userName));
 
             if (userNameAlreadyExists) {
-                System.out.println("Toks vartotojo vardas jau egzistuoja.");
+                System.out.println("Toks vartotojo vardas jau egzistuoja.\n");
                 continue;
             }
             return userName;

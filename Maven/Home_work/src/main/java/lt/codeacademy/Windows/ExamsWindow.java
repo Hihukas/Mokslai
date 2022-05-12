@@ -1,5 +1,6 @@
 package lt.codeacademy.Windows;
 
+import lt.codeacademy.Answers.StudentsAnswers;
 import lt.codeacademy.Exams.Exam;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,6 +12,7 @@ import java.io.File;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
+import java.util.UUID;
 import java.util.stream.IntStream;
 
 public class ExamsWindow extends AbstractWindow {
@@ -68,8 +70,11 @@ public class ExamsWindow extends AbstractWindow {
 //                //TODO add check that time has passed 48 hours
 //                .anyMatch(examAnswers -> examAnswers.getExam().getId().equals(exam.getId()));
 //    }
-//    private boolean canTakeExam(Exam exam) {
+//    private void canTakeExam(Exam exams, StudentsAnswers studentsAnswers, User user) {
+//        UUID userID = user.getId();
+//        studentsAnswers.getTime()
 //
+//        studentsAnswers.
 //    }
 
 }
