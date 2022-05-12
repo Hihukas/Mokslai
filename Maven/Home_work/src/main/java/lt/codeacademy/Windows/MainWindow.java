@@ -21,12 +21,11 @@ public class MainWindow extends AbstractWindow {
                     loginWindow.window();
                 }
                 case "2" -> {
-                    System.out.println("2");
+                    RegistrationWindow registrationWindow = new RegistrationWindow();
+                    registrationWindow.window();
                 }
                 case "3" -> System.out.println("Programa baigia darbą.");
-                default -> {
-                    System.out.println("Tokio veiksmo nėra. Pasirinkite iš naujo.");
-                }
+                default -> System.out.println("Tokio veiksmo nėra. Pasirinkite iš naujo.\n");
             }
         } while (!(input.equals("1") || input.equals("2") || input.equals("3")));
     }

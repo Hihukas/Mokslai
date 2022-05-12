@@ -1,63 +1,103 @@
 package lt.codeacademy.Windows;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import lt.codeacademy.Answers.StudentsAnswers;
 import lt.codeacademy.Exams.Exam;
-import lt.codeacademy.Exams.Question;
+import lt.codeacademy.Users.User;
+import lt.codeacademy.Users.UserType;
 
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.IntStream;
 
 public class QuestionsWindow extends AbstractWindow {
     private Exam exam;
+    private User user;
+    private Enum<UserType> userType;
     private List<Integer> questionsAnswers = new LinkedList<>();
+    private List<StudentsAnswers> studentsAnswers = new ArrayList<>();
 
-    public QuestionsWindow(Exam exam) {
+    public QuestionsWindow(Exam exam, Enum<UserType> userType, User user) {
         this.exam = exam;
+        this.userType = userType;
+        this.user = user;
     }
 
     @Override
     public void window() throws Exception {
         System.out.printf("\nPasirinktas egzaminas:\nID: %s\nEgzamino tipas: %s\nPavadinimas: %s\n", exam.getId(), exam.getExamType(), exam.getName());
-        exam.getQuestions().forEach(question -> printQuestion(question.getQuestion(), question.getAnswers()));
-//        StudentAnswers studentAnswer = new StudentAnswers();
-//        saveAnswersToState(studentAnswer);
-////        saveAnswersToFile(studentAnswer);
-//        System.out.println("Aciu uz atsakymus jie issaugoti, Jusu rezultatas:" + calcTestResult());
-//        Thread.sleep(3000);
-//        StudentFrame frame = new StudentFrame(getState());
-//        frame.window();
-//    }
-//
-//    private void saveAnswersToState(StudentAnswers studentAnswer) {
-//        getState().getAnswer().add(studentAnswer);
-//    }
-//
-//    private String calcTestResult() {
-//        return "NaN";
-//    }
-//
-//    private void saveAnswersToFile(StudentAnswers studentAnswer) {
-//        try {
-//        ObjectMapper objectMapper = new ObjectMapper();
-//            File file = new File("answers/StudentsAnswers.json");
-//            objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-//            objectMapper.writeValue(file, studentAnswer);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
-//
-//    private StudentAnswers createStudentAnswersObject() {
-//        StudentAnswers studentAnswers = new StudentAnswers();
-//        studentAnswers.setUser(getState().getUser());
-//        studentAnswers.setExam(exam);
-//        studentAnswers.setAnswers(questionsAnswers);
-//        studentAnswers.setTime(LocalDateTime.now());
-//        return studentAnswers;
-//    }
-//
 
+        exam.getQuestions().forEach(question -> printQuestion(question.getQuestion(), question.getAnswers()));
+
+        StudentsAnswers studentsAnswers = createStudentAnswersObject();
+        saveStudentAnswers(studentsAnswers);
+        saveAnswersToFile(studentsAnswers);
+
+        System.out.printf("\nAčiū už atsakymus! Jie išsaugoti!\nJūsų pažymys: %s\n", testResult());
+        testResult();
+
+        Thread.sleep(5000);
+        StudentWindow frame = new StudentWindow(userType, user);
+        frame.window();
     }
 
+    private String testResult() {
+        List<Integer> correctAnswers = exam.getQuestions().stream()
+                .map(question -> question.getCorrectAnswer()).toList();
+
+        List<Integer> result = new ArrayList<>();
+        for (int i = 0; i < exam.getQuestions().size(); i++) {
+            if (correctAnswers.get(i).equals(questionsAnswers.get(i))) {
+                result.add(i);
+            }
+        }
+
+        double grade;
+        if (result.size() == exam.getQuestions().size()) {
+            grade = 10D;
+        } else {
+            grade = ((result.size() * 10D) / exam.getQuestions().size());
+        }
+
+        return String.format("%.0f", grade);
+    }
+
+    private StudentsAnswers createStudentAnswersObject() {
+        StudentsAnswers studentsAnswers = new StudentsAnswers();
+        studentsAnswers.setUser(user);
+        studentsAnswers.setExam(exam);
+        studentsAnswers.setAnswers(questionsAnswers);
+        studentsAnswers.setGrade(testResult());
+        LocalDateTime localDateTime = LocalDateTime.now();
+        studentsAnswers.setTime(localDateTime.toString());
+        return studentsAnswers;
+    }
+
+    private void saveStudentAnswers(StudentsAnswers studentAnswer) {
+        studentsAnswers.add(studentAnswer);
+    }
+
+    private void saveAnswersToFile(StudentsAnswers studentAnswers) {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+
+            File file = new File("StudentsAnswers.json");
+
+            List<StudentsAnswers> studentsAnswersList = objectMapper.readValue(file, new TypeReference<>() {
+            });
+            studentsAnswersList.add(studentAnswers);
+
+            objectMapper.writeValue(file, studentsAnswersList);
+        } catch (IOException e) {
+            System.out.println("Jūsų egzamino išsaugoti nepavyko. Prašome kreiptis į dėstytoją.");
+        }
+    }
+//Reikia tvarkyti!
     private void printQuestion(String question, List<String> answers) {
         Scanner scanner = new Scanner(System.in);
 
@@ -68,11 +108,18 @@ public class QuestionsWindow extends AbstractWindow {
                 .forEach(System.out::println);
 
         System.out.println("\nĮveskite teisingą atsakymo numerį:");
-//       try{ int answerInput = scanner.nextInt();} catch (InputMismatchException || NoSuchElementException e)
-//        if (answerInput < 1 || answerInput > answers.size()) {
-//            System.out.println("Tokio atsakymo nėra!");
-//        }
-//        questionsAnswers.add(answerInput);
+        int answerInput = 0;
 
+        try {
+            answerInput = scanner.nextInt();
+            if (answerInput < 1 || answerInput > answers.size()) {
+                System.out.println("Tokio atsakymo nėra!");
+                printQuestion(question, answers);
+            }
+            questionsAnswers.add(answerInput);
+        } catch (InputMismatchException e) {
+            System.out.println("Galimi tik skaičiai.");
+            printQuestion(question, answers);
+        }
     }
 }

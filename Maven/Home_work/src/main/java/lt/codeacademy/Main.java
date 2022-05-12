@@ -1,20 +1,6 @@
 package lt.codeacademy;
 
-import lt.codeacademy.Answers.StudentAnswers;
-import lt.codeacademy.Exams.Exam;
-import lt.codeacademy.Exams.ExamType;
-import lt.codeacademy.Exams.Question;
-import lt.codeacademy.Users.User;
-import lt.codeacademy.Users.UserType;
 import lt.codeacademy.Windows.*;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -22,10 +8,10 @@ public class Main {
         //       new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
 
 
-    MainWindow mainWindow = new MainWindow();
-    mainWindow.window();
+        MainWindow mainWindow = new MainWindow();
+        mainWindow.window();
 
-    }
+
 
 //    private static State createTestState() {
 //        State result = new State();
@@ -81,4 +67,5 @@ public class Main {
 //        return Stream.of(result).collect(Collectors.toList());
 //    }
 
+    }
 }

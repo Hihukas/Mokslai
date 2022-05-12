@@ -14,6 +14,10 @@
     "question" : "Klausimas?\nAtsakymų variantai:",
     "answers" : [ "b", "a", "c" ],
     "correctAnswer" : 3
+  }, {
+    "question" : "Klausimas?\nAtsakymų variantai:",
+    "answers" : [ "b", "a", "c" ],
+    "correctAnswer" : 3
   } ]
 }, {
   "id" : "81201942-a291-4feb-aa98-a929140ae252",
