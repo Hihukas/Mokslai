@@ -97,7 +97,7 @@ public class QuestionsWindow extends AbstractWindow {
             System.out.println("Jūsų egzamino išsaugoti nepavyko. Prašome kreiptis į dėstytoją.");
         }
     }
-//Reikia tvarkyti!
+
     private void printQuestion(String question, List<String> answers) {
         Scanner scanner = new Scanner(System.in);
 
@@ -116,7 +116,9 @@ public class QuestionsWindow extends AbstractWindow {
                 System.out.println("Tokio atsakymo nėra!");
                 printQuestion(question, answers);
             }
-            questionsAnswers.add(answerInput);
+            if (answerInput <= answers.size() && answerInput > 0) {
+                questionsAnswers.add(answerInput);
+            }
         } catch (InputMismatchException e) {
             System.out.println("Galimi tik skaičiai.");
             printQuestion(question, answers);
