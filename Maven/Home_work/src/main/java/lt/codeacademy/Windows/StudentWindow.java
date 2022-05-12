@@ -22,7 +22,7 @@ public class StudentWindow extends AbstractWindow {
                     Pasirinkite norimą atlikti veiksmą:
                     [1] - Laikyti egzaminą.
                     [2] - Egzaminų rezultatai.
-                    [3] - Grįžti į pagrindinį meniu.
+                    [3] - Atsijungti ir grįžti į pagrindinį meniu.
                     """);
             Scanner scanner = new Scanner(System.in);
             input = scanner.nextLine();

@@ -8,6 +8,7 @@ import lt.codeacademy.Users.User;
 import lt.codeacademy.Users.UserType;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.IntStream;
 
@@ -22,20 +23,8 @@ public class ExamResultWindow extends AbstractWindow {
 
     @Override
     public void window() throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-
-        File file = new File("StudentsAnswers.json");
-        List<StudentsAnswers> studentsAnswersList = objectMapper.readValue(file, new TypeReference<>() {
-        });
-
         List<StudentsAnswers> oneStudentsAnswersList =new ArrayList<>();
-
-        for(StudentsAnswers id: studentsAnswersList){
-            if(id.getUser().getId().equals(user.getId())){
-                oneStudentsAnswersList.add(id);
-            }
-        }
+        fillOneStudentsAnswersList(oneStudentsAnswersList);
 
         System.out.println("Egzaminų sąrašas:");
 
@@ -67,5 +56,20 @@ public class ExamResultWindow extends AbstractWindow {
                 default -> System.out.println("Tokio veiksmo nėra. Bandykite dar kartą.");
             }
         } while (!input.equals("1"));
+    }
+
+    private void fillOneStudentsAnswersList(List<StudentsAnswers> oneStudentsAnswersList) throws Exception {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+
+        File file = new File("StudentsAnswers.json");
+        List<StudentsAnswers> studentsAnswersList = objectMapper.readValue(file, new TypeReference<>() {
+        });
+
+        for(StudentsAnswers id: studentsAnswersList){
+            if(id.getUser().getId().equals(user.getId())){
+                oneStudentsAnswersList.add(id);
+            }
+        }
     }
 }

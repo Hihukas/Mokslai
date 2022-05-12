@@ -23,7 +23,7 @@ public class TeacherWindow extends AbstractWindow {
                     [1] - Egzaminų rezultatai.
                     [2] - Sukurti egzaminą.
                     [3] - Egzaminų redagavimas.
-                    [4] - Išeiti.
+                    [4] - Atsijungti ir grįžti į pagrindinį meniu.
                     """);
             Scanner scanner = new Scanner(System.in);
             input = scanner.nextLine();
@@ -34,7 +34,10 @@ public class TeacherWindow extends AbstractWindow {
                     ExamsWindow examsWindow = new ExamsWindow(userType, user);
                     examsWindow.window();
                 }
-                case "4" -> System.out.println("Programa baigia darbą.");
+                case "4" -> {
+                    MainWindow mainWindow = new MainWindow();
+                    mainWindow.window();
+                }
                 default -> System.out.println("Tokio veiksmo nėra. Pasirinkite iš naujo.\n");
             }
         } while (!(input.equals("1") || input.equals("2") || input.equals("3") || input.equals("4")));
