@@ -9,10 +9,10 @@ import lt.codeacademy.Users.User;
 import lt.codeacademy.Users.UserType;
 
 import java.io.File;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
-import java.util.UUID;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class ExamsWindow extends AbstractWindow {
@@ -35,7 +35,10 @@ public class ExamsWindow extends AbstractWindow {
         List<Exam> exams = objectMapper.readValue(file, new TypeReference<>() {
         });
 
+
         System.out.println("Egzaminų sąrašas:");
+
+        canTakeExam(user, UserType.STUDENT);
 
         IntStream.range(0, exams.size())
                 .mapToObj(i -> {
@@ -70,12 +73,57 @@ public class ExamsWindow extends AbstractWindow {
 //                //TODO add check that time has passed 48 hours
 //                .anyMatch(examAnswers -> examAnswers.getExam().getId().equals(exam.getId()));
 //    }
-//    private void canTakeExam(Exam exams, StudentsAnswers studentsAnswers, User user) {
-//        UUID userID = user.getId();
-//        studentsAnswers.getTime()
-//
-//        studentsAnswers.
-//    }
+    private void canTakeExam(User user, UserType userType) throws Exception {
+        OneStudentExamsResultsWindow oneStudentExamsResultsWindow = new OneStudentExamsResultsWindow(userType, user);
+        List<StudentsAnswers> oneStudentsAnswerList = oneStudentExamsResultsWindow.fillOneStudentsAnswersList();
 
+        List<LocalDateTime> examsTimesLessThan48Hours = oneStudentsAnswerList
+                .stream()
+                .map(exam -> LocalDateTime.parse(exam.getTime()))
+                .filter(examTimes -> {
+                    LocalDateTime to = LocalDateTime.now();
+                    Duration duration = Duration.between(examTimes, to);
+                    String time;
+                    if (duration.toHours() < 48) {
+                        time = examTimes.toString();
+                    } else {
+                        time = null;
+                    }
+                    return time != null;
+                }).toList();
+
+//        List<String> newList = oneStudentsAnswerList.stream().map(studentsAnswers -> {
+//            StudentsAnswers e = studentsAnswers;
+//            return e.getExam().getId() + e.getTime();
+//        }).toList();
+//
+//        List<Integer> result = new ArrayList<>();
+//        for (int i = 0; i < newList.size(); i++) {
+//            if (newList.stream().map(t -> newList.)
+//                    .equals(examsTimesLessThan48Hours.get(i))) {
+//                result.add(i);
+//            }
+//        }
+//
+//        result.forEach(System.out::println);
+
+//                .stream()
+//                .filter(exists -> {
+//                    List<UUID> idList = new ArrayList<>();
+//                    if(oneStudentsAnswerList.stream().map(h -> LocalDateTime.parse(h.getTime()))
+//                            .anyMatch(v -> v.equals(exists))){
+//                       idList.add(IntStream.range(0, oneStudentsAnswerList.size())
+//                                       .mapToObj(i -> {
+//                                           StudentsAnswers e = oneStudentsAnswerList.get(i);
+//                                           return e.getExam().getId();
+//                                       }).findAny().orElse(null));
+////                               oneStudentsAnswerList.stream().map(id -> id.getExam().getId()).findAny().orElse(null));
+//                    } else{
+//                        idList = null;
+//                    }
+//                    return idList != null;
+//                })
+//                .collect(Collectors.toList());
+    }
 }
 

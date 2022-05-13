@@ -28,7 +28,10 @@ public class TeacherWindow extends AbstractWindow {
             Scanner scanner = new Scanner(System.in);
             input = scanner.nextLine();
             switch (input) {
-                case "1" -> System.out.println("open tests");
+                case "1" -> {
+                    StudentsExamsResultsWindow studentsExamsResultsWindow = new StudentsExamsResultsWindow(userType, user);
+                    studentsExamsResultsWindow.window();
+                }
                 case "2" -> System.out.println("open tests");
                 case "3" -> {
                     ExamsWindow examsWindow = new ExamsWindow(userType, user);

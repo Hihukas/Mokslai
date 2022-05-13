@@ -12,7 +12,6 @@ public class Main {
         mainWindow.window();
 
 
-
 //    private static State createTestState() {
 //        State result = new State();
 //        result.setUser(createTestUser());

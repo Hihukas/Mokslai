@@ -26,7 +26,7 @@ public class RegistrationWindow extends AbstractWindow {
 
         RegistrationWindow registrationWindow = new RegistrationWindow();
 
-        String userName = registrationWindow.usernameCheck(scanner, file, objectMapper, usersList);
+        String userName = registrationWindow.usernameCheck(scanner, usersList);
         System.out.println("Sukurkite slaptažodį:");
         String password = scanner.nextLine();
         if (!passwordCheck(scanner, password)) {
@@ -51,7 +51,7 @@ public class RegistrationWindow extends AbstractWindow {
 
         switch (UserType.STUDENT) {
             case STUDENT -> {
-                System.out.println("Sveikiname prisijungus, Studente!\n");
+                System.out.printf("\nSveikiname prisijungus, %s!\n", name);
                 StudentWindow window = new StudentWindow(UserType.STUDENT, user);
                 window.window();
             }
@@ -63,7 +63,7 @@ public class RegistrationWindow extends AbstractWindow {
         }
     }
 
-    private String usernameCheck(Scanner scanner, File file, ObjectMapper objectMapper, List<User> usersList) throws Exception {
+    private String usernameCheck(Scanner scanner, List<User> usersList) {
         while (true) {
             System.out.println("Sukurkite vartotojo vardą:");
             String userName = scanner.nextLine();

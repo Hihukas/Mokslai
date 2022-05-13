@@ -8,23 +8,21 @@ import lt.codeacademy.Users.User;
 import lt.codeacademy.Users.UserType;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.*;
 import java.util.stream.IntStream;
 
-public class ExamResultWindow extends AbstractWindow {
+public class OneStudentExamsResultsWindow extends AbstractWindow {
     private User user;
     private Enum<UserType> userType;
 
-    public ExamResultWindow(Enum<UserType> userType, User user) {
+    public OneStudentExamsResultsWindow(Enum<UserType> userType, User user) {
         this.userType = userType;
         this.user = user;
     }
 
     @Override
     public void window() throws Exception {
-        List<StudentsAnswers> oneStudentsAnswersList =new ArrayList<>();
-        fillOneStudentsAnswersList(oneStudentsAnswersList);
+        List<StudentsAnswers> oneStudentsAnswersList = fillOneStudentsAnswersList();
 
         System.out.println("Egzaminų sąrašas:");
 
@@ -48,28 +46,29 @@ public class ExamResultWindow extends AbstractWindow {
             System.out.println("\n[1] Grįžti į studento meniu.");
             Scanner scanner = new Scanner(System.in);
             input = scanner.nextLine();
-            switch (input) {
-                case "1" -> {
-                    StudentWindow window = new StudentWindow(userType, user);
-                    window.window();
-                }
-                default -> System.out.println("Tokio veiksmo nėra. Bandykite dar kartą.");
+            if ("1".equals(input)) {
+                StudentWindow window = new StudentWindow(userType, user);
+                window.window();
+            } else {
+                System.out.println("Tokio veiksmo nėra. Bandykite dar kartą.");
             }
         } while (!input.equals("1"));
     }
 
-    private void fillOneStudentsAnswersList(List<StudentsAnswers> oneStudentsAnswersList) throws Exception {
+    public List<StudentsAnswers> fillOneStudentsAnswersList() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+        List<StudentsAnswers> filledOneStudentsAnswersList = new ArrayList<>();
 
         File file = new File("StudentsAnswers.json");
         List<StudentsAnswers> studentsAnswersList = objectMapper.readValue(file, new TypeReference<>() {
         });
 
-        for(StudentsAnswers id: studentsAnswersList){
-            if(id.getUser().getId().equals(user.getId())){
-                oneStudentsAnswersList.add(id);
+        for (StudentsAnswers id : studentsAnswersList) {
+            if (id.getUser().getId().equals(user.getId())) {
+                filledOneStudentsAnswersList.add(id);
             }
         }
+        return filledOneStudentsAnswersList;
     }
 }

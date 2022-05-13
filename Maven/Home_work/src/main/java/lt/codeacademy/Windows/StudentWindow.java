@@ -32,8 +32,8 @@ public class StudentWindow extends AbstractWindow {
                     examsWindow.window();
                 }
                 case "2" -> {
-                    ExamResultWindow examResultWindow = new ExamResultWindow(userType, user);
-                    examResultWindow.window();
+                    OneStudentExamsResultsWindow oneStudentExamsResultsWindow = new OneStudentExamsResultsWindow(userType, user);
+                    oneStudentExamsResultsWindow.window();
                 }
                 case "3" -> {
                     MainWindow mainWindow = new MainWindow();
