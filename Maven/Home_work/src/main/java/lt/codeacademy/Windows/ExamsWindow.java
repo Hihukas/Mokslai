@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class ExamsWindow extends AbstractWindow {
     private User user;
@@ -38,14 +39,19 @@ public class ExamsWindow extends AbstractWindow {
 
         System.out.println("Egzaminų sąrašas:");
 
-        canTakeExam(user, UserType.STUDENT);
+//        canTakeExam(user, UserType.STUDENT);
 
         IntStream.range(0, exams.size())
                 .mapToObj(i -> {
                     Exam e = exams.get(i);
-                    return "[" + (i + 1) + "] Egzamino ID: " + e.getId() +
-                            ", Egzamino pavadinimas: " + e.getName() +
-                            ", Egzamino tipas: " + e.getExamType();
+                    try {
+                        return "[" + (i + 1) + "] Egzamino ID: " + e.getId() +
+                                ", Egzamino pavadinimas: " + e.getName() +
+                                ", Egzamino tipas: " + e.getExamType() +
+                                " ?" + canTakeExam(user, UserType.STUDENT, exams);
+                    } catch (Exception ex) {
+                        throw new RuntimeException(ex);
+                    }
                 })
                 .forEach(System.out::println);
 
@@ -73,24 +79,48 @@ public class ExamsWindow extends AbstractWindow {
 //                //TODO add check that time has passed 48 hours
 //                .anyMatch(examAnswers -> examAnswers.getExam().getId().equals(exam.getId()));
 //    }
-    private void canTakeExam(User user, UserType userType) throws Exception {
+    private boolean canTakeExam(User user, UserType userType, List<Exam> exams) throws Exception {
         OneStudentExamsResultsWindow oneStudentExamsResultsWindow = new OneStudentExamsResultsWindow(userType, user);
         List<StudentsAnswers> oneStudentsAnswerList = oneStudentExamsResultsWindow.fillOneStudentsAnswersList();
 
-        List<LocalDateTime> examsTimesLessThan48Hours = oneStudentsAnswerList
+//        List<LocalDateTime> examsTimesLessThan48Hours = oneStudentsAnswerList
+//                .stream()
+//                .map(exam -> LocalDateTime.parse(exam.getTime()))
+//                .filter(examTimes -> {
+//                    LocalDateTime to = LocalDateTime.now();
+//                    Duration duration = Duration.between(examTimes, to);
+//                    String time;
+//                    if (duration.toHours() < 48) {
+//                        time = examTimes.toString();
+//                    } else {
+//                        time = null;
+//                    }
+//                    return time != null;
+//                }).toList();
+
+//        List<LocalDateTime> examsTimesLessThan48Hours2 =
+       return oneStudentsAnswerList
                 .stream()
-                .map(exam -> LocalDateTime.parse(exam.getTime()))
-                .filter(examTimes -> {
+                .anyMatch(exam -> {
+                    LocalDateTime from = LocalDateTime.parse(exam.getTime());
                     LocalDateTime to = LocalDateTime.now();
-                    Duration duration = Duration.between(examTimes, to);
-                    String time;
-                    if (duration.toHours() < 48) {
-                        time = examTimes.toString();
-                    } else {
-                        time = null;
+                    Duration duration = Duration.between(from, to);
+                    List<StudentsAnswers> newList = new ArrayList<>();
+                    if (duration.toHours() > 48){
+                        newList.add(exam);
                     }
-                    return time != null;
-                }).toList();
+
+                    List<UUID> uuid = newList.stream()
+                            .filter(id -> id.getExam().getId().equals(exam.getExam().getId())).findAny().stream().toList();
+
+                 return exams.stream().filter(i -> i.getId().equals());
+                });
+
+
+//                    else {
+//                        time = null;
+//                    }
+//                    return time != null;
 
 //        List<String> newList = oneStudentsAnswerList.stream().map(studentsAnswers -> {
 //            StudentsAnswers e = studentsAnswers;
