@@ -56,12 +56,7 @@ public class QuestionsWindow extends AbstractWindow {
             }
         }
 
-        double grade;
-        if (result.size() == exam.getQuestions().size()) {
-            grade = 10D;
-        } else {
-            grade = ((result.size() * 10D) / exam.getQuestions().size());
-        }
+        double grade = ((result.size() * 10D) / exam.getQuestions().size());
 
         return String.format("%.0f", grade);
     }
