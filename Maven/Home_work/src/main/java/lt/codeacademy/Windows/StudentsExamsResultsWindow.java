@@ -8,6 +8,8 @@ import lt.codeacademy.Users.User;
 import lt.codeacademy.Users.UserType;
 
 import java.io.File;
+import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -31,18 +33,17 @@ public class StudentsExamsResultsWindow extends AbstractWindow {
         List<StudentsAnswers> studentsAnswersList = objectMapper.readValue(file, new TypeReference<>() {
         });
 
-        IntStream.range(0, studentsAnswersList.size())
-                .mapToObj(i -> {
-                    StudentsAnswers e = studentsAnswersList.get(i);
-                    return "\nStudento vardas: " + e.getUser().getName() +
-                            "\nStudento pavardė: " + e.getUser().getSurname() +
-                            "\nEgzamino ID: " + e.getExam().getId() +
-                            ", Egzamino pavadinimas: " + e.getExam().getName() +
-                            ", Egzamino tipas: " + e.getExam().getExamType() +
-                            "\nPažymys: " + e.getGrade() +
-                            "\nEgzamino laikymo data: " + e.getTime();
-                })
-                .sorted()
+        studentsAnswersList.stream()
+                .sorted(Comparator.comparing((StudentsAnswers sa) -> sa.getUser().getName())
+                        .thenComparing(sa -> sa.getUser().getSurname())
+                        .thenComparing(sa -> LocalDateTime.parse(sa.getTime())))
+                .map(e -> "\nStudento vardas: " + e.getUser().getName() +
+                        "\nStudento pavardė: " + e.getUser().getSurname() +
+                        "\nEgzamino ID: " + e.getExam().getId() +
+                        ", Egzamino pavadinimas: " + e.getExam().getName() +
+                        ", Egzamino tipas: " + e.getExam().getExamType() +
+                        "\nPažymys: " + e.getGrade() +
+                        "\nEgzamino laikymo data: " + e.getTime())
                 .forEachOrdered(System.out::println);
 
         returnAction();

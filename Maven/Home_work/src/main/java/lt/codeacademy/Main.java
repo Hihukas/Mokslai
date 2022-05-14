@@ -10,6 +10,8 @@ public class Main {
 
         MainWindow mainWindow = new MainWindow();
         mainWindow.window();
+//        ExamsCreateWindow examsCreateWindow = new ExamsCreateWindow();
+//        examsCreateWindow.window();
 
 
 //    private static State createTestState() {
