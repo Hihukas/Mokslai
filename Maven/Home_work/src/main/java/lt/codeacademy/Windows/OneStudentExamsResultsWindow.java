@@ -13,10 +13,8 @@ import java.util.stream.IntStream;
 
 public class OneStudentExamsResultsWindow extends AbstractWindow {
     private User user;
-    private Enum<UserType> userType;
 
-    public OneStudentExamsResultsWindow(Enum<UserType> userType, User user) {
-        this.userType = userType;
+    public OneStudentExamsResultsWindow(User user) {
         this.user = user;
     }
 
@@ -47,7 +45,7 @@ public class OneStudentExamsResultsWindow extends AbstractWindow {
             Scanner scanner = new Scanner(System.in);
             input = scanner.nextLine();
             if ("1".equals(input)) {
-                StudentWindow window = new StudentWindow(userType, user);
+                StudentWindow window = new StudentWindow(user);
                 window.window();
             } else {
                 System.out.println("Tokio veiksmo nėra. Bandykite dar kartą.");

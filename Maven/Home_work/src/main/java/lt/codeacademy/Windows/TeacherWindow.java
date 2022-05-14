@@ -7,10 +7,8 @@ import java.util.Scanner;
 
 public class TeacherWindow extends AbstractWindow {
     private User user;
-    private Enum<UserType> userType;
 
-    public TeacherWindow(Enum<UserType> userType, User user) {
-        this.userType = userType;
+    public TeacherWindow(User user) {
         this.user = user;
     }
 
@@ -27,7 +25,7 @@ public class TeacherWindow extends AbstractWindow {
         String input = scanner.nextLine();
         switch (input) {
             case "1" -> {
-                StudentsExamsResultsWindow studentsExamsResultsWindow = new StudentsExamsResultsWindow(userType, user);
+                StudentsExamsResultsWindow studentsExamsResultsWindow = new StudentsExamsResultsWindow(user);
                 studentsExamsResultsWindow.window();
             }
             case "2" -> {
@@ -35,7 +33,7 @@ public class TeacherWindow extends AbstractWindow {
                 examsCreateWindow.window();
             }
             case "3" -> {
-                ExamsWindow examsWindow = new ExamsWindow(userType, user);
+                ExamsWindow examsWindow = new ExamsWindow(user, this, true);
                 examsWindow.window();
             }
             case "4" -> {
@@ -44,7 +42,7 @@ public class TeacherWindow extends AbstractWindow {
             }
             default -> {
                 System.out.println("Tokio veiksmo nėra. Pasirinkite iš naujo.\n");
-                TeacherWindow teacherWindow = new TeacherWindow(userType, user);
+                TeacherWindow teacherWindow = new TeacherWindow(user);
                 teacherWindow.window();
             }
         }

@@ -49,15 +49,9 @@ public class RegistrationWindow extends AbstractWindow {
         usersList.add(user);
         objectMapper.writeValue(file, usersList);
 
-        if (UserType.STUDENT == UserType.STUDENT) {
-            System.out.printf("\nSveikiname prisijungus, %s!\n", name);
-            StudentWindow window = new StudentWindow(UserType.STUDENT, user);
-            window.window();
-        } else {
-            System.out.println("Prisiregistruoti nepavyko. Bandykite dar kartą.");
-            RegistrationWindow window = new RegistrationWindow();
-            window.window();
-        }
+        System.out.printf("\nSveikiname prisijungus, %s!\n", name);
+        StudentWindow window = new StudentWindow(user);
+        window.window();
     }
 
     private String usernameCheck(Scanner scanner, List<User> usersList) {

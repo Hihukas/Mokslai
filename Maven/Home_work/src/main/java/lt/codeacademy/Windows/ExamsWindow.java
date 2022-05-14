@@ -15,33 +15,28 @@ import java.util.*;
 import java.util.stream.IntStream;
 
 public class ExamsWindow extends AbstractWindow {
-    private User user;
-    private Enum<UserType> userType;
+    private final User user;
 
-    public ExamsWindow(Enum<UserType> userType, User user) {
-        this.userType = userType;
+    private final AbstractWindow previousWindow;
+
+    private final boolean editMode;
+
+    public ExamsWindow(User user, AbstractWindow previousWindow, boolean editMode) {
         this.user = user;
+        this.previousWindow = previousWindow;
+        this.editMode = editMode;
     }
 
     @Override
     public void window() throws Exception {
         Scanner scanner = new Scanner(System.in);
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-
-        File file = new File("Exams.json");
-
-        List<Exam> exams = objectMapper.readValue(file, new TypeReference<>() {
-        });
-
-        List<Exam> examsToTake = getUsersExamsToTake(user, user.getUserType(), exams);
+        List<Exam> examsToTake = getExams();
 
         if(examsToTake.size()==0){
-            System.out.println("Galimų laikyti egzaminų sąrašas tuščias.");
+            System.out.println("Egzaminų sąrašas tuščias.");
             Thread.sleep(3000);
-            StudentWindow studentWindow = new StudentWindow(userType, user);
-            studentWindow.window();
+            previousWindow.window();
         }
 
         System.out.println("Egzaminų sąrašas:");
@@ -63,11 +58,11 @@ public class ExamsWindow extends AbstractWindow {
 
         try {
             Exam exam = examsToTake.get(scanner.nextInt() - 1);
-            if (userType.equals(UserType.STUDENT)) {
-                QuestionsWindow questionsWindow = new QuestionsWindow(exam, userType, user);
-                questionsWindow.window();
+            if (editMode) {
+                System.out.println("Editinomo langas");
             } else {
-                System.out.println("Dėstytojo langas");
+                QuestionsWindow questionsWindow = new QuestionsWindow(exam, user);
+                questionsWindow.window();
             }
         } catch (InputMismatchException e) {
             System.out.println("Galimi tik skaičiai.\n");
@@ -78,8 +73,17 @@ public class ExamsWindow extends AbstractWindow {
         }
     }
 
-    private List<Exam> getUsersExamsToTake(User user, UserType userType, List<Exam> exams) throws Exception {
-        OneStudentExamsResultsWindow oneStudentExamsResultsWindow = new OneStudentExamsResultsWindow(userType, user);
+    private List<Exam> getExams() throws Exception {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+        File file = new File("Exams.json");
+        List<Exam> exams = objectMapper.readValue(file, new TypeReference<>() {
+        });
+        return editMode ?  exams : getUsersExamsToTake(exams);
+    }
+
+    private List<Exam> getUsersExamsToTake(List<Exam> exams) throws Exception {
+        OneStudentExamsResultsWindow oneStudentExamsResultsWindow = new OneStudentExamsResultsWindow(user);
         List<StudentsAnswers> oneStudentsAnswerList = oneStudentExamsResultsWindow.fillOneStudentsAnswersList();
 
         List<Exam> restrictedExams = oneStudentsAnswerList.stream()

@@ -7,10 +7,8 @@ import java.util.Scanner;
 
 public class StudentWindow extends AbstractWindow {
     private User user;
-    private Enum<UserType> userType;
 
-    public StudentWindow(Enum<UserType> userType, User user) {
-        this.userType = userType;
+    public StudentWindow(User user) {
         this.user = user;
     }
 
@@ -28,11 +26,11 @@ public class StudentWindow extends AbstractWindow {
             input = scanner.nextLine();
             switch (input) {
                 case "1" -> {
-                    ExamsWindow examsWindow = new ExamsWindow(userType, user);
+                    ExamsWindow examsWindow = new ExamsWindow(user, this, false);
                     examsWindow.window();
                 }
                 case "2" -> {
-                    OneStudentExamsResultsWindow oneStudentExamsResultsWindow = new OneStudentExamsResultsWindow(userType, user);
+                    OneStudentExamsResultsWindow oneStudentExamsResultsWindow = new OneStudentExamsResultsWindow(user);
                     oneStudentExamsResultsWindow.window();
                 }
                 case "3" -> {

@@ -17,13 +17,11 @@ import java.util.stream.IntStream;
 public class QuestionsWindow extends AbstractWindow {
     private Exam exam;
     private User user;
-    private Enum<UserType> userType;
     private List<Integer> questionsAnswers = new LinkedList<>();
     private List<StudentsAnswers> studentsAnswers = new ArrayList<>();
 
-    public QuestionsWindow(Exam exam, Enum<UserType> userType, User user) {
+    public QuestionsWindow(Exam exam, User user) {
         this.exam = exam;
-        this.userType = userType;
         this.user = user;
     }
 
@@ -41,7 +39,7 @@ public class QuestionsWindow extends AbstractWindow {
         testResult();
 
         Thread.sleep(5000);
-        StudentWindow window = new StudentWindow(userType, user);
+        StudentWindow window = new StudentWindow(user);
         window.window();
     }
 

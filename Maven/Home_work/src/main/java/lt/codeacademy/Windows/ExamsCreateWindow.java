@@ -83,7 +83,7 @@ public class ExamsCreateWindow extends AbstractWindow {
         String input = scanner.nextLine();
         switch (input) {
             case "1" -> {
-                TeacherWindow teacherWindow = new TeacherWindow(user.getUserType(), user);
+                TeacherWindow teacherWindow = new TeacherWindow(user);
                 teacherWindow.window();
             }
             case "2" -> {

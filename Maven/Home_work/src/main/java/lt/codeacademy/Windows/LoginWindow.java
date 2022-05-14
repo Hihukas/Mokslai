@@ -33,12 +33,12 @@ public class LoginWindow extends AbstractWindow {
             switch (user.getUserType()) {
                 case STUDENT -> {
                     System.out.printf("\nSveikiname prisijungus, %s!\n", user.getName());
-                    StudentWindow studentWindow = new StudentWindow(userType, user);
+                    StudentWindow studentWindow = new StudentWindow(user);
                     studentWindow.window();
                 }
                 case LECTOR -> {
                     System.out.printf("\nSveikiname prisijungus, %s!\n", user.getName());
-                    TeacherWindow teacherWindow = new TeacherWindow(userType, user);
+                    TeacherWindow teacherWindow = new TeacherWindow(user);
                     teacherWindow.window();
                 }
                 default -> {
