@@ -1,19 +1,21 @@
 package lt.codeacademy.Windows;
 
 import lt.codeacademy.Exams.Exam;
+import lt.codeacademy.Exams.Question;
 import lt.codeacademy.Users.User;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 
 public class ExamsEditingWindow extends AbstractWindow {
     private final User user;
-    private final List<Exam> exams;
+    private final Exam exam;
 
-    public ExamsEditingWindow(User user, List<Exam> exams) {
+    public ExamsEditingWindow(User user, Exam exam) {
         this.user = user;
-        this.exams = exams;
+        this.exam = exam;
     }
 
     @Override
@@ -21,7 +23,7 @@ public class ExamsEditingWindow extends AbstractWindow {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("""
-                [1] Redaguoti klausimus.
+                [1] Ištrinti klausimus.
                 [2] Papildyti egzaminą klausimais.
                 [3] Grįžti į dėstytojo meniu.
                 """);
@@ -29,15 +31,15 @@ public class ExamsEditingWindow extends AbstractWindow {
         String input = scanner.nextLine();
 
         switch (input) {
-            case "1" -> ;
-            case "2" -> ;
+            case "1" -> changeQuestions(exam);
+            case "2" -> System.out.println("bla, bla");
             case "3" -> {
                 TeacherWindow teacherWindow = new TeacherWindow(user);
                 teacherWindow.window();
-            };
+            }
             default -> {
                 System.out.println("Tokio veiksmo nėra. Pasirinkite iš naujo.\n");
-                ExamsEditingWindow examsEditingWindow = new ExamsEditingWindow(user, exams);
+                ExamsEditingWindow examsEditingWindow = new ExamsEditingWindow(user, exam);
                 examsEditingWindow.window();
             }
         }
@@ -45,29 +47,34 @@ public class ExamsEditingWindow extends AbstractWindow {
         chooseAction(scanner, user);
     }
 
+    private void changeQuestions(Exam exam, Scanner scanner) {
+        System.out.println("Pasirinkite norimą ištrinti klausimą:\n");
+
+        IntStream.range(0, exam.getQuestions().size())
+                .mapToObj(i -> {
+                    Question q = exam.getQuestions().get(i);
+                    return "[" + (i + 1) + "] " + q.getQuestion() +
+                            q.getAnswers() + "\n";
+                }).forEach(System.out::println);
+
+        List<Question> questions = exam.get(scanner.nextInt() - 1);
+    }
+
     private void chooseAction(Scanner scanner, User user) throws Exception {
         System.out.println("""
-                Testo egzaminas išsaugotas.
+                Informacija išsaugota.
                                 
                 [1] Grįžti į dėstytojo meniu.
-                [2] Redaguoti kitą testo egzaminą.
                 """);
 
         String input = scanner.nextLine();
-        switch (input) {
-            case "1" -> {
-                TeacherWindow teacherWindow = new TeacherWindow(user);
-                teacherWindow.window();
-            }
-            case "2" -> {
-                ExamsCreateWindow examsCreateWindow = new ExamsCreateWindow(user);
-                examsCreateWindow.window();
-            }
-            default -> {
-                System.out.println("Tokio veiksmo nėra. Pasirinkite iš naujo");
-                ExamsEditingWindow examsEditingWindow = new ExamsEditingWindow(user);
-                examsEditingWindow.chooseAction(scanner, user);
-            }
+        if ("1".equals(input)) {
+            TeacherWindow teacherWindow = new TeacherWindow(user);
+            teacherWindow.window();
+        } else {
+            System.out.println("Tokio veiksmo nėra. Pasirinkite iš naujo");
+            ExamsEditingWindow examsEditingWindow = new ExamsEditingWindow(user, exam);
+            examsEditingWindow.chooseAction(scanner, user);
         }
     }
 }

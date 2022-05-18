@@ -73,7 +73,7 @@ public class ExamsCreateWindow extends AbstractWindow {
 
     private void chooseAction(Scanner scanner, User user) throws Exception {
         System.out.println("""
-                Testo egzaminas išsaugotas.
+                Informacija išsaugota.
                                 
                 [1] Grįžti į dėstytojo meniu.
                 [2] Kurti naują testo egzaminą.

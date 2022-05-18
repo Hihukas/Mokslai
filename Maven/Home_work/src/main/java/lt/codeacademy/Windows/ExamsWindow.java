@@ -63,7 +63,7 @@ public class ExamsWindow extends AbstractWindow {
         try {
             Exam exam = examsToTake.get(scanner.nextInt() - 1);
             if (editMode) {
-                ExamsEditingWindow examsEditingWindow = new ExamsEditingWindow(user, exams);
+                ExamsEditingWindow examsEditingWindow = new ExamsEditingWindow(user, exam);
                 examsEditingWindow.window();
             } else {
                 QuestionsWindow questionsWindow = new QuestionsWindow(exam, user);
