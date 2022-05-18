@@ -22,6 +22,10 @@ public class ExamsEditingWindow extends AbstractWindow {
     public void window() throws Exception {
         Scanner scanner = new Scanner(System.in);
 
+        List<Question> questions = exam.getQuestions().stream().toList();
+
+        ExamsCreateWindow examsCreateWindow = new ExamsCreateWindow(user);
+        examsCreateWindow.questionCreate(scanner, questions);
 
         chooseAction(scanner, user);
     }
