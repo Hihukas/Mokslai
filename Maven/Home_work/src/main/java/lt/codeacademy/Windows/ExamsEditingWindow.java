@@ -1,15 +1,19 @@
 package lt.codeacademy.Windows;
 
+import lt.codeacademy.Exams.Exam;
 import lt.codeacademy.Users.User;
 
+import java.util.List;
 import java.util.Scanner;
 
 
 public class ExamsEditingWindow extends AbstractWindow {
     private final User user;
+    private final List<Exam> exams;
 
-    public ExamsEditingWindow(User user) {
+    public ExamsEditingWindow(User user, List<Exam> exams) {
         this.user = user;
+        this.exams = exams;
     }
 
     @Override
@@ -17,10 +21,9 @@ public class ExamsEditingWindow extends AbstractWindow {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("""
-                [1] Ištrinti egzaminą.
-                [2] Redaguoti klausimus.
-                [3] Papildyti egzaminą klausimais.
-                [4] Grįžti į dėstytojo meniu.
+                [1] Redaguoti klausimus.
+                [2] Papildyti egzaminą klausimais.
+                [3] Grįžti į dėstytojo meniu.
                 """);
 
         String input = scanner.nextLine();
@@ -28,11 +31,13 @@ public class ExamsEditingWindow extends AbstractWindow {
         switch (input) {
             case "1" -> ;
             case "2" -> ;
-            case "3" -> ;
-            case "4" -> ;
+            case "3" -> {
+                TeacherWindow teacherWindow = new TeacherWindow(user);
+                teacherWindow.window();
+            };
             default -> {
                 System.out.println("Tokio veiksmo nėra. Pasirinkite iš naujo.\n");
-                ExamsEditingWindow examsEditingWindow = new ExamsEditingWindow(user);
+                ExamsEditingWindow examsEditingWindow = new ExamsEditingWindow(user, exams);
                 examsEditingWindow.window();
             }
         }

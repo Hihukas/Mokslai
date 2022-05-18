@@ -29,8 +29,13 @@ public class ExamsWindow extends AbstractWindow {
     @Override
     public void window() throws Exception {
         Scanner scanner = new Scanner(System.in);
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+        File file = new File("Exams.json");
+        List<Exam> exams = objectMapper.readValue(file, new TypeReference<>() {
+        });
 
-        List<Exam> examsToTake = getExams();
+        List<Exam> examsToTake = getExams(exams);
 
         if(examsToTake.size()==0){
             System.out.println("Egzaminų sąrašas tuščias.");
@@ -58,7 +63,7 @@ public class ExamsWindow extends AbstractWindow {
         try {
             Exam exam = examsToTake.get(scanner.nextInt() - 1);
             if (editMode) {
-                ExamsEditingWindow examsEditingWindow = new ExamsEditingWindow(user);
+                ExamsEditingWindow examsEditingWindow = new ExamsEditingWindow(user, exams);
                 examsEditingWindow.window();
             } else {
                 QuestionsWindow questionsWindow = new QuestionsWindow(exam, user);
@@ -73,12 +78,9 @@ public class ExamsWindow extends AbstractWindow {
         }
     }
 
-    private List<Exam> getExams() throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-        File file = new File("Exams.json");
-        List<Exam> exams = objectMapper.readValue(file, new TypeReference<>() {
-        });
+    private List<Exam> getExams(List<Exam> exams) throws Exception {
+
+
         return editMode ?  exams : getUsersExamsToTake(exams);
     }
 
