@@ -15,6 +15,28 @@ public class ExamsEditingWindow extends AbstractWindow {
     @Override
     public void window() throws Exception {
         Scanner scanner = new Scanner(System.in);
+
+        System.out.println("""
+                [1] Ištrinti egzaminą.
+                [2] Redaguoti klausimus.
+                [3] Papildyti egzaminą klausimais.
+                [4] Grįžti į dėstytojo meniu.
+                """);
+
+        String input = scanner.nextLine();
+
+        switch (input) {
+            case "1" -> ;
+            case "2" -> ;
+            case "3" -> ;
+            case "4" -> ;
+            default -> {
+                System.out.println("Tokio veiksmo nėra. Pasirinkite iš naujo.\n");
+                ExamsEditingWindow examsEditingWindow = new ExamsEditingWindow(user);
+                examsEditingWindow.window();
+            }
+        }
+
         chooseAction(scanner, user);
     }
 
