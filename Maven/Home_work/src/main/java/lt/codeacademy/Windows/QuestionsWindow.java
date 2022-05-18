@@ -5,8 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import lt.codeacademy.Answers.StudentsAnswers;
 import lt.codeacademy.Exams.Exam;
+import lt.codeacademy.Exams.Question;
 import lt.codeacademy.Users.User;
-import lt.codeacademy.Users.UserType;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,10 +15,10 @@ import java.util.*;
 import java.util.stream.IntStream;
 
 public class QuestionsWindow extends AbstractWindow {
-    private Exam exam;
-    private User user;
-    private List<Integer> questionsAnswers = new LinkedList<>();
-    private List<StudentsAnswers> studentsAnswers = new ArrayList<>();
+    private final Exam exam;
+    private final User user;
+    private final List<Integer> questionsAnswers = new LinkedList<>();
+    private final List<StudentsAnswers> studentsAnswers = new ArrayList<>();
 
     public QuestionsWindow(Exam exam, User user) {
         this.exam = exam;
@@ -35,7 +35,7 @@ public class QuestionsWindow extends AbstractWindow {
         saveStudentAnswers(studentsAnswers);
         saveAnswersToFile(studentsAnswers);
 
-        System.out.printf("\nAčiū už atsakymus! Jie išsaugoti!\nJūsų pažymys: %s\n", testResult());
+        System.out.printf("\nAčiū už atsakymus! Jie išsaugoti!\nJūsų pažymys: %s\nEgzaminą perlaikyti bus galima po 48 valandų.\n", testResult());
         testResult();
 
         Thread.sleep(5000);
@@ -45,7 +45,7 @@ public class QuestionsWindow extends AbstractWindow {
 
     private String testResult() {
         List<Integer> correctAnswers = exam.getQuestions().stream()
-                .map(question -> question.getCorrectAnswer()).toList();
+                .map(Question::getCorrectAnswer).toList();
 
         List<Integer> result = new ArrayList<>();
         for (int i = 0; i < exam.getQuestions().size(); i++) {
@@ -101,7 +101,7 @@ public class QuestionsWindow extends AbstractWindow {
                 .forEach(System.out::println);
 
         System.out.println("\nĮveskite teisingą atsakymo numerį:");
-        int answerInput = 0;
+        int answerInput;
 
         try {
             answerInput = scanner.nextInt();

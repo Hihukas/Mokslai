@@ -4,7 +4,6 @@ import lt.codeacademy.Users.User;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import lt.codeacademy.Users.UserType;
 
 import java.io.File;
 import java.util.List;
@@ -13,39 +12,37 @@ import java.util.Scanner;
 public class LoginWindow extends AbstractWindow {
     @Override
     public void window() throws Exception {
-        User user;
-        do {
-            Scanner scanner = new Scanner(System.in);
 
-            System.out.println("Įveskite vartotojo vardą: ");
-            String userName = scanner.nextLine();
-            System.out.println("Įveskite slaptažodį:");
-            String password = scanner.nextLine();
+        Scanner scanner = new Scanner(System.in);
 
-            user = login(userName, password);
-            if (user == null) {
-                System.out.println("Tokio vartotojo vardo arba slaptažodžio nėra. Bandykite iš naujo.\n");
-                window();
+        System.out.println("Įveskite vartotojo vardą: ");
+        String userName = scanner.nextLine();
+        System.out.println("Įveskite slaptažodį:");
+        String password = scanner.nextLine();
+
+        User user = login(userName, password);
+        if (user == null) {
+            System.out.println("Tokio vartotojo vardo arba slaptažodžio nėra. Bandykite iš naujo.\n");
+            window();
+        }
+
+        switch (user.getUserType()) {
+            case STUDENT -> {
+                System.out.printf("\nSveikiname prisijungus, %s!\n", user.getName());
+                StudentWindow studentWindow = new StudentWindow(user);
+                studentWindow.window();
             }
-
-            Enum<UserType> userType = user.getUserType();
-
-            switch (user.getUserType()) {
-                case STUDENT -> {
-                    System.out.printf("\nSveikiname prisijungus, %s!\n", user.getName());
-                    StudentWindow studentWindow = new StudentWindow(user);
-                    studentWindow.window();
-                }
-                case LECTOR -> {
-                    System.out.printf("\nSveikiname prisijungus, %s!\n", user.getName());
-                    TeacherWindow teacherWindow = new TeacherWindow(user);
-                    teacherWindow.window();
-                }
-                default -> {
-                    System.out.println("Neteisingas vartotojo vardas arba slaptažodis. Bandykite dar kartą.\n");
-                }
+            case LECTOR -> {
+                System.out.printf("\nSveikiname prisijungus, %s!\n", user.getName());
+                TeacherWindow teacherWindow = new TeacherWindow(user);
+                teacherWindow.window();
             }
-        } while (user.getUserType().equals(UserType.STUDENT) || user.getUserType().equals(UserType.LECTOR));
+            default -> {
+                System.out.println("Neteisingas vartotojo vardas arba slaptažodis. Bandykite dar kartą.\n");
+                LoginWindow loginWindow = new LoginWindow();
+                loginWindow.window();
+            }
+        }
     }
 
     public User login(String userName, String password) throws Exception {

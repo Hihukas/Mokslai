@@ -9,7 +9,6 @@ import lt.codeacademy.Exams.Question;
 import lt.codeacademy.Users.User;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.*;
 
 

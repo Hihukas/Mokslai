@@ -6,7 +6,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import lt.codeacademy.Users.User;
-import lt.codeacademy.Users.UserType;
 
 import java.io.File;
 import java.time.Duration;

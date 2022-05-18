@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class MainWindow extends AbstractWindow {
     @Override
     public void window() throws Exception {
-        String input;
         System.out.println("""
                 Pasirinkite norimą atlikti veiksmą:
                 [1] - Prisijungimas.
@@ -13,7 +12,7 @@ public class MainWindow extends AbstractWindow {
                 [3] - Išeiti.
                 """);
         Scanner scanner = new Scanner(System.in);
-        input = scanner.nextLine();
+        String input = scanner.nextLine();
         switch (input) {
             case "1" -> {
                 LoginWindow loginWindow = new LoginWindow();
@@ -23,10 +22,7 @@ public class MainWindow extends AbstractWindow {
                 RegistrationWindow registrationWindow = new RegistrationWindow();
                 registrationWindow.window();
             }
-            case "3" -> {
-                System.out.println("Programa baigia darbą.");
-                System.exit(0);
-            }
+            case "3" -> System.out.println("Programa baigia darbą.");
             default -> {
                 System.out.println("Tokio veiksmo nėra. Pasirinkite iš naujo.\n");
                 MainWindow mainWindow = new MainWindow();

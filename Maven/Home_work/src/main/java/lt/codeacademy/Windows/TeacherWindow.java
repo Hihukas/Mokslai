@@ -1,12 +1,11 @@
 package lt.codeacademy.Windows;
 
 import lt.codeacademy.Users.User;
-import lt.codeacademy.Users.UserType;
 
 import java.util.Scanner;
 
 public class TeacherWindow extends AbstractWindow {
-    private User user;
+    private final User user;
 
     public TeacherWindow(User user) {
         this.user = user;

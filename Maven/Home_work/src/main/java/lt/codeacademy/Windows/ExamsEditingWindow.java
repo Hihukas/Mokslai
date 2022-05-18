@@ -1,17 +1,9 @@
 package lt.codeacademy.Windows;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import lt.codeacademy.Exams.Exam;
 import lt.codeacademy.Users.User;
-import lt.codeacademy.Users.UserType;
 
-import java.io.File;
-import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.IntStream;
+
 
 public class ExamsEditingWindow extends AbstractWindow {
     @Override

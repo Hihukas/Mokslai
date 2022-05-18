@@ -1,12 +1,11 @@
 package lt.codeacademy.Windows;
 
 import lt.codeacademy.Users.User;
-import lt.codeacademy.Users.UserType;
 
 import java.util.Scanner;
 
 public class StudentWindow extends AbstractWindow {
-    private User user;
+    private final User user;
 
     public StudentWindow(User user) {
         this.user = user;
@@ -14,31 +13,32 @@ public class StudentWindow extends AbstractWindow {
 
     @Override
     public void window() throws Exception {
-        String input;
-        do {
-            System.out.println("""
-                    Pasirinkite norimą atlikti veiksmą:
-                    [1] - Laikyti egzaminą.
-                    [2] - Egzaminų rezultatai.
-                    [3] - Atsijungti ir grįžti į pagrindinį meniu.
-                    """);
-            Scanner scanner = new Scanner(System.in);
-            input = scanner.nextLine();
-            switch (input) {
-                case "1" -> {
-                    ExamsWindow examsWindow = new ExamsWindow(user, this, false);
-                    examsWindow.window();
-                }
-                case "2" -> {
-                    OneStudentExamsResultsWindow oneStudentExamsResultsWindow = new OneStudentExamsResultsWindow(user);
-                    oneStudentExamsResultsWindow.window();
-                }
-                case "3" -> {
-                    MainWindow mainWindow = new MainWindow();
-                    mainWindow.window();
-                }
-                default -> System.out.println("Tokio veiksmo nėra. Pasirinkite iš naujo.\n");
+        System.out.println("""
+                Pasirinkite norimą atlikti veiksmą:
+                [1] - Laikyti egzaminą.
+                [2] - Egzaminų rezultatai.
+                [3] - Atsijungti ir grįžti į pagrindinį meniu.
+                """);
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        switch (input) {
+            case "1" -> {
+                ExamsWindow examsWindow = new ExamsWindow(user, this, false);
+                examsWindow.window();
             }
-        } while (!(input.equals("1") || input.equals("2") || input.equals("3")));
+            case "2" -> {
+                OneStudentExamsResultsWindow oneStudentExamsResultsWindow = new OneStudentExamsResultsWindow(user);
+                oneStudentExamsResultsWindow.window();
+            }
+            case "3" -> {
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.window();
+            }
+            default -> {
+                System.out.println("Tokio veiksmo nėra. Pasirinkite iš naujo.\n");
+                StudentWindow studentWindow = new StudentWindow(user);
+                studentWindow.window();
+            }
+        }
     }
 }

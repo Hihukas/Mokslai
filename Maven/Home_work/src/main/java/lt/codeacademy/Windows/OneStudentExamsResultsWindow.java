@@ -5,14 +5,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import lt.codeacademy.Answers.StudentsAnswers;
 import lt.codeacademy.Users.User;
-import lt.codeacademy.Users.UserType;
 
 import java.io.File;
 import java.util.*;
 import java.util.stream.IntStream;
 
 public class OneStudentExamsResultsWindow extends AbstractWindow {
-    private User user;
+    private final User user;
 
     public OneStudentExamsResultsWindow(User user) {
         this.user = user;

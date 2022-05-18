@@ -36,34 +36,4 @@
     "answers" : [ "b", "a", "c" ],
     "correctAnswer" : 3
   } ]
-}, {
-  "id" : "cb2a2184-5887-473d-a357-7986f09936a6",
-  "examType" : "TEST",
-  "name" : "OOP3",
-  "questions" : [ {
-    "question" : "Klausimas?",
-    "answers" : [ "a", "b", "c" ],
-    "correctAnswer" : 1
-  }, {
-    "question" : "Klausimas?",
-    "answers" : [ "a", "b", "c" ],
-    "correctAnswer" : 2
-  }, {
-    "question" : "Klausimas?",
-    "answers" : [ "a", "b", "c" ],
-    "correctAnswer" : 3
-  } ]
-}, {
-  "id" : "ad7014d6-3046-4eef-a86f-da4b7a91a4b0",
-  "examType" : "TEST",
-  "name" : "OOP4",
-  "questions" : [ {
-    "question" : "Klausimas?\nAtsakymų variantai:",
-    "answers" : [ "a", "b" ],
-    "correctAnswer" : 1
-  }, {
-    "question" : "Klausimas?\nAtsakymų variantai:",
-    "answers" : [ "a", "b", "c" ],
-    "correctAnswer" : 3
-  } ]
-} ]
+}]
