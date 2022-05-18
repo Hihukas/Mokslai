@@ -89,7 +89,11 @@ public class ExamsCreateWindow extends AbstractWindow {
                 ExamsCreateWindow examsCreateWindow = new ExamsCreateWindow(user);
                 examsCreateWindow.window();
             }
-            default -> System.out.println("Tokio veiksmo nėra. Pasirinkite iš naujo");
+            default -> {
+                System.out.println("Tokio veiksmo nėra. Pasirinkite iš naujo");
+                ExamsCreateWindow examsCreateWindow = new ExamsCreateWindow(user);
+                examsCreateWindow.chooseAction(scanner, user);
+            }
         }
     }
 }

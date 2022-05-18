@@ -58,7 +58,8 @@ public class ExamsWindow extends AbstractWindow {
         try {
             Exam exam = examsToTake.get(scanner.nextInt() - 1);
             if (editMode) {
-                System.out.println("Editinomo langas");
+                ExamsEditingWindow examsEditingWindow = new ExamsEditingWindow(user);
+                examsEditingWindow.window();
             } else {
                 QuestionsWindow questionsWindow = new QuestionsWindow(exam, user);
                 questionsWindow.window();
