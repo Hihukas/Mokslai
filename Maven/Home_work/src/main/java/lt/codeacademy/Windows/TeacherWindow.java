@@ -17,7 +17,7 @@ public class TeacherWindow extends AbstractWindow {
                 Pasirinkite norimą atlikti veiksmą:
                 [1] - Egzaminų rezultatai.
                 [2] - Sukurti testo egzaminą.
-                [3] - Testo egzaminų redagavimas.
+                [3] - Testo egzaminų papildymas klausimais.
                 [4] - Atsijungti ir grįžti į pagrindinį meniu.
                 """);
         Scanner scanner = new Scanner(System.in);

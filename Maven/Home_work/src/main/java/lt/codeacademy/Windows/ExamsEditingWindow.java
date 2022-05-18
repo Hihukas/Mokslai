@@ -22,33 +22,12 @@ public class ExamsEditingWindow extends AbstractWindow {
     public void window() throws Exception {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("""
-                [1] Ištrinti klausimus.
-                [2] Papildyti egzaminą klausimais.
-                [3] Grįžti į dėstytojo meniu.
-                """);
-
-        String input = scanner.nextLine();
-
-        switch (input) {
-            case "1" -> changeQuestions(exam);
-            case "2" -> System.out.println("bla, bla");
-            case "3" -> {
-                TeacherWindow teacherWindow = new TeacherWindow(user);
-                teacherWindow.window();
-            }
-            default -> {
-                System.out.println("Tokio veiksmo nėra. Pasirinkite iš naujo.\n");
-                ExamsEditingWindow examsEditingWindow = new ExamsEditingWindow(user, exam);
-                examsEditingWindow.window();
-            }
-        }
 
         chooseAction(scanner, user);
     }
 
-    private void changeQuestions(Exam exam, Scanner scanner) {
-        System.out.println("Pasirinkite norimą ištrinti klausimą:\n");
+    private void addQuestions(Exam exam, Scanner scanner) {
+        System.out.println("Sukurkite klausimą:\n");
 
         IntStream.range(0, exam.getQuestions().size())
                 .mapToObj(i -> {
@@ -57,7 +36,8 @@ public class ExamsEditingWindow extends AbstractWindow {
                             q.getAnswers() + "\n";
                 }).forEach(System.out::println);
 
-        List<Question> questions = exam.get(scanner.nextInt() - 1);
+        List<Question> questions = exam.getQuestions().stream().toList();
+        questions.remove(scanner.nextInt() - 1);
     }
 
     private void chooseAction(Scanner scanner, User user) throws Exception {

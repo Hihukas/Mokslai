@@ -29,13 +29,22 @@ public class ExamsCreateWindow extends AbstractWindow {
 
         List<Question> questions = new ArrayList<>();
 
-
         System.out.println("Įveskite testo egzamino temą:");
         String examTheme = scanner.nextLine();
+
+        questionCreate(scanner, questions);
+
+        exams.add(new Exam(UUID.randomUUID(), ExamType.TEST, examTheme, questions));
+
+        objectMapper.writeValue(file, exams);
+
+        chooseAction(scanner, user);
+    }
+
+    public void questionCreate(Scanner scanner, List<Question> questions){
         System.out.println("Įveskite norimą klausimų kiekį:");
         int examQuestionsQuantity = (scanner.nextInt() - 1);
         scanner.nextLine();
-
 
         for (int i = 0; i <= examQuestionsQuantity; i++) {
             System.out.println("Sukurkite klausimą:");
@@ -61,14 +70,6 @@ public class ExamsCreateWindow extends AbstractWindow {
 
             questions.add(questionObj);
         }
-
-        exams.add(new Exam(UUID.randomUUID(), ExamType.TEST, examTheme, questions));
-
-        objectMapper.writeValue(file, exams);
-
-        chooseAction(scanner, user);
-
-
     }
 
     private void chooseAction(Scanner scanner, User user) throws Exception {
@@ -76,24 +77,16 @@ public class ExamsCreateWindow extends AbstractWindow {
                 Informacija išsaugota.
                                 
                 [1] Grįžti į dėstytojo meniu.
-                [2] Kurti naują testo egzaminą.
                 """);
 
         String input = scanner.nextLine();
-        switch (input) {
-            case "1" -> {
-                TeacherWindow teacherWindow = new TeacherWindow(user);
-                teacherWindow.window();
-            }
-            case "2" -> {
-                ExamsCreateWindow examsCreateWindow = new ExamsCreateWindow(user);
-                examsCreateWindow.window();
-            }
-            default -> {
-                System.out.println("Tokio veiksmo nėra. Pasirinkite iš naujo");
-                ExamsCreateWindow examsCreateWindow = new ExamsCreateWindow(user);
-                examsCreateWindow.chooseAction(scanner, user);
-            }
+        if ("1".equals(input)) {
+            TeacherWindow teacherWindow = new TeacherWindow(user);
+            teacherWindow.window();
+        } else {
+            System.out.println("Tokio veiksmo nėra. Pasirinkite iš naujo");
+            ExamsCreateWindow examsCreateWindow = new ExamsCreateWindow(user);
+            examsCreateWindow.chooseAction(scanner, user);
         }
     }
 }

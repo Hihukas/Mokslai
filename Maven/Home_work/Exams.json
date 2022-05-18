@@ -36,4 +36,17 @@
     "answers" : [ "b", "a", "c" ],
     "correctAnswer" : 3
   } ]
-}]
+}, {
+  "id" : "8a279af6-84f3-4ec1-96eb-7e0d9cc25c64",
+  "examType" : "TEST",
+  "name" : "OOP3",
+  "questions" : [ {
+    "question" : "Klausimas?\nAtsakymų variantai:",
+    "answers" : [ "a", "b" ],
+    "correctAnswer" : 1
+  }, {
+    "question" : "Klausimas?\nAtsakymų variantai:",
+    "answers" : [ "a", "b", "c" ],
+    "correctAnswer" : 2
+  } ]
+} ]
