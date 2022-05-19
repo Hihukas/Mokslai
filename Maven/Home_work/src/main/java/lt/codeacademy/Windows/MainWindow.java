@@ -2,8 +2,6 @@ package lt.codeacademy.Windows;
 
 import lt.codeacademy.Utility;
 
-import java.util.Scanner;
-
 public class MainWindow extends AbstractWindow {
     private final Utility utility;
 
@@ -22,11 +20,11 @@ public class MainWindow extends AbstractWindow {
         String input = utility.getScanner().nextLine();
         switch (input) {
             case "1" -> {
-                LoginWindow loginWindow = new LoginWindow();
+                LoginWindow loginWindow = new LoginWindow(utility);
                 loginWindow.window();
             }
             case "2" -> {
-                RegistrationWindow registrationWindow = new RegistrationWindow();
+                RegistrationWindow registrationWindow = new RegistrationWindow(utility);
                 registrationWindow.window();
             }
             case "3" -> System.out.println("Programa baigia darbą.");

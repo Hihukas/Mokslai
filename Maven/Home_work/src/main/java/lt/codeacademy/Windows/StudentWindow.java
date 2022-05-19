@@ -3,8 +3,6 @@ package lt.codeacademy.Windows;
 import lt.codeacademy.Users.User;
 import lt.codeacademy.Utility;
 
-import java.util.Scanner;
-
 public class StudentWindow extends AbstractWindow {
     private final User user;
     private final Utility utility;
@@ -22,15 +20,14 @@ public class StudentWindow extends AbstractWindow {
                 [2] - Egzaminų rezultatai.
                 [3] - Atsijungti ir grįžti į pagrindinį meniu.
                 """);
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
+        String input = utility.getScanner().nextLine();
         switch (input) {
             case "1" -> {
-                ExamsWindow examsWindow = new ExamsWindow(user, this, false);
+                ExamsWindow examsWindow = new ExamsWindow(user, this, false, utility);
                 examsWindow.window();
             }
             case "2" -> {
-                OneStudentExamsResultsWindow oneStudentExamsResultsWindow = new OneStudentExamsResultsWindow(user);
+                OneStudentExamsResultsWindow oneStudentExamsResultsWindow = new OneStudentExamsResultsWindow(user, utility);
                 oneStudentExamsResultsWindow.window();
             }
             case "3" -> {
@@ -39,7 +36,7 @@ public class StudentWindow extends AbstractWindow {
             }
             default -> {
                 System.out.println("Tokio veiksmo nėra. Pasirinkite iš naujo.\n");
-                StudentWindow studentWindow = new StudentWindow(user);
+                StudentWindow studentWindow = new StudentWindow(user, utility);
                 studentWindow.window();
             }
         }

@@ -1,14 +1,15 @@
 package lt.codeacademy.Windows;
 
 import lt.codeacademy.Users.User;
-
-import java.util.Scanner;
+import lt.codeacademy.Utility;
 
 public class TeacherWindow extends AbstractWindow {
     private final User user;
+    private final Utility utility;
 
-    public TeacherWindow(User user) {
+    public TeacherWindow(User user, Utility utility) {
         this.user = user;
+        this.utility = utility;
     }
 
     @Override
@@ -20,28 +21,27 @@ public class TeacherWindow extends AbstractWindow {
                 [3] - Testo egzaminų papildymas klausimais.
                 [4] - Atsijungti ir grįžti į pagrindinį meniu.
                 """);
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
+        String input = utility.getScanner().nextLine();
         switch (input) {
             case "1" -> {
-                StudentsExamsResultsWindow studentsExamsResultsWindow = new StudentsExamsResultsWindow(user);
+                StudentsExamsResultsWindow studentsExamsResultsWindow = new StudentsExamsResultsWindow(user, utility);
                 studentsExamsResultsWindow.window();
             }
             case "2" -> {
-                ExamsCreateWindow examsCreateWindow = new ExamsCreateWindow(user);
+                ExamsCreateWindow examsCreateWindow = new ExamsCreateWindow(user, utility);
                 examsCreateWindow.window();
             }
             case "3" -> {
-                ExamsWindow examsWindow = new ExamsWindow(user, this, true);
+                ExamsWindow examsWindow = new ExamsWindow(user, this, true, utility);
                 examsWindow.window();
             }
             case "4" -> {
-                MainWindow mainWindow = new MainWindow();
+                MainWindow mainWindow = new MainWindow(utility);
                 mainWindow.window();
             }
             default -> {
                 System.out.println("Tokio veiksmo nėra. Pasirinkite iš naujo.\n");
-                TeacherWindow teacherWindow = new TeacherWindow(user);
+                TeacherWindow teacherWindow = new TeacherWindow(user, utility);
                 teacherWindow.window();
             }
         }

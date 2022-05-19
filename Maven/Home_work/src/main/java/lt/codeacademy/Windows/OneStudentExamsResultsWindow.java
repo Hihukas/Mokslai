@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import lt.codeacademy.Answers.StudentsAnswers;
 import lt.codeacademy.Users.User;
+import lt.codeacademy.Utility;
 
 import java.io.File;
 import java.util.*;
@@ -12,9 +13,11 @@ import java.util.stream.IntStream;
 
 public class OneStudentExamsResultsWindow extends AbstractWindow {
     private final User user;
+    private final Utility utility;
 
-    public OneStudentExamsResultsWindow(User user) {
+    public OneStudentExamsResultsWindow(User user, Utility utility) {
         this.user = user;
+        this.utility = utility;
     }
 
     @Override
@@ -41,10 +44,9 @@ public class OneStudentExamsResultsWindow extends AbstractWindow {
         String input;
         do {
             System.out.println("\n[1] Grįžti į studento meniu.");
-            Scanner scanner = new Scanner(System.in);
-            input = scanner.nextLine();
+            input = utility.getScanner().nextLine();
             if ("1".equals(input)) {
-                StudentWindow window = new StudentWindow(user);
+                StudentWindow window = new StudentWindow(user, utility);
                 window.window();
             } else {
                 System.out.println("Tokio veiksmo nėra. Bandykite dar kartą.");
@@ -62,7 +64,7 @@ public class OneStudentExamsResultsWindow extends AbstractWindow {
         });
 
         for (StudentsAnswers id : studentsAnswersList) {
-            if (id.getUser().getId().equals(user.getId())) {
+            if (id.getUser().getId().equals(utility.getUser().getId())) {
                 filledOneStudentsAnswersList.add(id);
             }
         }

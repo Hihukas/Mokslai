@@ -5,16 +5,21 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import lt.codeacademy.Users.User;
 import lt.codeacademy.Users.UserType;
+import lt.codeacademy.Utility;
 
 import java.io.File;
 import java.util.List;
-import java.util.Scanner;
 import java.util.UUID;
 
 public class RegistrationWindow extends AbstractWindow {
+    private final Utility utility;
+
+    public RegistrationWindow(Utility utility) {
+        this.utility = utility;
+    }
+
     @Override
     public void window() throws Exception {
-        Scanner scanner = new Scanner(System.in);
 
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
@@ -24,19 +29,19 @@ public class RegistrationWindow extends AbstractWindow {
         List<User> usersList = objectMapper.readValue(file, new TypeReference<>() {
         });
 
-        RegistrationWindow registrationWindow = new RegistrationWindow();
+        RegistrationWindow registrationWindow = new RegistrationWindow(utility);
 
-        String userName = registrationWindow.usernameCheck(scanner, usersList);
+        String userName = registrationWindow.usernameCheck(usersList);
         System.out.println("Sukurkite slaptažodį:");
-        String password = scanner.nextLine();
-        if (!passwordCheck(scanner, password)) {
+        String password = utility.getScanner().nextLine();
+        if (!passwordCheck(password)) {
             System.out.println("Paskyros sukurti nepavyko.\n");
             window();
         }
         System.out.println("Įveskite savo vardą:");
-        String name = scanner.nextLine();
+        String name = utility.getScanner().nextLine();
         System.out.println("Įveskite savo pavardę:");
-        String surname = scanner.nextLine();
+        String surname = utility.getScanner().nextLine();
 
         User user = new User()
                 .setId(UUID.randomUUID())
@@ -50,14 +55,14 @@ public class RegistrationWindow extends AbstractWindow {
         objectMapper.writeValue(file, usersList);
 
         System.out.printf("\nSveikiname prisijungus, %s!\n", name);
-        StudentWindow window = new StudentWindow(user);
+        StudentWindow window = new StudentWindow(user, utility);
         window.window();
     }
 
-    private String usernameCheck(Scanner scanner, List<User> usersList) {
+    private String usernameCheck(List<User> usersList) {
         while (true) {
             System.out.println("Sukurkite vartotojo vardą:");
-            String userName = scanner.nextLine();
+            String userName = utility.getScanner().nextLine();
 
             boolean userNameAlreadyExists = usersList.stream()
                     .anyMatch(u -> u.getUsername().equals(userName));
@@ -70,10 +75,10 @@ public class RegistrationWindow extends AbstractWindow {
         }
     }
 
-    private boolean passwordCheck(Scanner scanner, String password) {
+    private boolean passwordCheck(String password) {
         for (int i = 0; i < 3; i++) {
             System.out.println("Pakartokite slaptažodžio įvedimą:");
-            String repeatPassword = scanner.nextLine();
+            String repeatPassword = utility.getScanner().nextLine();
             if (!repeatPassword.equals(password)) {
                 System.out.println("Slaptažodžiai nesutampa.\n");
                 continue;

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import lt.codeacademy.Users.User;
+import lt.codeacademy.Utility;
 
 import java.io.File;
 import java.time.Duration;
@@ -15,20 +16,19 @@ import java.util.stream.IntStream;
 
 public class ExamsWindow extends AbstractWindow {
     private final User user;
-
+    private final Utility utility;
     private final AbstractWindow previousWindow;
-
     private final boolean editMode;
 
-    public ExamsWindow(User user, AbstractWindow previousWindow, boolean editMode) {
+    public ExamsWindow(User user, AbstractWindow previousWindow, boolean editMode, Utility utility) {
         this.user = user;
         this.previousWindow = previousWindow;
         this.editMode = editMode;
+        this.utility = utility;
     }
 
     @Override
     public void window() throws Exception {
-        Scanner scanner = new Scanner(System.in);
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         File file = new File("Exams.json");
@@ -37,7 +37,7 @@ public class ExamsWindow extends AbstractWindow {
 
         List<Exam> examsToTake = getExams(exams);
 
-        if(examsToTake.size()==0){
+        if (examsToTake.size() == 0) {
             System.out.println("Egzaminų sąrašas tuščias.");
             Thread.sleep(3000);
             previousWindow.window();
@@ -61,13 +61,13 @@ public class ExamsWindow extends AbstractWindow {
         System.out.println("\nPasirinkite egzaminą:");
 
         try {
-            int index = (scanner.nextInt() - 1);
+            int index = (utility.getScanner().nextInt() - 1);
             Exam exam = examsToTake.get(index);
             if (editMode) {
-                ExamsEditingWindow examsEditingWindow = new ExamsEditingWindow(user, exam, index);
+                ExamsEditingWindow examsEditingWindow = new ExamsEditingWindow(user, exam, index, utility);
                 examsEditingWindow.window();
             } else {
-                QuestionsWindow questionsWindow = new QuestionsWindow(exam, user);
+                QuestionsWindow questionsWindow = new QuestionsWindow(exam, user, utility);
                 questionsWindow.window();
             }
         } catch (InputMismatchException e) {
@@ -82,11 +82,11 @@ public class ExamsWindow extends AbstractWindow {
     private List<Exam> getExams(List<Exam> exams) throws Exception {
 
 
-        return editMode ?  exams : getUsersExamsToTake(exams);
+        return editMode ? exams : getUsersExamsToTake(exams);
     }
 
     private List<Exam> getUsersExamsToTake(List<Exam> exams) throws Exception {
-        OneStudentExamsResultsWindow oneStudentExamsResultsWindow = new OneStudentExamsResultsWindow(user);
+        OneStudentExamsResultsWindow oneStudentExamsResultsWindow = new OneStudentExamsResultsWindow(user, utility);
         List<StudentsAnswers> oneStudentsAnswerList = oneStudentExamsResultsWindow.fillOneStudentsAnswersList();
 
         List<Exam> restrictedExams = oneStudentsAnswerList.stream()

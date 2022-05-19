@@ -16,6 +16,5 @@ public class Main {
 
         MainWindow mainWindow = new MainWindow(new Utility());
         mainWindow.window();
-
     }
 }

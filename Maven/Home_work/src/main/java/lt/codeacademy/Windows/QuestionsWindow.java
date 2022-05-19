@@ -7,6 +7,7 @@ import lt.codeacademy.Answers.StudentsAnswers;
 import lt.codeacademy.Exams.Exam;
 import lt.codeacademy.Exams.Question;
 import lt.codeacademy.Users.User;
+import lt.codeacademy.Utility;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,12 +18,14 @@ import java.util.stream.IntStream;
 public class QuestionsWindow extends AbstractWindow {
     private final Exam exam;
     private final User user;
+    private final Utility utility;
     private final List<Integer> questionsAnswers = new LinkedList<>();
     private final List<StudentsAnswers> studentsAnswers = new ArrayList<>();
 
-    public QuestionsWindow(Exam exam, User user) {
+    public QuestionsWindow(Exam exam, User user, Utility utility) {
         this.exam = exam;
         this.user = user;
+        this.utility = utility;
     }
 
     @Override
@@ -39,7 +42,7 @@ public class QuestionsWindow extends AbstractWindow {
         testResult();
 
         Thread.sleep(5000);
-        StudentWindow window = new StudentWindow(user);
+        StudentWindow window = new StudentWindow(user, utility);
         window.window();
     }
 
@@ -92,8 +95,6 @@ public class QuestionsWindow extends AbstractWindow {
     }
 
     private void printQuestion(String question, List<String> answers) {
-        Scanner scanner = new Scanner(System.in);
-
         System.out.println("\n" + question);
 
         IntStream.range(0, answers.size())
@@ -104,7 +105,7 @@ public class QuestionsWindow extends AbstractWindow {
         int answerInput;
 
         try {
-            answerInput = scanner.nextInt();
+            answerInput = utility.getScanner().nextInt();
             if (answerInput < 1 || answerInput > answers.size()) {
                 System.out.println("Tokio atsakymo nėra!");
                 printQuestion(question, answers);

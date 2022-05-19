@@ -7,20 +7,22 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import lt.codeacademy.Exams.ExamType;
 import lt.codeacademy.Exams.Question;
 import lt.codeacademy.Users.User;
+import lt.codeacademy.Utility;
 
 import java.io.File;
 import java.util.*;
 
 
 public class ExamsCreateWindow extends AbstractWindow {
-    private User user;
+    private final User user;
+    private final Utility utility;
 
-    public ExamsCreateWindow(User user) {
+    public ExamsCreateWindow(User user, Utility utility) {
         this.user = user;
+        this.utility = utility;
     }
 
     public void window() throws Exception {
-        Scanner scanner = new Scanner(System.in);
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         File file = new File("Exams.json");
@@ -30,9 +32,9 @@ public class ExamsCreateWindow extends AbstractWindow {
         List<Question> questions = new ArrayList<>();
 
         System.out.println("Įveskite testo egzamino temą:");
-        String examTheme = scanner.nextLine();
+        String examTheme = utility.getScanner().nextLine();
 
-        questionsCreate(scanner, questions);
+        questionsCreate(questions);
 
         exams.add(new Exam(UUID.randomUUID(), ExamType.TEST, examTheme, questions));
 
@@ -40,30 +42,30 @@ public class ExamsCreateWindow extends AbstractWindow {
 
         System.out.println("\nInformacija išsaugota.");
 
-        returnAction(scanner, user);
+        returnAction(user);
     }
 
-    public void questionsCreate(Scanner scanner, List<Question> questions) {
+    public void questionsCreate(List<Question> questions) {
         System.out.println("Įveskite norimą klausimų kiekį:");
-        int examQuestionsQuantity = (scanner.nextInt() - 1);
-        scanner.nextLine();
+        int examQuestionsQuantity = (utility.getScanner().nextInt() - 1);
+        utility.getScanner().nextLine();
 
         for (int i = 0; i <= examQuestionsQuantity; i++) {
             System.out.println("Sukurkite klausimą:");
-            String question = (scanner.nextLine() + "\nAtsakymų variantai:");
+            String question = (utility.getScanner().nextLine() + "\nAtsakymų variantai:");
 
             System.out.println("Įveskite norimą atsakymų kiekį:");
-            int examQuestionsAnswersQuantity = (scanner.nextInt() - 1);
-            scanner.nextLine();
+            int examQuestionsAnswersQuantity = (utility.getScanner().nextInt() - 1);
+            utility.getScanner().nextLine();
             List<String> answers = new ArrayList<>();
             for (int a = 0; a <= examQuestionsAnswersQuantity; a++) {
                 System.out.println("Įrašykite atsakymą:");
-                String answer = scanner.nextLine();
+                String answer = utility.getScanner().nextLine();
                 answers.add(answer);
             }
             System.out.println("Nurodykite teisingą atsakymą:");
-            int correctAnswer = scanner.nextInt();
-            scanner.nextLine();
+            int correctAnswer = utility.getScanner().nextInt();
+            utility.getScanner().nextLine();
 
             Question questionObject = new Question();
             questionObject.setQuestion(question);
@@ -74,16 +76,16 @@ public class ExamsCreateWindow extends AbstractWindow {
         }
     }
 
-    public void returnAction(Scanner scanner, User user) throws Exception {
+    public void returnAction(User user) throws Exception {
         String input;
         do {
             System.out.println("""    
                                                    
                     [1] Grįžti į dėstytojo meniu.
                     """);
-            input = scanner.nextLine();
+            input = utility.getScanner().nextLine();
             if ("1".equals(input)) {
-                TeacherWindow teacherWindow = new TeacherWindow(user);
+                TeacherWindow teacherWindow = new TeacherWindow(user, utility);
                 teacherWindow.window();
             } else {
                 System.out.println("Tokio veiksmo nėra. Pasirinkite iš naujo");

@@ -5,18 +5,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import lt.codeacademy.Answers.StudentsAnswers;
 import lt.codeacademy.Users.User;
+import lt.codeacademy.Utility;
 
 import java.io.File;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Scanner;
 
 public class StudentsExamsResultsWindow extends AbstractWindow {
     private final User user;
+    private final Utility utility;
 
-    public StudentsExamsResultsWindow(User user) {
+    public StudentsExamsResultsWindow(User user, Utility utility) {
         this.user = user;
+        this.utility = utility;
     }
 
     @Override
@@ -25,8 +27,6 @@ public class StudentsExamsResultsWindow extends AbstractWindow {
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 
         File file = new File("StudentsAnswers.json");
-
-        Scanner scanner = new Scanner(System.in);
         List<StudentsAnswers> studentsAnswersList = objectMapper.readValue(file, new TypeReference<>() {
         });
 
@@ -43,25 +43,7 @@ public class StudentsExamsResultsWindow extends AbstractWindow {
                         "\nEgzamino laikymo data: " + e.getTime())
                 .forEachOrdered(System.out::println);
 
-        ExamsCreateWindow examsCreateWindow = new ExamsCreateWindow(user);
-        examsCreateWindow.returnAction(scanner, user);
-
-//        returnAction();
-//    }
-//
-//    private void returnAction() throws Exception {
-//        String input;
-//        do {
-//            System.out.println("\n[1] Grįžti į dėstytojo meniu.");
-//            Scanner scanner = new Scanner(System.in);
-//            input = scanner.nextLine();
-//            if ("1".equals(input)) {
-//                TeacherWindow teacherWindow = new TeacherWindow(user);
-//                teacherWindow.window();
-//            } else {
-//                System.out.println("Tokio veiksmo nėra. Bandykite dar kartą.");
-//            }
-//        } while (!input.equals("1"));
-//    }
+        ExamsCreateWindow examsCreateWindow = new ExamsCreateWindow(user, utility);
+        examsCreateWindow.returnAction(user);
     }
 }
