@@ -1,14 +1,9 @@
 package lt.codeacademy.Windows;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import lt.codeacademy.Users.User;
 import lt.codeacademy.Users.UserType;
 import lt.codeacademy.Utility;
 
-import java.io.File;
-import java.util.List;
 import java.util.UUID;
 
 public class RegistrationWindow extends AbstractWindow {
@@ -20,18 +15,7 @@ public class RegistrationWindow extends AbstractWindow {
 
     @Override
     public void window() throws Exception {
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-
-        File file = new File("Users.json");
-
-        List<User> usersList = objectMapper.readValue(file, new TypeReference<>() {
-        });
-
-        RegistrationWindow registrationWindow = new RegistrationWindow(utility);
-
-        String userName = registrationWindow.usernameCheck(usersList);
+        String userName = usernameCheck();
         System.out.println("Sukurkite slaptažodį:");
         String password = utility.getScanner().nextLine();
         if (!passwordCheck(password)) {
@@ -51,20 +35,19 @@ public class RegistrationWindow extends AbstractWindow {
                 .setName(name)
                 .setSurname(surname);
 
-        usersList.add(user);
-        objectMapper.writeValue(file, usersList);
+        utility.getUsersList().add(user);
 
         System.out.printf("\nSveikiname prisijungus, %s!\n", name);
         StudentWindow window = new StudentWindow(user, utility);
         window.window();
     }
 
-    private String usernameCheck(List<User> usersList) {
+    private String usernameCheck() {
         while (true) {
             System.out.println("Sukurkite vartotojo vardą:");
             String userName = utility.getScanner().nextLine();
 
-            boolean userNameAlreadyExists = usersList.stream()
+            boolean userNameAlreadyExists = utility.getUsersList().stream()
                     .anyMatch(u -> u.getUsername().equals(userName));
 
             if (userNameAlreadyExists) {

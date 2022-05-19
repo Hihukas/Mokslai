@@ -79,10 +79,7 @@ public class ExamsCreateWindow extends AbstractWindow {
     public void returnAction(User user) throws Exception {
         String input;
         do {
-            System.out.println("""    
-                                                   
-                    [1] Grįžti į dėstytojo meniu.
-                    """);
+            System.out.println("\n[1] Grįžti į pagrindinį meniu.");
             input = utility.getScanner().nextLine();
             if ("1".equals(input)) {
                 TeacherWindow teacherWindow = new TeacherWindow(user, utility);

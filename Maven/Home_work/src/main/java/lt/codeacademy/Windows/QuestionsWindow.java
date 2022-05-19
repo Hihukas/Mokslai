@@ -39,7 +39,6 @@ public class QuestionsWindow extends AbstractWindow {
         saveAnswersToFile(studentsAnswers);
 
         System.out.printf("\nAčiū už atsakymus! Jie išsaugoti!\nJūsų pažymys: %s\nEgzaminą perlaikyti bus galima po 48 valandų.\n", testResult());
-        testResult();
 
         Thread.sleep(5000);
         StudentWindow window = new StudentWindow(user, utility);

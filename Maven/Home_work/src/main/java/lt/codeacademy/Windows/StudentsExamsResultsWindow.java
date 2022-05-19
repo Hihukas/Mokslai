@@ -1,16 +1,11 @@
 package lt.codeacademy.Windows;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import lt.codeacademy.Answers.StudentsAnswers;
 import lt.codeacademy.Users.User;
 import lt.codeacademy.Utility;
 
-import java.io.File;
 import java.time.LocalDateTime;
 import java.util.Comparator;
-import java.util.List;
 
 public class StudentsExamsResultsWindow extends AbstractWindow {
     private final User user;
@@ -23,14 +18,7 @@ public class StudentsExamsResultsWindow extends AbstractWindow {
 
     @Override
     public void window() throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-
-        File file = new File("StudentsAnswers.json");
-        List<StudentsAnswers> studentsAnswersList = objectMapper.readValue(file, new TypeReference<>() {
-        });
-
-        studentsAnswersList.stream()
+       utility.getStudentsAnswersList().stream()
                 .sorted(Comparator.comparing((StudentsAnswers sa) -> sa.getUser().getName())
                         .thenComparing(sa -> sa.getUser().getSurname())
                         .thenComparing(sa -> LocalDateTime.parse(sa.getTime())))

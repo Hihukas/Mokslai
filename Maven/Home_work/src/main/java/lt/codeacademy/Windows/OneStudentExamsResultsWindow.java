@@ -43,13 +43,13 @@ public class OneStudentExamsResultsWindow extends AbstractWindow {
     private void returnAction() throws Exception {
         String input;
         do {
-            System.out.println("\n[1] Grįžti į studento meniu.");
+            System.out.println("\n[1] Grįžti į pagrindinį meniu.");
             input = utility.getScanner().nextLine();
             if ("1".equals(input)) {
                 StudentWindow window = new StudentWindow(user, utility);
                 window.window();
             } else {
-                System.out.println("Tokio veiksmo nėra. Bandykite dar kartą.");
+                System.out.println("Tokio veiksmo nėra. Pasirinkite iš naujo");
             }
         } while (!input.equals("1"));
     }
@@ -64,7 +64,7 @@ public class OneStudentExamsResultsWindow extends AbstractWindow {
         });
 
         for (StudentsAnswers id : studentsAnswersList) {
-            if (id.getUser().getId().equals(utility.getUser().getId())) {
+            if (id.getUser().getId().equals(user.getId())) {
                 filledOneStudentsAnswersList.add(id);
             }
         }

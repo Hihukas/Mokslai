@@ -1,5 +1,6 @@
 package lt.codeacademy.Windows;
 
+import lt.codeacademy.Files.ReaderWriter;
 import lt.codeacademy.Utility;
 
 public class MainWindow extends AbstractWindow {
@@ -27,7 +28,12 @@ public class MainWindow extends AbstractWindow {
                 RegistrationWindow registrationWindow = new RegistrationWindow(utility);
                 registrationWindow.window();
             }
-            case "3" -> System.out.println("Programa baigia darbą.");
+            case "3" -> {
+                System.out.println("Programa baigia darbą.");
+                ReaderWriter readerWriter = new ReaderWriter(utility);
+                readerWriter.fileWriter();
+                System.exit(0);
+            }
             default -> {
                 System.out.println("Tokio veiksmo nėra. Pasirinkite iš naujo.\n");
                 MainWindow mainWindow = new MainWindow(utility);
