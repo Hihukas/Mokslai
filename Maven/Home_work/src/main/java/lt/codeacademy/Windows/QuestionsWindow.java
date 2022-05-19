@@ -40,9 +40,9 @@ public class QuestionsWindow extends AbstractWindow {
 
         System.out.printf("\nAčiū už atsakymus! Jie išsaugoti!\nJūsų pažymys: %s\nEgzaminą perlaikyti bus galima po 48 valandų.\n", testResult());
 
-        Thread.sleep(5000);
-        StudentWindow window = new StudentWindow(user, utility);
-        window.window();
+        Thread.sleep(3000);
+        StudentWindow studentWindow = new StudentWindow(user, utility);
+        studentWindow.window();
     }
 
     private String testResult() {

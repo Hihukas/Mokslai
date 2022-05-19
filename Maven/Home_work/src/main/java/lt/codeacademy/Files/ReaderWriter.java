@@ -24,6 +24,9 @@ public class ReaderWriter {
         File usersListFile = new File("Users.json");
         utility.setUsersList(utility.getObjectMapper().readValue(usersListFile, new TypeReference<>() {}));
 
+        File examsFile = new File("Exams.json");
+        utility.setExamsList(utility.getObjectMapper().readValue(examsFile, new TypeReference<>() {}));
+
 
 
     }
@@ -35,5 +38,10 @@ public class ReaderWriter {
 
         File usersListFile = new File("Users.json");
         utility.getObjectMapper().writeValue(usersListFile, utility.getUsersList());
+
+        File examsFile = new File("Exams.json");
+        utility.getObjectMapper().writeValue(examsFile, utility.getExamsList());
+
+
     }
 }

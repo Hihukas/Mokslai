@@ -1,13 +1,7 @@
 package lt.codeacademy.Windows;
 
 import lt.codeacademy.Users.User;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import lt.codeacademy.Utility;
-
-import java.io.File;
-import java.util.List;
 
 public class LoginWindow extends AbstractWindow {
     private final Utility utility;
@@ -41,23 +35,11 @@ public class LoginWindow extends AbstractWindow {
                 TeacherWindow teacherWindow = new TeacherWindow(user, utility);
                 teacherWindow.window();
             }
-            default -> {
-                System.out.println("Neteisingas vartotojo vardas arba slaptažodis. Bandykite dar kartą.\n");
-                LoginWindow loginWindow = new LoginWindow(utility);
-                loginWindow.window();
-            }
         }
     }
 
-    private User login(String userName, String password) throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-
-        File file = new File("Users.json");
-        List<User> usersList = objectMapper.readValue(file, new TypeReference<>() {
-        });
-
-        return usersList.stream()
+    private User login(String userName, String password) {
+        return utility.getUsersList().stream()
                 .filter(u -> u.getUsername().equals(userName) && u.getPassword().equals(password))
                 .findAny()
                 .orElse(null);

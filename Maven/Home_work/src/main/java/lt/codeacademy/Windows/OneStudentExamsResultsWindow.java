@@ -55,15 +55,15 @@ public class OneStudentExamsResultsWindow extends AbstractWindow {
     }
 
     public List<StudentsAnswers> fillOneStudentsAnswersList() throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         List<StudentsAnswers> filledOneStudentsAnswersList = new ArrayList<>();
+//
+//        File file = new File("StudentsAnswers.json");
+//        List<StudentsAnswers> studentsAnswersList = objectMapper.readValue(file, new TypeReference<>() {
+//        });
 
-        File file = new File("StudentsAnswers.json");
-        List<StudentsAnswers> studentsAnswersList = objectMapper.readValue(file, new TypeReference<>() {
-        });
-
-        for (StudentsAnswers id : studentsAnswersList) {
+        for (StudentsAnswers id : utility.getStudentsAnswersList()) {
             if (id.getUser().getId().equals(user.getId())) {
                 filledOneStudentsAnswersList.add(id);
             }

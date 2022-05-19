@@ -15,18 +15,20 @@ public class Utility {
     private StudentsAnswers studentsAnswers;
     private List<StudentsAnswers> studentsAnswersList;
     List<User> usersList;
+    List<Exam> examsList;
     private Scanner scanner = new Scanner(System.in);
     private ObjectMapper objectMapper = new ObjectMapper();
 
     public Utility() {
     }
 
-    public Utility(User user, Exam exam, StudentsAnswers studentsAnswers, List<StudentsAnswers> studentsAnswersList, List<User> usersList, Scanner scanner, ObjectMapper objectMapper) {
+    public Utility(User user, Exam exam, StudentsAnswers studentsAnswers, List<StudentsAnswers> studentsAnswersList, List<User> usersList, List<Exam> examsList, Scanner scanner, ObjectMapper objectMapper) {
         this.user = user;
         this.exam = exam;
         this.studentsAnswers = studentsAnswers;
         this.studentsAnswersList = studentsAnswersList;
         this.usersList = usersList;
+        this.examsList = examsList;
         this.scanner = scanner;
         this.objectMapper = objectMapper;
     }
@@ -69,6 +71,14 @@ public class Utility {
 
     public void setUsersList(List<User> usersList) {
         this.usersList = usersList;
+    }
+
+    public List<Exam> getExamsList() {
+        return examsList;
+    }
+
+    public void setExamsList(List<Exam> examsList) {
+        this.examsList = examsList;
     }
 
     public Scanner getScanner() {

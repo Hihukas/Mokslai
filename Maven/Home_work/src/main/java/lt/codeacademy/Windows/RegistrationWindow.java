@@ -20,7 +20,8 @@ public class RegistrationWindow extends AbstractWindow {
         String password = utility.getScanner().nextLine();
         if (!passwordCheck(password)) {
             System.out.println("Paskyros sukurti nepavyko.\n");
-            window();
+            RegistrationWindow registrationWindow = new RegistrationWindow(utility);
+            registrationWindow.window();
         }
         System.out.println("Įveskite savo vardą:");
         String name = utility.getScanner().nextLine();

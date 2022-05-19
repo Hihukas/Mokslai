@@ -29,13 +29,13 @@ public class ExamsWindow extends AbstractWindow {
 
     @Override
     public void window() throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-        File file = new File("Exams.json");
-        List<Exam> exams = objectMapper.readValue(file, new TypeReference<>() {
-        });
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+//        File file = new File("Exams.json");
+//        List<Exam> exams = objectMapper.readValue(file, new TypeReference<>() {
+//        });
 
-        List<Exam> examsToTake = getExams(exams);
+        List<Exam> examsToTake = getExams(utility.getExamsList());
 
         if (examsToTake.size() == 0) {
             System.out.println("Egzaminų sąrašas tuščias.");
