@@ -25,6 +25,8 @@ public class StudentsExamsResultsWindow extends AbstractWindow {
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 
         File file = new File("StudentsAnswers.json");
+
+        Scanner scanner = new Scanner(System.in);
         List<StudentsAnswers> studentsAnswersList = objectMapper.readValue(file, new TypeReference<>() {
         });
 
@@ -41,21 +43,25 @@ public class StudentsExamsResultsWindow extends AbstractWindow {
                         "\nEgzamino laikymo data: " + e.getTime())
                 .forEachOrdered(System.out::println);
 
-        returnAction();
-    }
+        ExamsCreateWindow examsCreateWindow = new ExamsCreateWindow(user);
+        examsCreateWindow.returnAction(scanner, user);
 
-    private void returnAction() throws Exception {
-        String input;
-        do {
-            System.out.println("\n[1] Grįžti į dėstytojo meniu.");
-            Scanner scanner = new Scanner(System.in);
-            input = scanner.nextLine();
-            if ("1".equals(input)) {
-                TeacherWindow teacherWindow = new TeacherWindow(user);
-                teacherWindow.window();
-            } else {
-                System.out.println("Tokio veiksmo nėra. Bandykite dar kartą.");
-            }
-        } while (!input.equals("1"));
+//        returnAction();
+//    }
+//
+//    private void returnAction() throws Exception {
+//        String input;
+//        do {
+//            System.out.println("\n[1] Grįžti į dėstytojo meniu.");
+//            Scanner scanner = new Scanner(System.in);
+//            input = scanner.nextLine();
+//            if ("1".equals(input)) {
+//                TeacherWindow teacherWindow = new TeacherWindow(user);
+//                teacherWindow.window();
+//            } else {
+//                System.out.println("Tokio veiksmo nėra. Bandykite dar kartą.");
+//            }
+//        } while (!input.equals("1"));
+//    }
     }
 }

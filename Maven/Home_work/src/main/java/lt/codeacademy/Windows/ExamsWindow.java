@@ -61,9 +61,10 @@ public class ExamsWindow extends AbstractWindow {
         System.out.println("\nPasirinkite egzaminą:");
 
         try {
-            Exam exam = examsToTake.get(scanner.nextInt() - 1);
+            int index = (scanner.nextInt() - 1);
+            Exam exam = examsToTake.get(index);
             if (editMode) {
-                ExamsEditingWindow examsEditingWindow = new ExamsEditingWindow(user, exam);
+                ExamsEditingWindow examsEditingWindow = new ExamsEditingWindow(user, exam, index);
                 examsEditingWindow.window();
             } else {
                 QuestionsWindow questionsWindow = new QuestionsWindow(exam, user);

@@ -1,14 +1,17 @@
 package lt.codeacademy.Windows;
 
 import lt.codeacademy.Users.User;
+import lt.codeacademy.Utility;
 
 import java.util.Scanner;
 
 public class StudentWindow extends AbstractWindow {
     private final User user;
+    private final Utility utility;
 
-    public StudentWindow(User user) {
+    public StudentWindow(User user, Utility utility) {
         this.user = user;
+        this.utility = utility;
     }
 
     @Override
@@ -31,7 +34,7 @@ public class StudentWindow extends AbstractWindow {
                 oneStudentExamsResultsWindow.window();
             }
             case "3" -> {
-                MainWindow mainWindow = new MainWindow();
+                MainWindow mainWindow = new MainWindow(utility);
                 mainWindow.window();
             }
             default -> {
