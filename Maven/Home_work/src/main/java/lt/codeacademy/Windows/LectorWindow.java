@@ -10,7 +10,7 @@ public class LectorWindow extends AbstractWindow {
     }
 
     @Override
-    public void window(){
+    public void window() {
         System.out.println("""
                                 
                 Pasirinkite norimą atlikti veiksmą:

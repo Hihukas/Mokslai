@@ -17,21 +17,28 @@ public class OneStudentExamsResultsWindow extends AbstractWindow {
     public void window() {
         List<StudentsAnswers> oneStudentsAnswersList = fillOneStudentsAnswersList();
 
-        System.out.println("Egzaminų sąrašas:");
+        if (oneStudentsAnswersList.size() == 0) {
+            System.out.println("Sąrašas tuščias.");
 
-        IntStream.range(0, oneStudentsAnswersList.size())
-                .mapToObj(i -> {
-                    StudentsAnswers e = oneStudentsAnswersList.get(i);
-                    return (i + 1) + " Egzamino ID: " + e.getExam().getId() +
-                            ", Egzamino pavadinimas: " + e.getExam().getName() +
-                            ", Egzamino tipas: " + e.getExam().getExamType() +
-                            ", Pažymys: " + e.getGrade() +
-                            ", Egzamino laikymo data: " + e.getTime();
-                })
-                .forEach(System.out::println);
+            ReturnAction returnAction = new ReturnAction(utility);
+            returnAction.returnAction();
+        } else {
+            System.out.println("Egzaminų sąrašas:");
 
-        ReturnAction returnAction = new ReturnAction(utility);
-        returnAction.returnAction();
+            IntStream.range(0, oneStudentsAnswersList.size())
+                    .mapToObj(i -> {
+                        StudentsAnswers e = oneStudentsAnswersList.get(i);
+                        return (i + 1) + " Egzamino ID: " + e.getExam().getId() +
+                                ", Egzamino pavadinimas: " + e.getExam().getName() +
+                                ", Egzamino tipas: " + e.getExam().getExamType() +
+                                ", Pažymys: " + e.getGrade() +
+                                ", Egzamino laikymo data: " + e.getTime();
+                    })
+                    .forEach(System.out::println);
+
+            ReturnAction returnAction = new ReturnAction(utility);
+            returnAction.returnAction();
+        }
     }
 
     public List<StudentsAnswers> fillOneStudentsAnswersList() {
