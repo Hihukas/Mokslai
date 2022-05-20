@@ -1,15 +1,11 @@
 package lt.codeacademy.Windows;
 
 import lt.codeacademy.Exams.Exam;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import lt.codeacademy.Exams.ExamType;
 import lt.codeacademy.Exams.Question;
 import lt.codeacademy.Users.User;
 import lt.codeacademy.Utility;
 
-import java.io.File;
 import java.util.*;
 
 
@@ -23,11 +19,7 @@ public class ExamsCreateWindow extends AbstractWindow {
     }
 
     public void window() throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-        File file = new File("Exams.json");
-        List<Exam> exams = objectMapper.readValue(file, new TypeReference<>() {
-        });
+        List<Exam> exams = utility.getExamsList();
 
         List<Question> questions = new ArrayList<>();
 
@@ -38,11 +30,12 @@ public class ExamsCreateWindow extends AbstractWindow {
 
         exams.add(new Exam(UUID.randomUUID(), ExamType.TEST, examTheme, questions));
 
-        objectMapper.writeValue(file, exams);
+        utility.setExamsList(exams);
 
         System.out.println("\nInformacija išsaugota.");
 
-        returnAction(user);
+        ReturnAction returnAction = new ReturnAction(utility);
+        returnAction.returnAction(user);
     }
 
     public void questionsCreate(List<Question> questions) {
@@ -74,20 +67,6 @@ public class ExamsCreateWindow extends AbstractWindow {
 
             questions.add(questionObject);
         }
-    }
-
-    public void returnAction(User user) throws Exception {
-        String input;
-        do {
-            System.out.println("\n[1] Grįžti į pagrindinį meniu.");
-            input = utility.getScanner().nextLine();
-            if ("1".equals(input)) {
-                TeacherWindow teacherWindow = new TeacherWindow(user, utility);
-                teacherWindow.window();
-            } else {
-                System.out.println("Tokio veiksmo nėra. Pasirinkite iš naujo");
-            }
-        } while (!input.equals("1"));
     }
 }
 

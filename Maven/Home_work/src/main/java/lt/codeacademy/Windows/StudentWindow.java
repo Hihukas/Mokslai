@@ -15,6 +15,7 @@ public class StudentWindow extends AbstractWindow {
     @Override
     public void window() throws Exception {
         System.out.println("""
+                                
                 Pasirinkite norimą atlikti veiksmą:
                 [1] - Laikyti egzaminą.
                 [2] - Egzaminų rezultatai.
@@ -35,7 +36,7 @@ public class StudentWindow extends AbstractWindow {
                 mainWindow.window();
             }
             default -> {
-                System.out.println("Tokio veiksmo nėra. Pasirinkite iš naujo.\n");
+                System.out.println("Tokio veiksmo nėra. Pasirinkite iš naujo.");
                 StudentWindow studentWindow = new StudentWindow(user, utility);
                 studentWindow.window();
             }

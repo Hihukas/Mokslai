@@ -35,5 +35,13 @@
     "question" : "Klausimas?\nAtsakymų variantai:",
     "answers" : [ "b", "a", "c" ],
     "correctAnswer" : 3
+  }, {
+    "question" : "Klausimas?\nAtsakymų variantai:",
+    "answers" : [ "a", "b" ],
+    "correctAnswer" : 1
+  }, {
+    "question" : "Klausimas?\nAtsakymų variantai:",
+    "answers" : [ "a", "b", "c" ],
+    "correctAnswer" : 3
   } ]
-} ]
+}]

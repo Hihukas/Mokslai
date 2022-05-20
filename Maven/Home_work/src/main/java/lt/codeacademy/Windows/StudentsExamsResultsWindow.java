@@ -18,7 +18,7 @@ public class StudentsExamsResultsWindow extends AbstractWindow {
 
     @Override
     public void window() throws Exception {
-       utility.getStudentsAnswersList().stream()
+        utility.getStudentsAnswersList().stream()
                 .sorted(Comparator.comparing((StudentsAnswers sa) -> sa.getUser().getName())
                         .thenComparing(sa -> sa.getUser().getSurname())
                         .thenComparing(sa -> LocalDateTime.parse(sa.getTime())))
@@ -31,7 +31,7 @@ public class StudentsExamsResultsWindow extends AbstractWindow {
                         "\nEgzamino laikymo data: " + e.getTime())
                 .forEachOrdered(System.out::println);
 
-        ExamsCreateWindow examsCreateWindow = new ExamsCreateWindow(user, utility);
-        examsCreateWindow.returnAction(user);
+        ReturnAction returnAction = new ReturnAction(utility);
+        returnAction.returnAction(user);
     }
 }

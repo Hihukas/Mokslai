@@ -40,9 +40,8 @@ public class QuestionsWindow extends AbstractWindow {
 
         System.out.printf("\nAčiū už atsakymus! Jie išsaugoti!\nJūsų pažymys: %s\nEgzaminą perlaikyti bus galima po 48 valandų.\n", testResult());
 
-        Thread.sleep(3000);
-        StudentWindow studentWindow = new StudentWindow(user, utility);
-        studentWindow.window();
+        ReturnAction returnAction = new ReturnAction(utility);
+        returnAction.returnAction(user);
     }
 
     private String testResult() {
@@ -101,10 +100,9 @@ public class QuestionsWindow extends AbstractWindow {
                 .forEach(System.out::println);
 
         System.out.println("\nĮveskite teisingą atsakymo numerį:");
-        int answerInput;
 
         try {
-            answerInput = utility.getScanner().nextInt();
+            int answerInput = utility.getScanner().nextInt();
             if (answerInput < 1 || answerInput > answers.size()) {
                 System.out.println("Tokio atsakymo nėra!");
                 printQuestion(question, answers);

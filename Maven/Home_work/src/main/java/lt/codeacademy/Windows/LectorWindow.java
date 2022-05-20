@@ -3,11 +3,11 @@ package lt.codeacademy.Windows;
 import lt.codeacademy.Users.User;
 import lt.codeacademy.Utility;
 
-public class TeacherWindow extends AbstractWindow {
+public class LectorWindow extends AbstractWindow {
     private final User user;
     private final Utility utility;
 
-    public TeacherWindow(User user, Utility utility) {
+    public LectorWindow(User user, Utility utility) {
         this.user = user;
         this.utility = utility;
     }
@@ -41,8 +41,8 @@ public class TeacherWindow extends AbstractWindow {
             }
             default -> {
                 System.out.println("Tokio veiksmo nėra. Pasirinkite iš naujo.\n");
-                TeacherWindow teacherWindow = new TeacherWindow(user, utility);
-                teacherWindow.window();
+                LectorWindow lectorWindow = new LectorWindow(user, utility);
+                lectorWindow.window();
             }
         }
     }

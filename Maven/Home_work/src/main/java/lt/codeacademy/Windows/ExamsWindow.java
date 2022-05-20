@@ -2,13 +2,9 @@ package lt.codeacademy.Windows;
 
 import lt.codeacademy.Answers.StudentsAnswers;
 import lt.codeacademy.Exams.Exam;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import lt.codeacademy.Users.User;
 import lt.codeacademy.Utility;
 
-import java.io.File;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -29,12 +25,6 @@ public class ExamsWindow extends AbstractWindow {
 
     @Override
     public void window() throws Exception {
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-//        File file = new File("Exams.json");
-//        List<Exam> exams = objectMapper.readValue(file, new TypeReference<>() {
-//        });
-
         List<Exam> examsToTake = getExams(utility.getExamsList());
 
         if (examsToTake.size() == 0) {
@@ -72,20 +62,20 @@ public class ExamsWindow extends AbstractWindow {
             }
         } catch (InputMismatchException e) {
             System.out.println("Galimi tik skaičiai.\n");
-            window();
+            ExamsWindow examsWindow = new ExamsWindow(user, previousWindow, editMode, utility);
+            examsWindow.window();
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Tokio egzamino nėra! Rinkites dar kartą.\n");
-            window();
+            ExamsWindow examsWindow = new ExamsWindow(user, previousWindow, editMode, utility);
+            examsWindow.window();
         }
     }
 
-    private List<Exam> getExams(List<Exam> exams) throws Exception {
-
-
+    private List<Exam> getExams(List<Exam> exams) {
         return editMode ? exams : getUsersExamsToTake(exams);
     }
 
-    private List<Exam> getUsersExamsToTake(List<Exam> exams) throws Exception {
+    private List<Exam> getUsersExamsToTake(List<Exam> exams) {
         OneStudentExamsResultsWindow oneStudentExamsResultsWindow = new OneStudentExamsResultsWindow(user, utility);
         List<StudentsAnswers> oneStudentsAnswerList = oneStudentExamsResultsWindow.fillOneStudentsAnswersList();
 

@@ -24,16 +24,18 @@ public class LoginWindow extends AbstractWindow {
             loginWindow.window();
         }
 
-        switch (user.getUserType()) {
-            case STUDENT -> {
-                System.out.printf("\nSveikiname prisijungus, %s!\n", user.getName());
-                StudentWindow studentWindow = new StudentWindow(user, utility);
-                studentWindow.window();
-            }
-            case LECTOR -> {
-                System.out.printf("\nSveikiname prisijungus, %s!\n", user.getName());
-                TeacherWindow teacherWindow = new TeacherWindow(user, utility);
-                teacherWindow.window();
+        if (user != null) {
+            switch (user.getUserType()) {
+                case STUDENT -> {
+                    System.out.printf("\nSveikiname prisijungus, %s!\n", user.getName());
+                    StudentWindow studentWindow = new StudentWindow(user, utility);
+                    studentWindow.window();
+                }
+                case LECTOR -> {
+                    System.out.printf("\nSveikiname prisijungus, %s!\n", user.getName());
+                    LectorWindow lectorWindow = new LectorWindow(user, utility);
+                    lectorWindow.window();
+                }
             }
         }
     }

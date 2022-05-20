@@ -19,10 +19,20 @@ public class ReturnAction {
                     """);
             input = utility.getScanner().nextLine();
             if ("1".equals(input)) {
-                TeacherWindow teacherWindow = new TeacherWindow(user, utility);
-                teacherWindow.window();
+                switch (user.getUserType()) {
+                    case LECTOR -> {
+                        LectorWindow lectorWindow = new LectorWindow(user, utility);
+                        lectorWindow.window();
+                    }
+                    case STUDENT -> {
+                        StudentWindow studentWindow = new StudentWindow(user, utility);
+                        studentWindow.window();
+                    }
+                }
             } else {
                 System.out.println("Tokio veiksmo nėra. Pasirinkite iš naujo");
+                ReturnAction returnAction = new ReturnAction(utility);
+                returnAction.returnAction(user);
             }
         } while (!input.equals("1"));
     }
