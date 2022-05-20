@@ -1,0 +1,15 @@
+[ {
+  "id" : "868236ee-8be6-4a1e-a04d-4a6351221f18",
+  "userType" : "LECTOR",
+  "username" : "Dėstytojas",
+  "password" : "Dėstytojas",
+  "name" : "Dėstytojas",
+  "surname" : "Dėstytojas"
+}, {
+  "id" : "b9cd399c-59e1-4a0a-b9e1-8ca4baf4303b",
+  "userType" : "STUDENT",
+  "username" : "Studentas",
+  "password" : "Studentas",
+  "name" : "Studentas",
+  "surname" : "Studentas"
+} ]

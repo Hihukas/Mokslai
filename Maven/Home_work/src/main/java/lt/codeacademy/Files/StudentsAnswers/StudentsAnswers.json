@@ -1,0 +1,23 @@
+[ {
+  "user" : {
+    "id" : "b9cd399c-59e1-4a0a-b9e1-8ca4baf4303b",
+    "userType" : "STUDENT",
+    "username" : "Studentas",
+    "password" : "Studentas",
+    "name" : "Studentas",
+    "surname" : "Studentas"
+  },
+  "exam" : {
+    "id" : "526c9e40-161f-48b4-a64d-2ba6f4b9e62d",
+    "examType" : "TEST",
+    "name" : "OOP",
+    "questions" : [ {
+      "question" : "Klausimas?\nAtsakymų variantai:",
+      "answers" : [ "a", "b" ],
+      "correctAnswer" : 1
+    } ]
+  },
+  "answers" : [ 1 ],
+  "grade" : "10",
+  "time" : "2022-05-20T12:53:55.459995400"
+} ]

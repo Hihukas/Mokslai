@@ -9,6 +9,10 @@ import java.io.File;
 
 public class ReaderWriter {
     private final Utility utility;
+    private final File studentsAnswersFile = new File("src/main/java/lt/codeacademy/Files/StudentsAnswers/StudentsAnswers.json");
+    private final File usersListFile = new File("src/main/java/lt/codeacademy/Files/Users/Users.json");
+    private final File examsFile = new File("src/main/java/lt/codeacademy/Files/Exams/Exams.json");
+
 
     public ReaderWriter(Utility utility) {
         this.utility = utility;
@@ -17,31 +21,23 @@ public class ReaderWriter {
     public void fileReader() throws Exception {
         utility.getObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
 
-        File studentsAnswersFile = new File("StudentsAnswers.json");
         utility.setStudentsAnswersList(utility.getObjectMapper().readValue(studentsAnswersFile, new TypeReference<>() {
         }));
 
-        File usersListFile = new File("Users.json");
-        utility.setUsersList(utility.getObjectMapper().readValue(usersListFile, new TypeReference<>() {}));
+        utility.setUsersList(utility.getObjectMapper().readValue(usersListFile, new TypeReference<>() {
+        }));
 
-        File examsFile = new File("Exams.json");
-        utility.setExamsList(utility.getObjectMapper().readValue(examsFile, new TypeReference<>() {}));
-
-
-
+        utility.setExamsList(utility.getObjectMapper().readValue(examsFile, new TypeReference<>() {
+        }));
     }
-    public void fileWriter () throws Exception {
+
+    public void fileWriter() throws Exception {
         utility.getObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
 
-        File studentsAnswersFile = new File("StudentsAnswers.json");
         utility.getObjectMapper().writeValue(studentsAnswersFile, utility.getStudentsAnswersList());
 
-        File usersListFile = new File("Users.json");
         utility.getObjectMapper().writeValue(usersListFile, utility.getUsersList());
 
-        File examsFile = new File("Exams.json");
         utility.getObjectMapper().writeValue(examsFile, utility.getExamsList());
-
-
     }
 }

@@ -5,14 +5,12 @@ import lt.codeacademy.Answers.StudentsAnswers;
 import lt.codeacademy.Exams.Exam;
 import lt.codeacademy.Users.User;
 
-import java.io.File;
 import java.util.List;
 import java.util.Scanner;
 
 public class Utility {
     private User user;
     private Exam exam;
-    private StudentsAnswers studentsAnswers;
     private List<StudentsAnswers> studentsAnswersList;
     List<User> usersList;
     List<Exam> examsList;
@@ -22,10 +20,9 @@ public class Utility {
     public Utility() {
     }
 
-    public Utility(User user, Exam exam, StudentsAnswers studentsAnswers, List<StudentsAnswers> studentsAnswersList, List<User> usersList, List<Exam> examsList, Scanner scanner, ObjectMapper objectMapper) {
+    public Utility(User user, Exam exam, List<StudentsAnswers> studentsAnswersList, List<User> usersList, List<Exam> examsList, Scanner scanner, ObjectMapper objectMapper) {
         this.user = user;
         this.exam = exam;
-        this.studentsAnswers = studentsAnswers;
         this.studentsAnswersList = studentsAnswersList;
         this.usersList = usersList;
         this.examsList = examsList;
@@ -47,14 +44,6 @@ public class Utility {
 
     public void setExam(Exam exam) {
         this.exam = exam;
-    }
-
-    public StudentsAnswers getStudentsAnswers() {
-        return studentsAnswers;
-    }
-
-    public void setStudentsAnswers(StudentsAnswers studentsAnswers) {
-        this.studentsAnswers = studentsAnswers;
     }
 
     public List<StudentsAnswers> getStudentsAnswersList() {
@@ -85,15 +74,7 @@ public class Utility {
         return scanner;
     }
 
-    public void setScanner(Scanner scanner) {
-        this.scanner = scanner;
-    }
-
     public ObjectMapper getObjectMapper() {
         return objectMapper;
-    }
-
-    public void setObjectMapper(ObjectMapper objectMapper) {
-        this.objectMapper = objectMapper;
     }
 }

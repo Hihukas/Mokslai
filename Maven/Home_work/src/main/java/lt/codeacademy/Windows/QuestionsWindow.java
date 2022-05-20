@@ -1,14 +1,9 @@
 package lt.codeacademy.Windows;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import lt.codeacademy.Answers.StudentsAnswers;
 import lt.codeacademy.Exams.Question;
 import lt.codeacademy.Utility;
 
-import java.io.File;
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.IntStream;
@@ -28,9 +23,9 @@ public class QuestionsWindow extends AbstractWindow {
 
         utility.getExam().getQuestions().forEach(question -> printQuestion(question.getQuestion(), question.getAnswers()));
 
-        StudentsAnswers studentsAnswers = createStudentAnswersObject();
-        saveStudentAnswers(studentsAnswers);
-        saveAnswersToFile(studentsAnswers);
+        StudentsAnswers studentAnswers = createStudentAnswersObject();
+        studentsAnswers.add(studentAnswers);
+        utility.setStudentsAnswersList(studentsAnswers);
 
         System.out.printf("\nAčiū už atsakymus! Jie išsaugoti!\nJūsų pažymys: %s\nEgzaminą perlaikyti bus galima po 48 valandų.\n", testResult());
 
@@ -63,27 +58,6 @@ public class QuestionsWindow extends AbstractWindow {
         LocalDateTime localDateTime = LocalDateTime.now();
         studentsAnswers.setTime(localDateTime.toString());
         return studentsAnswers;
-    }
-
-    private void saveStudentAnswers(StudentsAnswers studentAnswer) {
-        studentsAnswers.add(studentAnswer);
-    }
-
-    private void saveAnswersToFile(StudentsAnswers studentAnswers) {
-        try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-
-            File file = new File("StudentsAnswers.json");
-
-            List<StudentsAnswers> studentsAnswersList = objectMapper.readValue(file, new TypeReference<>() {
-            });
-            studentsAnswersList.add(studentAnswers);
-
-            objectMapper.writeValue(file, studentsAnswersList);
-        } catch (IOException e) {
-            System.out.println("Jūsų egzamino išsaugoti nepavyko. Prašome kreiptis į dėstytoją.");
-        }
     }
 
     private void printQuestion(String question, List<String> answers) {

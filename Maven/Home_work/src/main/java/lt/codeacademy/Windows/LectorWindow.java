@@ -12,7 +12,7 @@ public class LectorWindow extends AbstractWindow {
     @Override
     public void window() throws Exception {
         System.out.println("""
-                
+                                
                 Pasirinkite norimą atlikti veiksmą:
                 [1] - Egzaminų rezultatai.
                 [2] - Sukurti testo egzaminą.
