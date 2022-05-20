@@ -14,7 +14,7 @@ public class OneStudentExamsResultsWindow extends AbstractWindow {
     }
 
     @Override
-    public void window() throws Exception {
+    public void window() {
         List<StudentsAnswers> oneStudentsAnswersList = fillOneStudentsAnswersList();
 
         System.out.println("Egzaminų sąrašas:");
@@ -31,17 +31,18 @@ public class OneStudentExamsResultsWindow extends AbstractWindow {
                 .forEach(System.out::println);
 
         ReturnAction returnAction = new ReturnAction(utility);
-        returnAction.returnAction(utility.getUser());
+        returnAction.returnAction();
     }
 
     public List<StudentsAnswers> fillOneStudentsAnswersList() {
         List<StudentsAnswers> filledOneStudentsAnswersList = new ArrayList<>();
 
-        for (StudentsAnswers id : utility.getStudentsAnswersList()) {
-            if (id.getUser().getId().equals(utility.getUser().getId())) {
-                filledOneStudentsAnswersList.add(id);
+        for (StudentsAnswers a : utility.getStudentsAnswersList()) {
+            if (a.getUser().getId().equals(utility.getUser().getId())) {
+                filledOneStudentsAnswersList.add(a);
             }
         }
         return filledOneStudentsAnswersList;
     }
 }
+

@@ -10,7 +10,7 @@ public class LectorWindow extends AbstractWindow {
     }
 
     @Override
-    public void window() throws Exception {
+    public void window(){
         System.out.println("""
                                 
                 Pasirinkite norimą atlikti veiksmą:
@@ -30,7 +30,7 @@ public class LectorWindow extends AbstractWindow {
                 examsCreateWindow.window();
             }
             case "3" -> {
-                ExamsWindow examsWindow = new ExamsWindow(this, true, utility);
+                ExamsWindow examsWindow = new ExamsWindow(utility);
                 examsWindow.window();
             }
             case "4" -> {
@@ -38,7 +38,7 @@ public class LectorWindow extends AbstractWindow {
                 mainWindow.window();
             }
             default -> {
-                System.out.println("Tokio veiksmo nėra. Pasirinkite iš naujo.\n");
+                System.out.println("Tokio veiksmo nėra. Pasirinkite iš naujo.");
                 LectorWindow lectorWindow = new LectorWindow(utility);
                 lectorWindow.window();
             }

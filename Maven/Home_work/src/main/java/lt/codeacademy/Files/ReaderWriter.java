@@ -18,26 +18,32 @@ public class ReaderWriter {
         this.utility = utility;
     }
 
-    public void fileReader() throws Exception {
+    public void fileReader() {
         utility.getObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
 
-        utility.setStudentsAnswersList(utility.getObjectMapper().readValue(studentsAnswersFile, new TypeReference<>() {
-        }));
+        try {
+            utility.setStudentsAnswersList(utility.getObjectMapper().readValue(studentsAnswersFile, new TypeReference<>() {
+            }));
 
-        utility.setUsersList(utility.getObjectMapper().readValue(usersListFile, new TypeReference<>() {
-        }));
+            utility.setUsersList(utility.getObjectMapper().readValue(usersListFile, new TypeReference<>() {
+            }));
 
-        utility.setExamsList(utility.getObjectMapper().readValue(examsFile, new TypeReference<>() {
-        }));
+            utility.setExamsList(utility.getObjectMapper().readValue(examsFile, new TypeReference<>() {
+            }));
+        } catch (Exception e) {
+        }
     }
 
-    public void fileWriter() throws Exception {
+    public void fileWriter() {
         utility.getObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
 
-        utility.getObjectMapper().writeValue(studentsAnswersFile, utility.getStudentsAnswersList());
+        try {
+            utility.getObjectMapper().writeValue(studentsAnswersFile, utility.getStudentsAnswersList());
 
-        utility.getObjectMapper().writeValue(usersListFile, utility.getUsersList());
+            utility.getObjectMapper().writeValue(usersListFile, utility.getUsersList());
 
-        utility.getObjectMapper().writeValue(examsFile, utility.getExamsList());
+            utility.getObjectMapper().writeValue(examsFile, utility.getExamsList());
+        } catch (Exception e) {
+        }
     }
 }

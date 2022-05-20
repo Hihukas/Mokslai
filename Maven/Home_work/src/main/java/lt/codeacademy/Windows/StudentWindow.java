@@ -10,7 +10,7 @@ public class StudentWindow extends AbstractWindow {
     }
 
     @Override
-    public void window() throws Exception {
+    public void window() {
         System.out.println("""
                                 
                 Pasirinkite norimą atlikti veiksmą:
@@ -21,7 +21,7 @@ public class StudentWindow extends AbstractWindow {
         String input = utility.getScanner().nextLine();
         switch (input) {
             case "1" -> {
-                ExamsWindow examsWindow = new ExamsWindow(this, false, utility);
+                ExamsWindow examsWindow = new ExamsWindow(utility);
                 examsWindow.window();
             }
             case "2" -> {

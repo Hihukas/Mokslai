@@ -14,12 +14,12 @@ public class StudentsExamsResultsWindow extends AbstractWindow {
     }
 
     @Override
-    public void window() throws Exception {
+    public void window() {
         if (utility.getStudentsAnswersList().size() == 0) {
             System.out.println("Sąrašas tuščias.");
 
             ReturnAction returnAction = new ReturnAction(utility);
-            returnAction.returnAction(utility.getUser());
+            returnAction.returnAction();
         } else {
             System.out.println("Sąrašas:");
             utility.getStudentsAnswersList().stream()
@@ -36,7 +36,7 @@ public class StudentsExamsResultsWindow extends AbstractWindow {
                     .forEachOrdered(System.out::println);
 
             ReturnAction returnAction = new ReturnAction(utility);
-            returnAction.returnAction(utility.getUser());
+            returnAction.returnAction();
         }
     }
 }

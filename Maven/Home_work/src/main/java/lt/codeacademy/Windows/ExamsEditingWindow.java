@@ -17,7 +17,7 @@ public class ExamsEditingWindow extends AbstractWindow {
     }
 
     @Override
-    public void window() throws Exception {
+    public void window() {
         List<Exam> exams = utility.getExamsList();
 
         List<Question> oldQuestions = utility.getExam().getQuestions().stream().toList();
@@ -35,7 +35,7 @@ public class ExamsEditingWindow extends AbstractWindow {
         System.out.println("\nInformacija išsaugota.");
 
         ReturnAction returnAction = new ReturnAction(utility);
-        returnAction.returnAction(utility.getUser());
+        returnAction.returnAction();
     }
 }
 

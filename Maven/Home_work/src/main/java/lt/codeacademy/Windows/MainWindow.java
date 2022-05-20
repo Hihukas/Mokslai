@@ -11,7 +11,7 @@ public class MainWindow extends AbstractWindow {
     }
 
     @Override
-    public void window() throws Exception {
+    public void window() {
         System.out.println("""
                 Pasirinkite norimą atlikti veiksmą:
                 [1] - Prisijungimas.

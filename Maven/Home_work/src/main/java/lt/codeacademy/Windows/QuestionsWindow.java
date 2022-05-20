@@ -18,7 +18,7 @@ public class QuestionsWindow extends AbstractWindow {
     }
 
     @Override
-    public void window() throws Exception {
+    public void window() {
         System.out.printf("\nPasirinktas egzaminas:\nID: %s\nEgzamino tipas: %s\nPavadinimas: %s\n", utility.getExam().getId(), utility.getExam().getExamType(), utility.getExam().getName());
 
         utility.getExam().getQuestions().forEach(question -> printQuestion(question.getQuestion(), question.getAnswers()));
@@ -30,7 +30,7 @@ public class QuestionsWindow extends AbstractWindow {
         System.out.printf("\nAčiū už atsakymus! Jie išsaugoti!\nJūsų pažymys: %s\nEgzaminą perlaikyti bus galima po 48 valandų.\n", testResult());
 
         ReturnAction returnAction = new ReturnAction(utility);
-        returnAction.returnAction(utility.getUser());
+        returnAction.returnAction();
     }
 
     private String testResult() {
@@ -70,17 +70,21 @@ public class QuestionsWindow extends AbstractWindow {
         System.out.println("\nĮveskite teisingą atsakymo numerį:");
 
         try {
+            utility.setScanner(new Scanner(System.in));
             int answerInput = utility.getScanner().nextInt();
+            utility.getScanner().nextLine();
             if (answerInput < 1 || answerInput > answers.size()) {
                 System.out.println("Tokio atsakymo nėra!");
-                printQuestion(question, answers);
+                QuestionsWindow questionsWindow = new QuestionsWindow(utility);
+                questionsWindow.printQuestion(question, answers);
             }
             if (answerInput <= answers.size() && answerInput > 0) {
                 questionsAnswers.add(answerInput);
             }
         } catch (InputMismatchException e) {
-            System.out.println("Galimi tik skaičiai.");
-            printQuestion(question, answers);
+            System.out.println("Tokio atsakymo nėra!");
+            QuestionsWindow questionsWindow = new QuestionsWindow(utility);
+            questionsWindow.printQuestion(question, answers);
         }
     }
 }

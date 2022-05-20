@@ -14,7 +14,7 @@ public class ExamsCreateWindow extends AbstractWindow {
         this.utility = utility;
     }
 
-    public void window() throws Exception {
+    public void window() {
         List<Exam> exams = utility.getExamsList();
 
         List<Question> questions = new ArrayList<>();
@@ -31,7 +31,7 @@ public class ExamsCreateWindow extends AbstractWindow {
         System.out.println("\nInformacija išsaugota.");
 
         ReturnAction returnAction = new ReturnAction(utility);
-        returnAction.returnAction(utility.getUser());
+        returnAction.returnAction();
     }
 
     public void questionsCreate(List<Question> questions) {

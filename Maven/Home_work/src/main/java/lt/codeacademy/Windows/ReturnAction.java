@@ -10,7 +10,7 @@ public class ReturnAction {
         this.utility = utility;
     }
 
-    public void returnAction(User user) throws Exception {
+    public void returnAction() {
         String input;
         do {
             System.out.println("""    
@@ -19,7 +19,7 @@ public class ReturnAction {
                     """);
             input = utility.getScanner().nextLine();
             if ("1".equals(input)) {
-                switch (user.getUserType()) {
+                switch (utility.getUser().getUserType()) {
                     case LECTOR -> {
                         LectorWindow lectorWindow = new LectorWindow(utility);
                         lectorWindow.window();
@@ -32,7 +32,7 @@ public class ReturnAction {
             } else {
                 System.out.println("Tokio veiksmo nėra. Pasirinkite iš naujo");
                 ReturnAction returnAction = new ReturnAction(utility);
-                returnAction.returnAction(user);
+                returnAction.returnAction();
             }
         } while (!input.equals("1"));
     }

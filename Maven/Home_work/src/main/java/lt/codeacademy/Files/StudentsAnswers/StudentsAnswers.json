@@ -8,16 +8,20 @@
     "surname" : "Studentas"
   },
   "exam" : {
-    "id" : "526c9e40-161f-48b4-a64d-2ba6f4b9e62d",
+    "id" : "06081d39-5208-426f-bda8-54e0b4d3c596",
     "examType" : "TEST",
     "name" : "OOP",
     "questions" : [ {
       "question" : "Klausimas?\nAtsakymų variantai:",
       "answers" : [ "a", "b" ],
       "correctAnswer" : 1
+    }, {
+      "question" : "Klausimas?\nAtsakymų variantai:",
+      "answers" : [ "a", "b" ],
+      "correctAnswer" : 2
     } ]
   },
-  "answers" : [ 1 ],
+  "answers" : [ 1, 2 ],
   "grade" : "10",
-  "time" : "2022-05-20T12:53:55.459995400"
+  "time" : "2022-05-20T17:09:29.734938500"
 } ]

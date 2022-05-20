@@ -74,7 +74,15 @@ public class Utility {
         return scanner;
     }
 
+    public void setScanner(Scanner scanner) {
+        this.scanner = scanner;
+    }
+
     public ObjectMapper getObjectMapper() {
         return objectMapper;
+    }
+
+    public void setObjectMapper(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
     }
 }

@@ -11,7 +11,7 @@ public class LoginWindow extends AbstractWindow {
     }
 
     @Override
-    public void window() throws Exception {
+    public void window() {
         System.out.println("Įveskite vartotojo vardą: ");
         String userName = utility.getScanner().nextLine();
         System.out.println("Įveskite slaptažodį:");

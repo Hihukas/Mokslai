@@ -14,7 +14,7 @@ public class RegistrationWindow extends AbstractWindow {
     }
 
     @Override
-    public void window() throws Exception {
+    public void window() {
         String userName = usernameCheck();
         System.out.println("Sukurkite slaptažodį:");
         String password = utility.getScanner().nextLine();
@@ -40,8 +40,8 @@ public class RegistrationWindow extends AbstractWindow {
         utility.setUser(user);
 
         System.out.printf("\nSveikiname prisijungus, %s!\n", name);
-        StudentWindow window = new StudentWindow(utility);
-        window.window();
+        StudentWindow studentWindow = new StudentWindow(utility);
+        studentWindow.window();
     }
 
     private String usernameCheck() {
