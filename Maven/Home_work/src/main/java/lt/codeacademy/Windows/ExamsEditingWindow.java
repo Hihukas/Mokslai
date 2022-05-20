@@ -2,23 +2,16 @@ package lt.codeacademy.Windows;
 
 import lt.codeacademy.Exams.Exam;
 import lt.codeacademy.Exams.Question;
-import lt.codeacademy.Users.User;
 import lt.codeacademy.Utility;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class ExamsEditingWindow extends AbstractWindow {
-    private final User user;
-    private final Exam exam;
-
     private final Utility utility;
     private final int index;
 
-    public ExamsEditingWindow(User user, Exam exam, int index, Utility utility) {
-        this.user = user;
-        this.exam = exam;
+    public ExamsEditingWindow(int index, Utility utility) {
         this.index = index;
         this.utility = utility;
     }
@@ -27,22 +20,22 @@ public class ExamsEditingWindow extends AbstractWindow {
     public void window() throws Exception {
         List<Exam> exams = utility.getExamsList();
 
-        List<Question> oldQuestions = exam.getQuestions().stream().toList();
+        List<Question> oldQuestions = utility.getExam().getQuestions().stream().toList();
 
         List<Question> questions = new ArrayList<>(oldQuestions);
 
-        ExamsCreateWindow examsCreateWindow = new ExamsCreateWindow(user, utility);
+        ExamsCreateWindow examsCreateWindow = new ExamsCreateWindow(utility);
 
         examsCreateWindow.questionsCreate(questions);
 
-        exams.set(index, new Exam(exam.getId(), exam.getExamType(), exam.getName(), questions));
+        exams.set(index, new Exam(utility.getExam().getId(), utility.getExam().getExamType(), utility.getExam().getName(), questions));
 
         utility.setExamsList(exams);
 
         System.out.println("\nInformacija išsaugota.");
 
         ReturnAction returnAction = new ReturnAction(utility);
-        returnAction.returnAction(user);
+        returnAction.returnAction(utility.getUser());
     }
 }
 

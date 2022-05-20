@@ -1,14 +1,11 @@
 package lt.codeacademy.Windows;
 
-import lt.codeacademy.Users.User;
 import lt.codeacademy.Utility;
 
 public class StudentWindow extends AbstractWindow {
-    private final User user;
     private final Utility utility;
 
-    public StudentWindow(User user, Utility utility) {
-        this.user = user;
+    public StudentWindow(Utility utility) {
         this.utility = utility;
     }
 
@@ -24,11 +21,11 @@ public class StudentWindow extends AbstractWindow {
         String input = utility.getScanner().nextLine();
         switch (input) {
             case "1" -> {
-                ExamsWindow examsWindow = new ExamsWindow(user, this, false, utility);
+                ExamsWindow examsWindow = new ExamsWindow(this, false, utility);
                 examsWindow.window();
             }
             case "2" -> {
-                OneStudentExamsResultsWindow oneStudentExamsResultsWindow = new OneStudentExamsResultsWindow(user, utility);
+                OneStudentExamsResultsWindow oneStudentExamsResultsWindow = new OneStudentExamsResultsWindow(utility);
                 oneStudentExamsResultsWindow.window();
             }
             case "3" -> {
@@ -37,7 +34,7 @@ public class StudentWindow extends AbstractWindow {
             }
             default -> {
                 System.out.println("Tokio veiksmo nėra. Pasirinkite iš naujo.");
-                StudentWindow studentWindow = new StudentWindow(user, utility);
+                StudentWindow studentWindow = new StudentWindow(utility);
                 studentWindow.window();
             }
         }

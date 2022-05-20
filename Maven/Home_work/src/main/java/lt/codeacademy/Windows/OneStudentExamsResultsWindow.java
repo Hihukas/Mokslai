@@ -1,18 +1,15 @@
 package lt.codeacademy.Windows;
 
 import lt.codeacademy.Answers.StudentsAnswers;
-import lt.codeacademy.Users.User;
 import lt.codeacademy.Utility;
 
 import java.util.*;
 import java.util.stream.IntStream;
 
 public class OneStudentExamsResultsWindow extends AbstractWindow {
-    private final User user;
     private final Utility utility;
 
-    public OneStudentExamsResultsWindow(User user, Utility utility) {
-        this.user = user;
+    public OneStudentExamsResultsWindow(Utility utility) {
         this.utility = utility;
     }
 
@@ -34,14 +31,14 @@ public class OneStudentExamsResultsWindow extends AbstractWindow {
                 .forEach(System.out::println);
 
         ReturnAction returnAction = new ReturnAction(utility);
-        returnAction.returnAction(user);
+        returnAction.returnAction(utility.getUser());
     }
 
     public List<StudentsAnswers> fillOneStudentsAnswersList() {
         List<StudentsAnswers> filledOneStudentsAnswersList = new ArrayList<>();
 
         for (StudentsAnswers id : utility.getStudentsAnswersList()) {
-            if (id.getUser().getId().equals(user.getId())) {
+            if (id.getUser().getId().equals(utility.getUser().getId())) {
                 filledOneStudentsAnswersList.add(id);
             }
         }

@@ -3,18 +3,14 @@ package lt.codeacademy.Windows;
 import lt.codeacademy.Exams.Exam;
 import lt.codeacademy.Exams.ExamType;
 import lt.codeacademy.Exams.Question;
-import lt.codeacademy.Users.User;
 import lt.codeacademy.Utility;
 
 import java.util.*;
 
-
 public class ExamsCreateWindow extends AbstractWindow {
-    private final User user;
     private final Utility utility;
 
-    public ExamsCreateWindow(User user, Utility utility) {
-        this.user = user;
+    public ExamsCreateWindow(Utility utility) {
         this.utility = utility;
     }
 
@@ -35,7 +31,7 @@ public class ExamsCreateWindow extends AbstractWindow {
         System.out.println("\nInformacija išsaugota.");
 
         ReturnAction returnAction = new ReturnAction(utility);
-        returnAction.returnAction(user);
+        returnAction.returnAction(utility.getUser());
     }
 
     public void questionsCreate(List<Question> questions) {

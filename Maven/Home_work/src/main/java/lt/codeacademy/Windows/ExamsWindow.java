@@ -2,7 +2,6 @@ package lt.codeacademy.Windows;
 
 import lt.codeacademy.Answers.StudentsAnswers;
 import lt.codeacademy.Exams.Exam;
-import lt.codeacademy.Users.User;
 import lt.codeacademy.Utility;
 
 import java.time.Duration;
@@ -11,13 +10,11 @@ import java.util.*;
 import java.util.stream.IntStream;
 
 public class ExamsWindow extends AbstractWindow {
-    private final User user;
     private final Utility utility;
     private final AbstractWindow previousWindow;
     private final boolean editMode;
 
-    public ExamsWindow(User user, AbstractWindow previousWindow, boolean editMode, Utility utility) {
-        this.user = user;
+    public ExamsWindow(AbstractWindow previousWindow, boolean editMode, Utility utility) {
         this.previousWindow = previousWindow;
         this.editMode = editMode;
         this.utility = utility;
@@ -52,21 +49,21 @@ public class ExamsWindow extends AbstractWindow {
 
         try {
             int index = (utility.getScanner().nextInt() - 1);
-            Exam exam = examsToTake.get(index);
+            utility.setExam(examsToTake.get(index));
             if (editMode) {
-                ExamsEditingWindow examsEditingWindow = new ExamsEditingWindow(user, exam, index, utility);
+                ExamsEditingWindow examsEditingWindow = new ExamsEditingWindow(index, utility);
                 examsEditingWindow.window();
             } else {
-                QuestionsWindow questionsWindow = new QuestionsWindow(exam, user, utility);
+                QuestionsWindow questionsWindow = new QuestionsWindow(utility);
                 questionsWindow.window();
             }
         } catch (InputMismatchException e) {
             System.out.println("Galimi tik skaičiai.\n");
-            ExamsWindow examsWindow = new ExamsWindow(user, previousWindow, editMode, utility);
+            ExamsWindow examsWindow = new ExamsWindow(previousWindow, editMode, utility);
             examsWindow.window();
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Tokio egzamino nėra! Rinkites dar kartą.\n");
-            ExamsWindow examsWindow = new ExamsWindow(user, previousWindow, editMode, utility);
+            ExamsWindow examsWindow = new ExamsWindow(previousWindow, editMode, utility);
             examsWindow.window();
         }
     }
@@ -76,7 +73,7 @@ public class ExamsWindow extends AbstractWindow {
     }
 
     private List<Exam> getUsersExamsToTake(List<Exam> exams) {
-        OneStudentExamsResultsWindow oneStudentExamsResultsWindow = new OneStudentExamsResultsWindow(user, utility);
+        OneStudentExamsResultsWindow oneStudentExamsResultsWindow = new OneStudentExamsResultsWindow(utility);
         List<StudentsAnswers> oneStudentsAnswerList = oneStudentExamsResultsWindow.fillOneStudentsAnswersList();
 
         List<Exam> restrictedExams = oneStudentsAnswerList.stream()

@@ -4,9 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import lt.codeacademy.Answers.StudentsAnswers;
-import lt.codeacademy.Exams.Exam;
 import lt.codeacademy.Exams.Question;
-import lt.codeacademy.Users.User;
 import lt.codeacademy.Utility;
 
 import java.io.File;
@@ -16,23 +14,19 @@ import java.util.*;
 import java.util.stream.IntStream;
 
 public class QuestionsWindow extends AbstractWindow {
-    private final Exam exam;
-    private final User user;
     private final Utility utility;
     private final List<Integer> questionsAnswers = new LinkedList<>();
     private final List<StudentsAnswers> studentsAnswers = new ArrayList<>();
 
-    public QuestionsWindow(Exam exam, User user, Utility utility) {
-        this.exam = exam;
-        this.user = user;
+    public QuestionsWindow(Utility utility) {
         this.utility = utility;
     }
 
     @Override
     public void window() throws Exception {
-        System.out.printf("\nPasirinktas egzaminas:\nID: %s\nEgzamino tipas: %s\nPavadinimas: %s\n", exam.getId(), exam.getExamType(), exam.getName());
+        System.out.printf("\nPasirinktas egzaminas:\nID: %s\nEgzamino tipas: %s\nPavadinimas: %s\n", utility.getExam().getId(), utility.getExam().getExamType(), utility.getExam().getName());
 
-        exam.getQuestions().forEach(question -> printQuestion(question.getQuestion(), question.getAnswers()));
+        utility.getExam().getQuestions().forEach(question -> printQuestion(question.getQuestion(), question.getAnswers()));
 
         StudentsAnswers studentsAnswers = createStudentAnswersObject();
         saveStudentAnswers(studentsAnswers);
@@ -41,29 +35,29 @@ public class QuestionsWindow extends AbstractWindow {
         System.out.printf("\nAčiū už atsakymus! Jie išsaugoti!\nJūsų pažymys: %s\nEgzaminą perlaikyti bus galima po 48 valandų.\n", testResult());
 
         ReturnAction returnAction = new ReturnAction(utility);
-        returnAction.returnAction(user);
+        returnAction.returnAction(utility.getUser());
     }
 
     private String testResult() {
-        List<Integer> correctAnswers = exam.getQuestions().stream()
+        List<Integer> correctAnswers = utility.getExam().getQuestions().stream()
                 .map(Question::getCorrectAnswer).toList();
 
         List<Integer> result = new ArrayList<>();
-        for (int i = 0; i < exam.getQuestions().size(); i++) {
+        for (int i = 0; i < utility.getExam().getQuestions().size(); i++) {
             if (correctAnswers.get(i).equals(questionsAnswers.get(i))) {
                 result.add(i);
             }
         }
 
-        double grade = ((result.size() * 10D) / exam.getQuestions().size());
+        double grade = ((result.size() * 10D) / utility.getExam().getQuestions().size());
 
         return String.format("%.0f", grade);
     }
 
     private StudentsAnswers createStudentAnswersObject() {
         StudentsAnswers studentsAnswers = new StudentsAnswers();
-        studentsAnswers.setUser(user);
-        studentsAnswers.setExam(exam);
+        studentsAnswers.setUser(utility.getUser());
+        studentsAnswers.setExam(utility.getExam());
         studentsAnswers.setAnswers(questionsAnswers);
         studentsAnswers.setGrade(testResult());
         LocalDateTime localDateTime = LocalDateTime.now();

@@ -21,11 +21,11 @@ public class ReturnAction {
             if ("1".equals(input)) {
                 switch (user.getUserType()) {
                     case LECTOR -> {
-                        LectorWindow lectorWindow = new LectorWindow(user, utility);
+                        LectorWindow lectorWindow = new LectorWindow(utility);
                         lectorWindow.window();
                     }
                     case STUDENT -> {
-                        StudentWindow studentWindow = new StudentWindow(user, utility);
+                        StudentWindow studentWindow = new StudentWindow(utility);
                         studentWindow.window();
                     }
                 }

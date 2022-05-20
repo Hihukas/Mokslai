@@ -37,9 +37,10 @@ public class RegistrationWindow extends AbstractWindow {
                 .setSurname(surname);
 
         utility.getUsersList().add(user);
+        utility.setUser(user);
 
         System.out.printf("\nSveikiname prisijungus, %s!\n", name);
-        StudentWindow window = new StudentWindow(user, utility);
+        StudentWindow window = new StudentWindow(utility);
         window.window();
     }
 

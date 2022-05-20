@@ -17,23 +17,22 @@ public class LoginWindow extends AbstractWindow {
         System.out.println("Įveskite slaptažodį:");
         String password = utility.getScanner().nextLine();
 
-        User user = login(userName, password);
-        if (user == null) {
+        utility.setUser(login(userName, password));
+
+        if (utility.getUser() == null) {
             System.out.println("Tokio vartotojo vardo arba slaptažodžio nėra. Bandykite iš naujo.\n");
             LoginWindow loginWindow = new LoginWindow(utility);
             loginWindow.window();
-        }
-
-        if (user != null) {
-            switch (user.getUserType()) {
+        } else {
+            switch (utility.getUser().getUserType()) {
                 case STUDENT -> {
-                    System.out.printf("\nSveikiname prisijungus, %s!\n", user.getName());
-                    StudentWindow studentWindow = new StudentWindow(user, utility);
+                    System.out.printf("\nSveikiname prisijungus, %s!\n", utility.getUser().getName());
+                    StudentWindow studentWindow = new StudentWindow(utility);
                     studentWindow.window();
                 }
                 case LECTOR -> {
-                    System.out.printf("\nSveikiname prisijungus, %s!\n", user.getName());
-                    LectorWindow lectorWindow = new LectorWindow(user, utility);
+                    System.out.printf("\nSveikiname prisijungus, %s!\n", utility.getUser().getName());
+                    LectorWindow lectorWindow = new LectorWindow(utility);
                     lectorWindow.window();
                 }
             }

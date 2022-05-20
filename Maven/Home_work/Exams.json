@@ -18,6 +18,10 @@
     "question" : "Klausimas?\nAtsakymų variantai:",
     "answers" : [ "a", "b", "c", "d", "e" ],
     "correctAnswer" : 5
+  }, {
+    "question" : "Klausimas?\nAtsakymų variantai:",
+    "answers" : [ "a", "b" ],
+    "correctAnswer" : 1
   } ]
 }, {
   "id" : "81201942-a291-4feb-aa98-a929140ae252",
@@ -44,4 +48,4 @@
     "answers" : [ "a", "b", "c" ],
     "correctAnswer" : 3
   } ]
-}]
+} ]

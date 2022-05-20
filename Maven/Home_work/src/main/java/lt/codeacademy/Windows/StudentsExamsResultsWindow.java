@@ -1,18 +1,15 @@
 package lt.codeacademy.Windows;
 
 import lt.codeacademy.Answers.StudentsAnswers;
-import lt.codeacademy.Users.User;
 import lt.codeacademy.Utility;
 
 import java.time.LocalDateTime;
 import java.util.Comparator;
 
 public class StudentsExamsResultsWindow extends AbstractWindow {
-    private final User user;
     private final Utility utility;
 
-    public StudentsExamsResultsWindow(User user, Utility utility) {
-        this.user = user;
+    public StudentsExamsResultsWindow(Utility utility) {
         this.utility = utility;
     }
 
@@ -32,6 +29,6 @@ public class StudentsExamsResultsWindow extends AbstractWindow {
                 .forEachOrdered(System.out::println);
 
         ReturnAction returnAction = new ReturnAction(utility);
-        returnAction.returnAction(user);
+        returnAction.returnAction(utility.getUser());
     }
 }
