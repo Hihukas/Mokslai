@@ -1,13 +1,13 @@
 package lt.codeacademy.Windows;
 
 import lt.codeacademy.Files.ReaderWriter;
-import lt.codeacademy.Utility;
+import lt.codeacademy.MainModel;
 
 public class MainWindow extends AbstractWindow {
-    private final Utility utility;
+    private final MainModel mainModel;
 
-    public MainWindow(Utility utility) {
-        this.utility = utility;
+    public MainWindow(MainModel mainModel) {
+        this.mainModel = mainModel;
     }
 
     @Override
@@ -18,25 +18,25 @@ public class MainWindow extends AbstractWindow {
                 [2] - Naujų studentų registracija.
                 [3] - Išeiti.
                 """);
-        String input = utility.getScanner().nextLine();
+        String input = mainModel.getScanner().nextLine();
         switch (input) {
             case "1" -> {
-                LoginWindow loginWindow = new LoginWindow(utility);
+                LoginWindow loginWindow = new LoginWindow(mainModel);
                 loginWindow.window();
             }
             case "2" -> {
-                RegistrationWindow registrationWindow = new RegistrationWindow(utility);
+                RegistrationWindow registrationWindow = new RegistrationWindow(mainModel);
                 registrationWindow.window();
             }
             case "3" -> {
                 System.out.println("Programa baigia darbą.");
-                ReaderWriter readerWriter = new ReaderWriter(utility);
+                ReaderWriter readerWriter = new ReaderWriter(mainModel);
                 readerWriter.fileWriter();
                 System.exit(0);
             }
             default -> {
                 System.out.println("Tokio veiksmo nėra. Pasirinkite iš naujo.\n");
-                MainWindow mainWindow = new MainWindow(utility);
+                MainWindow mainWindow = new MainWindow(mainModel);
                 mainWindow.window();
             }
         }

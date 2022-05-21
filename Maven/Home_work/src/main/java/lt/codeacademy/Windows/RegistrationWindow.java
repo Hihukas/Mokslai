@@ -2,31 +2,31 @@ package lt.codeacademy.Windows;
 
 import lt.codeacademy.Users.User;
 import lt.codeacademy.Users.UserType;
-import lt.codeacademy.Utility;
+import lt.codeacademy.MainModel;
 
 import java.util.UUID;
 
 public class RegistrationWindow extends AbstractWindow {
-    private final Utility utility;
+    private final MainModel mainModel;
 
-    public RegistrationWindow(Utility utility) {
-        this.utility = utility;
+    public RegistrationWindow(MainModel mainModel) {
+        this.mainModel = mainModel;
     }
 
     @Override
     public void window() {
         String userName = usernameCheck();
         System.out.println("Sukurkite slaptažodį:");
-        String password = utility.getScanner().nextLine();
+        String password = mainModel.getScanner().nextLine();
         if (!passwordCheck(password)) {
             System.out.println("Paskyros sukurti nepavyko.\n");
-            RegistrationWindow registrationWindow = new RegistrationWindow(utility);
+            RegistrationWindow registrationWindow = new RegistrationWindow(mainModel);
             registrationWindow.window();
         }
         System.out.println("Įveskite savo vardą:");
-        String name = utility.getScanner().nextLine();
+        String name = mainModel.getScanner().nextLine();
         System.out.println("Įveskite savo pavardę:");
-        String surname = utility.getScanner().nextLine();
+        String surname = mainModel.getScanner().nextLine();
 
         User user = new User()
                 .setId(UUID.randomUUID())
@@ -36,20 +36,20 @@ public class RegistrationWindow extends AbstractWindow {
                 .setName(name)
                 .setSurname(surname);
 
-        utility.getUsersList().add(user);
-        utility.setUser(user);
+        mainModel.getUsersList().add(user);
+        mainModel.setUser(user);
 
         System.out.printf("\nSveikiname prisijungus, %s!\n", name);
-        StudentWindow studentWindow = new StudentWindow(utility);
+        StudentWindow studentWindow = new StudentWindow(mainModel);
         studentWindow.window();
     }
 
     private String usernameCheck() {
         while (true) {
             System.out.println("Sukurkite vartotojo vardą:");
-            String userName = utility.getScanner().nextLine();
+            String userName = mainModel.getScanner().nextLine();
 
-            boolean userNameAlreadyExists = utility.getUsersList().stream()
+            boolean userNameAlreadyExists = mainModel.getUsersList().stream()
                     .anyMatch(u -> u.getUsername().equals(userName));
 
             if (userNameAlreadyExists) {
@@ -63,7 +63,7 @@ public class RegistrationWindow extends AbstractWindow {
     private boolean passwordCheck(String password) {
         for (int i = 0; i < 3; i++) {
             System.out.println("Pakartokite slaptažodžio įvedimą:");
-            String repeatPassword = utility.getScanner().nextLine();
+            String repeatPassword = mainModel.getScanner().nextLine();
             if (!repeatPassword.equals(password)) {
                 System.out.println("Slaptažodžiai nesutampa.\n");
                 continue;

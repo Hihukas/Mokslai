@@ -1,12 +1,12 @@
 package lt.codeacademy.Windows;
 
-import lt.codeacademy.Utility;
+import lt.codeacademy.MainModel;
 
 public class LectorWindow extends AbstractWindow {
-    private final Utility utility;
+    private final MainModel mainModel;
 
-    public LectorWindow(Utility utility) {
-        this.utility = utility;
+    public LectorWindow(MainModel mainModel) {
+        this.mainModel = mainModel;
     }
 
     @Override
@@ -19,27 +19,27 @@ public class LectorWindow extends AbstractWindow {
                 [3] - Testo egzaminų papildymas klausimais.
                 [4] - Atsijungti ir grįžti į pagrindinį meniu.
                 """);
-        String input = utility.getScanner().nextLine();
+        String input = mainModel.getScanner().nextLine();
         switch (input) {
             case "1" -> {
-                StudentsExamsResultsWindow studentsExamsResultsWindow = new StudentsExamsResultsWindow(utility);
+                StudentsExamsResultsWindow studentsExamsResultsWindow = new StudentsExamsResultsWindow(mainModel);
                 studentsExamsResultsWindow.window();
             }
             case "2" -> {
-                ExamsCreateWindow examsCreateWindow = new ExamsCreateWindow(utility);
+                ExamsCreateWindow examsCreateWindow = new ExamsCreateWindow(mainModel);
                 examsCreateWindow.window();
             }
             case "3" -> {
-                ExamsWindow examsWindow = new ExamsWindow(utility);
+                ExamsWindow examsWindow = new ExamsWindow(mainModel);
                 examsWindow.window();
             }
             case "4" -> {
-                MainWindow mainWindow = new MainWindow(utility);
+                MainWindow mainWindow = new MainWindow(mainModel);
                 mainWindow.window();
             }
             default -> {
                 System.out.println("Tokio veiksmo nėra. Pasirinkite iš naujo.");
-                LectorWindow lectorWindow = new LectorWindow(utility);
+                LectorWindow lectorWindow = new LectorWindow(mainModel);
                 lectorWindow.window();
             }
         }

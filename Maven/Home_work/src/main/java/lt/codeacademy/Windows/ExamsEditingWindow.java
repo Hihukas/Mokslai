@@ -2,39 +2,39 @@ package lt.codeacademy.Windows;
 
 import lt.codeacademy.Exams.Exam;
 import lt.codeacademy.Exams.Question;
-import lt.codeacademy.Utility;
+import lt.codeacademy.MainModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ExamsEditingWindow extends AbstractWindow {
-    private final Utility utility;
+    private final MainModel mainModel;
     private final int index;
 
-    public ExamsEditingWindow(int index, Utility utility) {
+    public ExamsEditingWindow(int index, MainModel mainModel) {
         this.index = index;
-        this.utility = utility;
+        this.mainModel = mainModel;
     }
 
     @Override
     public void window() {
-        List<Exam> exams = utility.getExamsList();
+        List<Exam> exams = mainModel.getExamsList();
 
-        List<Question> oldQuestions = utility.getExam().getQuestions().stream().toList();
+        List<Question> oldQuestions = mainModel.getExam().getQuestions().stream().toList();
 
         List<Question> questions = new ArrayList<>(oldQuestions);
 
-        ExamsCreateWindow examsCreateWindow = new ExamsCreateWindow(utility);
+        ExamsCreateWindow examsCreateWindow = new ExamsCreateWindow(mainModel);
 
         examsCreateWindow.questionsCreate(questions);
 
-        exams.set(index, new Exam(utility.getExam().getId(), utility.getExam().getExamType(), utility.getExam().getName(), questions));
+        exams.set(index, new Exam(mainModel.getExam().getId(), mainModel.getExam().getExamType(), mainModel.getExam().getName(), questions));
 
-        utility.setExamsList(exams);
+        mainModel.setExamsList(exams);
 
         System.out.println("\nInformacija išsaugota.");
 
-        ReturnAction returnAction = new ReturnAction(utility);
+        ReturnAction returnAction = new ReturnAction(mainModel);
         returnAction.returnAction();
     }
 }

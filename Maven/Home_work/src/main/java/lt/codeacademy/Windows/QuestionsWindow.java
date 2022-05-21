@@ -2,57 +2,66 @@ package lt.codeacademy.Windows;
 
 import lt.codeacademy.Answers.StudentsAnswers;
 import lt.codeacademy.Exams.Question;
-import lt.codeacademy.Utility;
+import lt.codeacademy.MainModel;
 
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.IntStream;
 
 public class QuestionsWindow extends AbstractWindow {
-    private final Utility utility;
+    private final MainModel mainModel;
     private final List<Integer> questionsAnswers = new LinkedList<>();
     private final List<StudentsAnswers> studentsAnswers = new ArrayList<>();
 
-    public QuestionsWindow(Utility utility) {
-        this.utility = utility;
+    public QuestionsWindow(MainModel mainModel) {
+        this.mainModel = mainModel;
     }
 
     @Override
     public void window() {
-        System.out.printf("\nPasirinktas egzaminas:\nID: %s\nEgzamino tipas: %s\nPavadinimas: %s\n", utility.getExam().getId(), utility.getExam().getExamType(), utility.getExam().getName());
+        System.out.printf("\nPasirinktas egzaminas:\nID: %s\nEgzamino tipas: %s\nPavadinimas: %s\n", mainModel.getExam().getId(), mainModel.getExam().getExamType(), mainModel.getExam().getName());
 
-        utility.getExam().getQuestions().forEach(question -> printQuestion(question.getQuestion(), question.getAnswers()));
+        List<Question> examQuestions = mainModel.getExam().getQuestions();
+        for (int i = 0; i < mainModel.getExam().getQuestions().size(); i++) {
+            Question question = examQuestions.get(i);
+            try {
+                printQuestion(question.getQuestion(), question.getAnswers());
+            } catch (InputMismatchException e) {
+                System.out.println("Tokio atsakymo nėra!");
+                i--;
+            }
+        }
 
         StudentsAnswers studentAnswers = createStudentAnswersObject();
         studentsAnswers.add(studentAnswers);
-        utility.setStudentsAnswersList(studentsAnswers);
+        mainModel.setStudentsAnswersList(studentsAnswers);
 
         System.out.printf("\nAčiū už atsakymus! Jie išsaugoti!\nJūsų pažymys: %s\nEgzaminą perlaikyti bus galima po 48 valandų.\n", testResult());
 
-        ReturnAction returnAction = new ReturnAction(utility);
+        ReturnAction returnAction = new ReturnAction(mainModel);
         returnAction.returnAction();
     }
 
     private String testResult() {
-        List<Integer> correctAnswers = utility.getExam().getQuestions().stream()
+        List<Integer> correctAnswers = mainModel.getExam().getQuestions().stream()
                 .map(Question::getCorrectAnswer).toList();
 
         List<Integer> result = new ArrayList<>();
-        for (int i = 0; i < utility.getExam().getQuestions().size(); i++) {
+        for (int i = 0; i < mainModel.getExam().getQuestions().size(); i++) {
             if (correctAnswers.get(i).equals(questionsAnswers.get(i))) {
                 result.add(i);
             }
         }
 
-        double grade = ((result.size() * 10D) / utility.getExam().getQuestions().size());
+        double grade = ((result.size() * 10D) / mainModel.getExam().getQuestions().size());
 
         return String.format("%.0f", grade);
     }
 
     private StudentsAnswers createStudentAnswersObject() {
         StudentsAnswers studentsAnswers = new StudentsAnswers();
-        studentsAnswers.setUser(utility.getUser());
-        studentsAnswers.setExam(utility.getExam());
+        studentsAnswers.setUser(mainModel.getUser());
+        studentsAnswers.setExam(mainModel.getExam());
         studentsAnswers.setAnswers(questionsAnswers);
         studentsAnswers.setGrade(testResult());
         LocalDateTime localDateTime = LocalDateTime.now();
@@ -69,22 +78,10 @@ public class QuestionsWindow extends AbstractWindow {
 
         System.out.println("\nĮveskite teisingą atsakymo numerį:");
 
-        try {
-            utility.setScanner(new Scanner(System.in));
-            int answerInput = utility.getScanner().nextInt();
-            utility.getScanner().nextLine();
-            if (answerInput < 1 || answerInput > answers.size()) {
-                System.out.println("Tokio atsakymo nėra!");
-                QuestionsWindow questionsWindow = new QuestionsWindow(utility);
-                questionsWindow.printQuestion(question, answers);
-            }
-            if (answerInput <= answers.size() && answerInput > 0) {
-                questionsAnswers.add(answerInput);
-            }
-        } catch (InputMismatchException e) {
-            System.out.println("Tokio atsakymo nėra!");
-            QuestionsWindow questionsWindow = new QuestionsWindow(utility);
-            questionsWindow.printQuestion(question, answers);
+        int answerInput = Integer.parseInt(mainModel.getScanner().nextLine());
+        if (answerInput < 1 || answerInput > answers.size()) {
+            throw new InputMismatchException();
         }
+        questionsAnswers.add(answerInput);
     }
 }

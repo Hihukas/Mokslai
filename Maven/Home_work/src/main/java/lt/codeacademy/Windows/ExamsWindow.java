@@ -3,7 +3,7 @@ package lt.codeacademy.Windows;
 import lt.codeacademy.Answers.StudentsAnswers;
 import lt.codeacademy.Exams.Exam;
 import lt.codeacademy.Users.UserType;
-import lt.codeacademy.Utility;
+import lt.codeacademy.MainModel;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -11,10 +11,10 @@ import java.util.*;
 import java.util.stream.IntStream;
 
 public class ExamsWindow extends AbstractWindow {
-    private final Utility utility;
+    private final MainModel mainModel;
 
-    public ExamsWindow(Utility utility) {
-        this.utility = utility;
+    public ExamsWindow(MainModel mainModel) {
+        this.mainModel = mainModel;
     }
 
     @Override
@@ -23,7 +23,7 @@ public class ExamsWindow extends AbstractWindow {
 
         if (examsToTake.size() == 0) {
             System.out.println("Egzaminų sąrašas tuščias.");
-            ReturnAction returnAction = new ReturnAction(utility);
+            ReturnAction returnAction = new ReturnAction(mainModel);
             returnAction.returnAction();
         }
 
@@ -47,32 +47,29 @@ public class ExamsWindow extends AbstractWindow {
 
     private void examChoose(List<Exam> examsToTake) {
         System.out.println("\nPasirinkite egzaminą:");
-
         try {
-            utility.setScanner(new Scanner(System.in));
-            int index = (utility.getScanner().nextInt() - 1);
-            utility.getScanner().nextLine();
-            utility.setExam(examsToTake.get(index));
-            if (utility.getUser().getUserType() == UserType.LECTOR) {
-                ExamsEditingWindow examsEditingWindow = new ExamsEditingWindow(index, utility);
+            int index = Integer.parseInt(mainModel.getScanner().nextLine()) - 1;
+            mainModel.setExam(examsToTake.get(index));
+            if (mainModel.getUser().getUserType() == UserType.LECTOR) {
+                ExamsEditingWindow examsEditingWindow = new ExamsEditingWindow(index, mainModel);
                 examsEditingWindow.window();
             } else {
-                QuestionsWindow questionsWindow = new QuestionsWindow(utility);
+                QuestionsWindow questionsWindow = new QuestionsWindow(mainModel);
                 questionsWindow.window();
             }
-        } catch (IndexOutOfBoundsException | InputMismatchException e) {
+        } catch (IndexOutOfBoundsException | InputMismatchException | NumberFormatException e) {
             System.out.println("Tokio egzamino nėra! Rinkites dar kartą.");
-            ExamsWindow examsWindow = new ExamsWindow(utility);
+            ExamsWindow examsWindow = new ExamsWindow(mainModel);
             examsWindow.examChoose(examsToTake);
         }
     }
 
     private List<Exam> getExams() {
-        return (utility.getUser().getUserType() == UserType.LECTOR) ? utility.getExamsList() : getUsersExamsToTake();
+        return (mainModel.getUser().getUserType() == UserType.LECTOR) ? mainModel.getExamsList() : getUsersExamsToTake();
     }
 
     private List<Exam> getUsersExamsToTake() {
-        OneStudentExamsResultsWindow oneStudentExamsResultsWindow = new OneStudentExamsResultsWindow(utility);
+        OneStudentExamsResultsWindow oneStudentExamsResultsWindow = new OneStudentExamsResultsWindow(mainModel);
         List<StudentsAnswers> oneStudentsAnswerList = oneStudentExamsResultsWindow.fillOneStudentsAnswersList();
 
         List<Exam> restrictedExams = oneStudentsAnswerList.stream()
@@ -85,7 +82,7 @@ public class ExamsWindow extends AbstractWindow {
                 .map(StudentsAnswers::getExam)
                 .toList();
 
-        return utility.getExamsList().stream()
+        return mainModel.getExamsList().stream()
                 .filter(e -> restrictedExams.stream().noneMatch(re -> re.getId().equals(e.getId())))
                 .toList();
     }

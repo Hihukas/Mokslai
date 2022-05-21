@@ -8,19 +8,19 @@ import lt.codeacademy.Users.User;
 import java.util.List;
 import java.util.Scanner;
 
-public class Utility {
+public class MainModel {
     private User user;
     private Exam exam;
     private List<StudentsAnswers> studentsAnswersList;
-    List<User> usersList;
-    List<Exam> examsList;
+    private List<User> usersList;
+    private List<Exam> examsList;
     private Scanner scanner = new Scanner(System.in);
     private ObjectMapper objectMapper = new ObjectMapper();
 
-    public Utility() {
+    public MainModel() {
     }
 
-    public Utility(User user, Exam exam, List<StudentsAnswers> studentsAnswersList, List<User> usersList, List<Exam> examsList, Scanner scanner, ObjectMapper objectMapper) {
+    public MainModel(User user, Exam exam, List<StudentsAnswers> studentsAnswersList, List<User> usersList, List<Exam> examsList, Scanner scanner, ObjectMapper objectMapper) {
         this.user = user;
         this.exam = exam;
         this.studentsAnswersList = studentsAnswersList;

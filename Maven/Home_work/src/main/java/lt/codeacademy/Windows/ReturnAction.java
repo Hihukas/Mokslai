@@ -1,39 +1,35 @@
 package lt.codeacademy.Windows;
 
-import lt.codeacademy.Users.User;
-import lt.codeacademy.Utility;
+import lt.codeacademy.MainModel;
 
 public class ReturnAction {
-    private final Utility utility;
+    private final MainModel mainModel;
 
-    public ReturnAction(Utility utility) {
-        this.utility = utility;
+    public ReturnAction(MainModel mainModel) {
+        this.mainModel = mainModel;
     }
 
     public void returnAction() {
-        String input;
-        do {
-            System.out.println("""    
-                                                   
-                    [1] Grįžti į pagrindinį meniu.
-                    """);
-            input = utility.getScanner().nextLine();
-            if ("1".equals(input)) {
-                switch (utility.getUser().getUserType()) {
-                    case LECTOR -> {
-                        LectorWindow lectorWindow = new LectorWindow(utility);
-                        lectorWindow.window();
-                    }
-                    case STUDENT -> {
-                        StudentWindow studentWindow = new StudentWindow(utility);
-                        studentWindow.window();
-                    }
+        System.out.println("""    
+                                               
+                [1] Grįžti į pagrindinį meniu.
+                """);
+        String input = mainModel.getScanner().nextLine();
+        if ("1".equals(input)) {
+            switch (mainModel.getUser().getUserType()) {
+                case LECTOR -> {
+                    LectorWindow lectorWindow = new LectorWindow(mainModel);
+                    lectorWindow.window();
                 }
-            } else {
-                System.out.println("Tokio veiksmo nėra. Pasirinkite iš naujo");
-                ReturnAction returnAction = new ReturnAction(utility);
-                returnAction.returnAction();
+                case STUDENT -> {
+                    StudentWindow studentWindow = new StudentWindow(mainModel);
+                    studentWindow.window();
+                }
             }
-        } while (!input.equals("1"));
+        } else {
+            System.out.println("Tokio veiksmo nėra. Pasirinkite iš naujo");
+            ReturnAction returnAction = new ReturnAction(mainModel);
+            returnAction.returnAction();
+        }
     }
 }

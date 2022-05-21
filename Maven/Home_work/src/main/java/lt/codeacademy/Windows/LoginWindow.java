@@ -1,38 +1,38 @@
 package lt.codeacademy.Windows;
 
 import lt.codeacademy.Users.User;
-import lt.codeacademy.Utility;
+import lt.codeacademy.MainModel;
 
 public class LoginWindow extends AbstractWindow {
-    private final Utility utility;
+    private final MainModel mainModel;
 
-    public LoginWindow(Utility utility) {
-        this.utility = utility;
+    public LoginWindow(MainModel mainModel) {
+        this.mainModel = mainModel;
     }
 
     @Override
     public void window() {
         System.out.println("Įveskite vartotojo vardą: ");
-        String userName = utility.getScanner().nextLine();
+        String userName = mainModel.getScanner().nextLine();
         System.out.println("Įveskite slaptažodį:");
-        String password = utility.getScanner().nextLine();
+        String password = mainModel.getScanner().nextLine();
 
-        utility.setUser(login(userName, password));
+        mainModel.setUser(login(userName, password));
 
-        if (utility.getUser() == null) {
+        if (mainModel.getUser() == null) {
             System.out.println("Tokio vartotojo vardo arba slaptažodžio nėra. Bandykite iš naujo.\n");
-            LoginWindow loginWindow = new LoginWindow(utility);
+            LoginWindow loginWindow = new LoginWindow(mainModel);
             loginWindow.window();
         } else {
-            switch (utility.getUser().getUserType()) {
+            switch (mainModel.getUser().getUserType()) {
                 case STUDENT -> {
-                    System.out.printf("\nSveikiname prisijungus, %s!\n", utility.getUser().getName());
-                    StudentWindow studentWindow = new StudentWindow(utility);
+                    System.out.printf("\nSveikiname prisijungus, %s!\n", mainModel.getUser().getName());
+                    StudentWindow studentWindow = new StudentWindow(mainModel);
                     studentWindow.window();
                 }
                 case LECTOR -> {
-                    System.out.printf("\nSveikiname prisijungus, %s!\n", utility.getUser().getName());
-                    LectorWindow lectorWindow = new LectorWindow(utility);
+                    System.out.printf("\nSveikiname prisijungus, %s!\n", mainModel.getUser().getName());
+                    LectorWindow lectorWindow = new LectorWindow(mainModel);
                     lectorWindow.window();
                 }
             }
@@ -40,7 +40,7 @@ public class LoginWindow extends AbstractWindow {
     }
 
     private User login(String userName, String password) {
-        return utility.getUsersList().stream()
+        return mainModel.getUsersList().stream()
                 .filter(u -> u.getUsername().equals(userName) && u.getPassword().equals(password))
                 .findAny()
                 .orElse(null);

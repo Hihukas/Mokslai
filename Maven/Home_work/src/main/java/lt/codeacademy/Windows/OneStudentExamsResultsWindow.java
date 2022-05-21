@@ -1,16 +1,16 @@
 package lt.codeacademy.Windows;
 
 import lt.codeacademy.Answers.StudentsAnswers;
-import lt.codeacademy.Utility;
+import lt.codeacademy.MainModel;
 
 import java.util.*;
 import java.util.stream.IntStream;
 
 public class OneStudentExamsResultsWindow extends AbstractWindow {
-    private final Utility utility;
+    private final MainModel mainModel;
 
-    public OneStudentExamsResultsWindow(Utility utility) {
-        this.utility = utility;
+    public OneStudentExamsResultsWindow(MainModel mainModel) {
+        this.mainModel = mainModel;
     }
 
     @Override
@@ -20,7 +20,7 @@ public class OneStudentExamsResultsWindow extends AbstractWindow {
         if (oneStudentsAnswersList.size() == 0) {
             System.out.println("Sąrašas tuščias.");
 
-            ReturnAction returnAction = new ReturnAction(utility);
+            ReturnAction returnAction = new ReturnAction(mainModel);
             returnAction.returnAction();
         } else {
             System.out.println("Egzaminų sąrašas:");
@@ -36,7 +36,7 @@ public class OneStudentExamsResultsWindow extends AbstractWindow {
                     })
                     .forEach(System.out::println);
 
-            ReturnAction returnAction = new ReturnAction(utility);
+            ReturnAction returnAction = new ReturnAction(mainModel);
             returnAction.returnAction();
         }
     }
@@ -44,8 +44,8 @@ public class OneStudentExamsResultsWindow extends AbstractWindow {
     public List<StudentsAnswers> fillOneStudentsAnswersList() {
         List<StudentsAnswers> filledOneStudentsAnswersList = new ArrayList<>();
 
-        for (StudentsAnswers a : utility.getStudentsAnswersList()) {
-            if (a.getUser().getId().equals(utility.getUser().getId())) {
+        for (StudentsAnswers a : mainModel.getStudentsAnswersList()) {
+            if (a.getUser().getId().equals(mainModel.getUser().getId())) {
                 filledOneStudentsAnswersList.add(a);
             }
         }

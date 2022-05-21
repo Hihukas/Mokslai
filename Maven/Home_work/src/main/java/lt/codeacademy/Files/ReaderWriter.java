@@ -2,47 +2,47 @@ package lt.codeacademy.Files;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import lt.codeacademy.Utility;
+import lt.codeacademy.MainModel;
 
 import java.io.File;
 
 
 public class ReaderWriter {
-    private final Utility utility;
+    private final MainModel mainModel;
     private final File studentsAnswersFile = new File("src/main/java/lt/codeacademy/Files/StudentsAnswers/StudentsAnswers.json");
     private final File usersListFile = new File("src/main/java/lt/codeacademy/Files/Users/Users.json");
     private final File examsFile = new File("src/main/java/lt/codeacademy/Files/Exams/Exams.json");
 
 
-    public ReaderWriter(Utility utility) {
-        this.utility = utility;
+    public ReaderWriter(MainModel mainModel) {
+        this.mainModel = mainModel;
     }
 
     public void fileReader() {
-        utility.getObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
+        mainModel.getObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
 
         try {
-            utility.setStudentsAnswersList(utility.getObjectMapper().readValue(studentsAnswersFile, new TypeReference<>() {
+            mainModel.setStudentsAnswersList(mainModel.getObjectMapper().readValue(studentsAnswersFile, new TypeReference<>() {
             }));
 
-            utility.setUsersList(utility.getObjectMapper().readValue(usersListFile, new TypeReference<>() {
+            mainModel.setUsersList(mainModel.getObjectMapper().readValue(usersListFile, new TypeReference<>() {
             }));
 
-            utility.setExamsList(utility.getObjectMapper().readValue(examsFile, new TypeReference<>() {
+            mainModel.setExamsList(mainModel.getObjectMapper().readValue(examsFile, new TypeReference<>() {
             }));
         } catch (Exception e) {
         }
     }
 
     public void fileWriter() {
-        utility.getObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
+        mainModel.getObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
 
         try {
-            utility.getObjectMapper().writeValue(studentsAnswersFile, utility.getStudentsAnswersList());
+            mainModel.getObjectMapper().writeValue(studentsAnswersFile, mainModel.getStudentsAnswersList());
 
-            utility.getObjectMapper().writeValue(usersListFile, utility.getUsersList());
+            mainModel.getObjectMapper().writeValue(usersListFile, mainModel.getUsersList());
 
-            utility.getObjectMapper().writeValue(examsFile, utility.getExamsList());
+            mainModel.getObjectMapper().writeValue(examsFile, mainModel.getExamsList());
         } catch (Exception e) {
         }
     }

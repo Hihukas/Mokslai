@@ -9,12 +9,12 @@ public class Main {
     public static void main(String[] args) throws Exception {
 //        FrameFactory frameFactory = new FrameFactory(createTestState());
         //       new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-        Utility utility = new Utility();
+        MainModel mainModel = new MainModel();
 
-        ReaderWriter readerWriter = new ReaderWriter(utility);
+        ReaderWriter readerWriter = new ReaderWriter(mainModel);
         readerWriter.fileReader();
 
-        MainWindow mainWindow = new MainWindow(utility);
+        MainWindow mainWindow = new MainWindow(mainModel);
         mainWindow.window();
 
     }
