@@ -26,7 +26,7 @@ public class QuestionsWindow extends AbstractWindow {
             Question question = examQuestions.get(i);
             try {
                 printQuestion(question.getQuestion(), question.getAnswers());
-            } catch (InputMismatchException e) {
+            } catch (InputMismatchException | NumberFormatException e) {
                 System.out.println("Tokio atsakymo nėra!");
                 i--;
             }

@@ -42,25 +42,27 @@ public class ExamsWindow extends AbstractWindow {
                 })
                 .forEach(System.out::println);
 
-        examChoose(examsToTake);
+
+        for (int i = 0; i < examsToTake.size(); i++) {
+            try {
+                examChoose(examsToTake);
+            } catch (IndexOutOfBoundsException | InputMismatchException | NumberFormatException e) {
+                System.out.println("Tokio egzamino nėra! Rinkites dar kartą.");
+                i--;
+            }
+        }
     }
 
     private void examChoose(List<Exam> examsToTake) {
         System.out.println("\nPasirinkite egzaminą:");
-        try {
-            int index = Integer.parseInt(mainModel.getScanner().nextLine()) - 1;
-            mainModel.setExam(examsToTake.get(index));
-            if (mainModel.getUser().getUserType() == UserType.LECTOR) {
-                ExamsEditingWindow examsEditingWindow = new ExamsEditingWindow(index, mainModel);
-                examsEditingWindow.window();
-            } else {
-                QuestionsWindow questionsWindow = new QuestionsWindow(mainModel);
-                questionsWindow.window();
-            }
-        } catch (IndexOutOfBoundsException | InputMismatchException | NumberFormatException e) {
-            System.out.println("Tokio egzamino nėra! Rinkites dar kartą.");
-            ExamsWindow examsWindow = new ExamsWindow(mainModel);
-            examsWindow.examChoose(examsToTake);
+        int index = Integer.parseInt(mainModel.getScanner().nextLine()) - 1;
+        mainModel.setExam(examsToTake.get(index));
+        if (mainModel.getUser().getUserType() == UserType.LECTOR) {
+            ExamsEditingWindow examsEditingWindow = new ExamsEditingWindow(index, mainModel);
+            examsEditingWindow.window();
+        } else {
+            QuestionsWindow questionsWindow = new QuestionsWindow(mainModel);
+            questionsWindow.window();
         }
     }
 
