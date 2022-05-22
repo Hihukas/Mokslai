@@ -6,7 +6,6 @@ import lt.codeacademy.MainModel;
 
 import java.io.File;
 
-
 public class ReaderWriter {
     private final MainModel mainModel;
     private final File studentsAnswersFile = new File("src/main/java/lt/codeacademy/Files/StudentsAnswers/StudentsAnswers.json");
@@ -31,6 +30,8 @@ public class ReaderWriter {
             mainModel.setExamsList(mainModel.getObjectMapper().readValue(examsFile, new TypeReference<>() {
             }));
         } catch (Exception e) {
+            System.out.println("Nepavyko nuskaityti duomenų!");
+            System.exit(0);
         }
     }
 
@@ -44,6 +45,7 @@ public class ReaderWriter {
 
             mainModel.getObjectMapper().writeValue(examsFile, mainModel.getExamsList());
         } catch (Exception e) {
+            System.out.println("Nepavyko išsaugoti duomenų!");
         }
     }
 }
