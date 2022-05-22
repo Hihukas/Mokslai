@@ -15,4 +15,30 @@
     "answers" : [ "a", "b", "c" ],
     "correctAnswer" : 3
   } ]
+}, {
+  "id" : "bf3bce7e-3ce2-466d-9813-8f0ad1ac0ce3",
+  "examType" : "TEST",
+  "name" : "OOP2",
+  "questions" : [ {
+    "question" : "Klausimas?\nAtsakymų variantai:",
+    "answers" : [ "a", "b", "c", "d" ],
+    "correctAnswer" : 4
+  }, {
+    "question" : "Klausimas?\nAtsakymų variantai:",
+    "answers" : [ "a", "b", "c", "d", "e" ],
+    "correctAnswer" : 1
+  } ]
+}, {
+  "id" : "0de8e319-3b1c-4e47-93f2-1bd1713ccf8f",
+  "examType" : "TEST",
+  "name" : "OOP3",
+  "questions" : [ {
+    "question" : "Klausimas?\nAtsakymų variantai:",
+    "answers" : [ "a", "b" ],
+    "correctAnswer" : 1
+  }, {
+    "question" : "Klausimas?\nAtsakymų variantai:",
+    "answers" : [ "a", "b", "c" ],
+    "correctAnswer" : 3
+  } ]
 } ]

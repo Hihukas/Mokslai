@@ -35,26 +35,54 @@ public class ExamsCreateWindow extends AbstractWindow {
     }
 
     public void questionsCreate(List<Question> questions) {
-        System.out.println("Įveskite norimą klausimų kiekį:");
-        int examQuestionsQuantity = (mainModel.getScanner().nextInt() - 1);
-        mainModel.getScanner().nextLine();
+        int examQuestionsQuantity = 0;
 
-        for (int i = 0; i <= examQuestionsQuantity; i++) {
+        for (int a = 0; a < 1; a++) {
+            System.out.println("Įveskite norimą klausimų kiekį:");
+            try {
+                examQuestionsQuantity = Integer.parseInt(mainModel.getScanner().nextLine()) - 1;
+            } catch (NumberFormatException e) {
+                System.out.println("Galimi tik skaičiai!\n");
+                a--;
+            }
+        }
+
+        for (int b = 0; b <= examQuestionsQuantity; b++) {
             System.out.println("Sukurkite klausimą:");
             String question = (mainModel.getScanner().nextLine() + "\nAtsakymų variantai:");
 
-            System.out.println("Įveskite norimą atsakymų kiekį:");
-            int examQuestionsAnswersQuantity = (mainModel.getScanner().nextInt() - 1);
-            mainModel.getScanner().nextLine();
+            int examQuestionsAnswersQuantity = 0;
+            for (int c = 0; c < 1; c++) {
+                System.out.println("Įveskite norimą atsakymų kiekį:");
+                try {
+                    examQuestionsAnswersQuantity = Integer.parseInt(mainModel.getScanner().nextLine()) - 1;
+                } catch (NumberFormatException e) {
+                    System.out.println("Galimi tik skaičiai!\n");
+                    c--;
+                }
+            }
+
             List<String> answers = new ArrayList<>();
-            for (int a = 0; a <= examQuestionsAnswersQuantity; a++) {
+
+            for (int d = 0; d <= examQuestionsAnswersQuantity; d++) {
                 System.out.println("Įrašykite atsakymą:");
                 String answer = mainModel.getScanner().nextLine();
                 answers.add(answer);
             }
-            System.out.println("Nurodykite teisingą atsakymą:");
-            int correctAnswer = mainModel.getScanner().nextInt();
-            mainModel.getScanner().nextLine();
+
+            int correctAnswer = 0;
+            for (int f = 0; f < 1; f++) {
+                System.out.println("Nurodykite teisingą atsakymą:");
+                try {
+                    correctAnswer = Integer.parseInt(mainModel.getScanner().nextLine());
+                    if (correctAnswer <= 0 || correctAnswer > (examQuestionsAnswersQuantity + 1)) {
+                        throw new IndexOutOfBoundsException();
+                    }
+                } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                    System.out.println("Tokio atsakymo nėra!\n");
+                    f--;
+                }
+            }
 
             Question questionObject = new Question();
             questionObject.setQuestion(question);
@@ -65,4 +93,5 @@ public class ExamsCreateWindow extends AbstractWindow {
         }
     }
 }
+
 

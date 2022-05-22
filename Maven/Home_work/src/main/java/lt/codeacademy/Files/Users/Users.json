@@ -12,4 +12,11 @@
   "password" : "Studentas",
   "name" : "Studentas",
   "surname" : "Studentas"
+}, {
+  "id" : "5ae1045d-1ae3-48b5-a8b2-157a2d8963b4",
+  "userType" : "STUDENT",
+  "username" : "Studentas2",
+  "password" : "Studentas2",
+  "name" : "Studentas2",
+  "surname" : "Studentas2"
 } ]

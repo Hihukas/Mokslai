@@ -5,10 +5,7 @@ import lt.codeacademy.Windows.*;
 
 public class Main {
 
-
-    public static void main(String[] args) throws Exception {
-//        FrameFactory frameFactory = new FrameFactory(createTestState());
-        //       new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+    public static void main(String[] args) {
         MainModel mainModel = new MainModel();
 
         ReaderWriter readerWriter = new ReaderWriter(mainModel);
@@ -16,6 +13,5 @@ public class Main {
 
         MainWindow mainWindow = new MainWindow(mainModel);
         mainWindow.window();
-
     }
 }

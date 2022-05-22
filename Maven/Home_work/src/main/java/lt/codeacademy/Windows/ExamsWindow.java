@@ -42,11 +42,10 @@ public class ExamsWindow extends AbstractWindow {
                 })
                 .forEach(System.out::println);
 
-
         for (int i = 0; i < examsToTake.size(); i++) {
             try {
                 examChoose(examsToTake);
-            } catch (IndexOutOfBoundsException | InputMismatchException | NumberFormatException e) {
+            } catch (IndexOutOfBoundsException | NumberFormatException e) {
                 System.out.println("Tokio egzamino nėra! Rinkites dar kartą.");
                 i--;
             }

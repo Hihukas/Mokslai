@@ -11,7 +11,6 @@ import java.util.stream.IntStream;
 public class QuestionsWindow extends AbstractWindow {
     private final MainModel mainModel;
     private final List<Integer> questionsAnswers = new LinkedList<>();
-    private final List<StudentsAnswers> studentsAnswers = new ArrayList<>();
 
     public QuestionsWindow(MainModel mainModel) {
         this.mainModel = mainModel;
@@ -22,17 +21,19 @@ public class QuestionsWindow extends AbstractWindow {
         System.out.printf("\nPasirinktas egzaminas:\nID: %s\nEgzamino tipas: %s\nPavadinimas: %s\n", mainModel.getExam().getId(), mainModel.getExam().getExamType(), mainModel.getExam().getName());
 
         List<Question> examQuestions = mainModel.getExam().getQuestions();
+
         for (int i = 0; i < mainModel.getExam().getQuestions().size(); i++) {
             Question question = examQuestions.get(i);
             try {
                 printQuestion(question.getQuestion(), question.getAnswers());
-            } catch (InputMismatchException | NumberFormatException e) {
+            } catch (IndexOutOfBoundsException | NumberFormatException e) {
                 System.out.println("Tokio atsakymo nėra!");
                 i--;
             }
         }
 
         StudentsAnswers studentAnswers = createStudentAnswersObject();
+        List<StudentsAnswers> studentsAnswers = mainModel.getStudentsAnswersList();
         studentsAnswers.add(studentAnswers);
         mainModel.setStudentsAnswersList(studentsAnswers);
 
@@ -47,6 +48,7 @@ public class QuestionsWindow extends AbstractWindow {
                 .map(Question::getCorrectAnswer).toList();
 
         List<Integer> result = new ArrayList<>();
+
         for (int i = 0; i < mainModel.getExam().getQuestions().size(); i++) {
             if (correctAnswers.get(i).equals(questionsAnswers.get(i))) {
                 result.add(i);
@@ -80,7 +82,7 @@ public class QuestionsWindow extends AbstractWindow {
 
         int answerInput = Integer.parseInt(mainModel.getScanner().nextLine());
         if (answerInput < 1 || answerInput > answers.size()) {
-            throw new InputMismatchException();
+            throw new IndexOutOfBoundsException();
         }
         questionsAnswers.add(answerInput);
     }
