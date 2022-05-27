@@ -38,10 +38,18 @@ public class H2JdbcExample {
         main.printResultSet(resultSet);
 
         // insert query
-        prepareStatement = connection.prepareStatement("INSERT INTO PROJEKTAS (ID, PAVADINIMAS) values (?, ?)");
-        prepareStatement.setInt(1, 5);
-        prepareStatement.setString(2, "Testas");
-        prepareStatement.execute();
+//        prepareStatement = connection.prepareStatement("INSERT INTO PROJEKTAS (ID, PAVADINIMAS) values (?, ?)");
+//        prepareStatement.setInt(1, 5);
+//        prepareStatement.setString(2, "Testas");
+//        prepareStatement.execute();
+
+        // update query
+        prepareStatement = connection.prepareStatement("UPDATE PROJEKTAS SET PAVADINIMAS=? WHERE id=?");
+        prepareStatement.setInt(2, 5);
+        prepareStatement.setString(1, "Naujas pavadinimas");
+        prepareStatement.executeUpdate();
+
+
 
         // DB info
         DatabaseMetaData databaseMetaData = connection.getMetaData();
