@@ -29,12 +29,20 @@ public class H2JdbcExample {
 
         main.printResultSet(resultSet);
 
+        // Prepare statement
+//        statement = connection.createStatement();
+//        statement.executeQuery("Select * from PROJEKTAS WHERE id=" + 2);
+        PreparedStatement prepareStatement = connection.prepareStatement("SELECT * from PROJEKTAS WHERE id=?");
+        prepareStatement.setInt(1, 2);
+        resultSet = prepareStatement.executeQuery();
+        main.printResultSet(resultSet);
+
         // DB info
         DatabaseMetaData databaseMetaData = connection.getMetaData();
 
         ResultSet tables = databaseMetaData.getTables(null, "PUBLIC", null, null);
 
-        while(tables.next()){
+        while (tables.next()) {
             System.out.println(tables.getString(3));
 
         }
