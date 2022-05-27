@@ -12,7 +12,7 @@ public class ApplicationProperties {
 
     private ApplicationProperties() {
         properties = new Properties();
-        try (InputStream stream = this.getClass().getResourceAsStream(NAME)) {
+        try (InputStream stream = this.getClass().getClassLoader().getResourceAsStream(NAME)) {
             properties.load(stream);
         } catch (Exception e) {
             System.out.printf("Nepavyko nuskaityti %s failo\n", NAME);

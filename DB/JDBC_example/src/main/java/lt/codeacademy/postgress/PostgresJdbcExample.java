@@ -1,17 +1,17 @@
 package lt.codeacademy.postgress;
 
+import lt.codeacademy.ApplicationProperties;
+
 import java.sql.*;
 
 public class PostgresJdbcExample {
-    private static final String URL = "jdbc:postgresql://127.0.0.1/postgres";
-    private static final String NAME = "postgres";
-    private static final String PASSWORD = "postgres";
-
     public static void main(String[] args) {
         PostgresJdbcExample example = new PostgresJdbcExample();
 
         try {
-            Connection connection = DriverManager.getConnection(URL, NAME, PASSWORD);
+            Connection connection = DriverManager.getConnection(ApplicationProperties.getInstance().getValue("jdbc.postgres.url"),
+                    ApplicationProperties.getInstance().getValue("jdbc.postgres.name"),
+                    ApplicationProperties.getInstance().getValue("jdbc.postgres.password"));
 
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM public.\"Bank\"");
