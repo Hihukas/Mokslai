@@ -37,6 +37,12 @@ public class H2JdbcExample {
         resultSet = prepareStatement.executeQuery();
         main.printResultSet(resultSet);
 
+        // insert query
+        prepareStatement = connection.prepareStatement("INSERT INTO PROJEKTAS (ID, PAVADINIMAS) values (?, ?)");
+        prepareStatement.setInt(1, 5);
+        prepareStatement.setString(2, "Testas");
+        prepareStatement.execute();
+
         // DB info
         DatabaseMetaData databaseMetaData = connection.getMetaData();
 
