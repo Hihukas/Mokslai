@@ -37,6 +37,7 @@ public class PostgresJdbcExample {
             preparedStatement.setInt(1, 5);
             preparedStatement.execute();
 
+            example.updateValuesInResultSet(connection);
         } catch (SQLException e) {
             System.out.println("SQL exception" + e.getMessage());
         }
@@ -45,6 +46,19 @@ public class PostgresJdbcExample {
     private void printResult(ResultSet resultSet) throws SQLException {
         while (resultSet.next()) {
             System.out.println(resultSet.getInt("id") + " " + resultSet.getString("name") + " " + resultSet.getString("vat_code") + " " + resultSet.getInt("registration_code"));
+        }
+    }
+
+    private void updateValuesInResultSet(Connection connection) throws SQLException {
+        Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM public.\"Bank\"");
+
+        while (resultSet.next()) {
+            if (resultSet.getString("name").equals("Swedbank")) {
+                resultSet.updateString("name", resultSet.getString("name").toUpperCase());
+                resultSet.updateRow();
+            }
+
         }
     }
 }
