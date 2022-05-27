@@ -16,6 +16,15 @@ public class PostgresJdbcExample {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM public.\"Bank\"");
             example.printResult(resultSet);
+
+            // insert example
+//            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO public.\"Bank\" values (?, ?, ?, ?)");
+//
+//            preparedStatement.setInt(1, 5);
+//            preparedStatement.setString(2, "Šiauliai bankas");
+//            preparedStatement.setString(3, "Š");
+//            preparedStatement.setInt(4, 5);
+//            preparedStatement.execute();
         } catch (SQLException e) {
             System.out.println("SQL exception" + e.getMessage());
         }
