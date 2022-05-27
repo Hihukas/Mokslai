@@ -44,10 +44,17 @@ public class H2JdbcExample {
 //        prepareStatement.execute();
 
         // update query
-        prepareStatement = connection.prepareStatement("UPDATE PROJEKTAS SET PAVADINIMAS=? WHERE id=?");
-        prepareStatement.setInt(2, 5);
-        prepareStatement.setString(1, "Naujas pavadinimas");
-        prepareStatement.executeUpdate();
+//        prepareStatement = connection.prepareStatement("UPDATE PROJEKTAS SET PAVADINIMAS=? WHERE id=?");
+//        prepareStatement.setInt(2, 5);
+//        prepareStatement.setString(1, "Naujas pavadinimas");
+//        prepareStatement.executeUpdate();
+
+        // delete query
+        prepareStatement = connection.prepareStatement("DELETE FROM PROJEKTAS WHERE id=?");
+        prepareStatement.setInt(1, 5);
+        prepareStatement.execute();
+
+
 
 
 
