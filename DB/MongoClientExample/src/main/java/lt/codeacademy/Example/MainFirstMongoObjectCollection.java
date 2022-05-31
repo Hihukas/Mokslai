@@ -11,7 +11,7 @@ import org.bson.Document;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainFirstMongoObjectColelction {
+public class MainFirstMongoObjectCollection {
     public static void main(String[] args) {
         MongoClient mongoClient = MongoClientProvider.getMongoClient();
         MongoDatabase mongoDatabase = mongoClient.getDatabase("FirstTaskDB");
@@ -20,7 +20,7 @@ public class MainFirstMongoObjectColelction {
         List<Exams> examsList = new ArrayList<>();
         FindIterable<Document> documents = collection.find();
         for(Document document: documents) {
-            examsList.add(new Exams(document.getObjectId("id").toString(), document.getString("name"), document.getString("surname"), document.getInteger("pazymys")));
+            examsList.add(new Exams(document.getObjectId("id"), document.getString("name"), document.getString("surname"), document.getInteger("pazymys")));
         }
 
         examsList.forEach(System.out::println);
