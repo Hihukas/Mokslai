@@ -15,7 +15,7 @@ public class Exams{
     public Exams() {
     }
 
-    public Exams(ObjectId id, String name, String surname, int pazymys) {
+    public Exams(ObjectId id, String name, String surname) {
         this.id = id;
         this.name = name;
         this.surname = surname;

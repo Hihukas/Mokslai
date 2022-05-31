@@ -20,7 +20,7 @@ public class MainFirstMongoObjectCollection {
         List<Exams> examsList = new ArrayList<>();
         FindIterable<Document> documents = collection.find();
         for(Document document: documents) {
-            examsList.add(new Exams(document.getObjectId("id"), document.getString("name"), document.getString("surname"), document.getInteger("pazymys")));
+            examsList.add(new Exams(document.getObjectId("id"), document.getString("name"), document.getString("surname")));
         }
 
         examsList.forEach(System.out::println);
