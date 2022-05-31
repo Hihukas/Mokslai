@@ -20,16 +20,16 @@ public class MainFirstMongoClient {
 
         MongoIterable<String> collectionNames = mongoDatabase.listCollectionNames();
 
-        for(String name: collectionNames){
+        for (String name : collectionNames) {
             System.out.println(name);
         }
 
         System.out.println(mongoDatabase.getName());
 
-       ListCollectionsIterable<Document> collections = mongoDatabase.listCollections();
-       for(Document document: collections){
-           System.out.println(document);
-           System.out.println(document.get("name"));
-       }
+        ListCollectionsIterable<Document> collections = mongoDatabase.listCollections();
+        for (Document document : collections) {
+            System.out.println(document);
+            System.out.println(document.get("name"));
+        }
     }
 }
