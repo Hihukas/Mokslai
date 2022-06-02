@@ -13,7 +13,8 @@
         <property name="show_sql">true</property>
         <!--Sukursime DB kiekvieną kartą iš naujo-->
         <property name="hibernate.hbm2ddl.auto">create-drop</property>
-
-        <mapping resource="user.hbm.xml"/>
+        <!--Reikia tik tada, kai mapinama per xml-->
+        <!--<mapping resource="user.hbm.xml"/>-->
+        <mapping class="lt.codeacademy.Entity.User"/>
     </session-factory>
 </hibernate-configuration>
