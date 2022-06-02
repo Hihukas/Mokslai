@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "users")
+//@Entity
+//@Table(name = "users")
 public class User {
     //    @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY);
@@ -18,6 +18,6 @@ public class User {
     private Long id;
     private String name;
     private String surname;
-    @Column(name = "e-mail", nullable = false)
+//    @Column(name = "e-mail", nullable = false)
     private String email;
 }

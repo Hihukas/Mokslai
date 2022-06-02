@@ -14,4 +14,8 @@ public class UserService {
         User user = new User(null, "Aleksandras", "Dudėnas", "aleks.dudenas@gmail.com");
         repository.createUser(user);
     }
+
+    public void showAllUsers(){
+        repository.getUsers().forEach(System.out::println);
+    }
 }

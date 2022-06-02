@@ -6,6 +6,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import java.util.Collections;
+import java.util.List;
+
 public class UserRepository {
     private final SessionFactory sessionFactory;
 
@@ -27,5 +30,15 @@ public class UserRepository {
                 transaction.rollback();
             }
         }
+    }
+
+    public List<User> getUsers() {
+        try (Session session = sessionFactory.openSession()) {
+            return session.createQuery("FROM User", User.class).list();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return Collections.emptyList();
     }
 }
