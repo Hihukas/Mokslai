@@ -1,0 +1,19 @@
+<hibernate-configuration xmlns="http://www.hibernate.org/xsd/orm/cfg">
+    <session-factory>
+        <!--Dialect, su kuria DB dirbame-->
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <!--PosgreSQL drivers-->
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <!--URL į DB-->
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost/hibernate</property>
+        <!--Prisijungimo duomenys-->
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.password">postgres</property>
+        <!--Rodys SQL užklausas į serverį-->
+        <property name="show_sql">true</property>
+        <!--Sukursime DB kiekvieną kartą iš naujo-->
+        <property name="hibernate.hbm2ddl.auto">create-drop</property>
+
+        <mapping resource="user.hbm.xml"/>
+    </session-factory>
+</hibernate-configuration>
