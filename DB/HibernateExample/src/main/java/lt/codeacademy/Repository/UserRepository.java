@@ -37,6 +37,10 @@ public class UserRepository {
 //        }
     }
 
+    public void deleteUser(User user){
+        modifyEntity(session -> session.delete(user));
+    }
+
     public List<User> getUsers() {
         try (Session session = sessionFactory.openSession()) {
             return session.createQuery("FROM User", User.class).list();

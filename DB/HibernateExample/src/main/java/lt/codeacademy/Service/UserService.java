@@ -44,4 +44,9 @@ public class UserService {
     public void updateUserEmailById(){
         repository.updateEmailById("jonas.jonaitis@gmail.com", 4L);
     }
+
+    public void deleteUser(){
+        User user = repository.getUsers().get(0);
+        repository.deleteUser(user);
+    }
 }
