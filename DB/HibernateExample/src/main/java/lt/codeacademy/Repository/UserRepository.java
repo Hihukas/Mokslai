@@ -9,6 +9,7 @@ import org.hibernate.query.Query;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class UserRepository {
@@ -19,19 +20,21 @@ public class UserRepository {
     }
 
     public void createUser(User user) {
-        Transaction transaction = null;
-        try (Session session = sessionFactory.openSession()) {
-            transaction = session.beginTransaction();
 
-            session.persist(user);
-
-            transaction.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            if (transaction != null) {
-                transaction.rollback();
-            }
-        }
+        modifyEntity(session -> session.persist(user));
+//        Transaction transaction = null;
+//        try (Session session = sessionFactory.openSession()) {
+//            transaction = session.beginTransaction();
+//
+//            session.persist(user);
+//
+//            transaction.commit();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            if (transaction != null) {
+//                transaction.rollback();
+//            }
+//        }
     }
 
     public List<User> getUsers() {
@@ -89,6 +92,22 @@ public class UserRepository {
             query.setParameter("email", email);
             query.setParameter("id", id);
             query.executeUpdate();
+
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+    }
+
+    private void modifyEntity(Consumer<Session> consumer){
+        Transaction transaction = null;
+        try (Session session = sessionFactory.openSession()) {
+            transaction = session.beginTransaction();
+
+            consumer.accept(session);
 
             transaction.commit();
         } catch (Exception e) {
