@@ -8,6 +8,7 @@ import org.hibernate.Transaction;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Function;
 
 public class UserRepository {
     private final SessionFactory sessionFactory;
@@ -53,8 +54,19 @@ public class UserRepository {
     }
 
     public User getUserById(Long id){
+        return getResult(session -> session.get(User.class, id));
+//        try(Session session = sessionFactory.openSession()){
+//            return session.get(User.class, id);
+//        } catch (Exception e){
+//            e.printStackTrace();
+//        }
+//
+//        return null;
+    }
+
+    private <T> T getResult(Function<Session, T> function){
         try(Session session = sessionFactory.openSession()){
-            return session.get(User.class, id);
+            return function.apply(session);
         } catch (Exception e){
             e.printStackTrace();
         }
