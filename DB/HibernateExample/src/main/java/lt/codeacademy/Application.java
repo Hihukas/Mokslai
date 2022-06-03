@@ -11,6 +11,7 @@ public class Application {
 //        userService.showUsers(5L);
         userService.updateUser();
         userService.updateUserEmailById();
-        userService.deleteUser();
+//        userService.deleteUser();
+        userService.deleteUserById(4L);
     }
 }

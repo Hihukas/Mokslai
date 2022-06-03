@@ -49,4 +49,10 @@ public class UserService {
         User user = repository.getUsers().get(0);
         repository.deleteUser(user);
     }
+
+    public void deleteUserById(Long id){
+        User user = new User();
+        user.setId(id);
+        repository.deleteUser(user);
+    }
 }

@@ -16,6 +16,6 @@ public class User {
     public Long id;
     private String name;
     private String surname;
-    @Column(name = "e-mail", nullable = false)
+    @Column(name = "e-mail")
     private String email;
 }
