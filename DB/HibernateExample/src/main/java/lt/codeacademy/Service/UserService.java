@@ -55,4 +55,8 @@ public class UserService {
         user.setId(id);
         repository.deleteUser(user);
     }
+
+    public void deleteUserByEmail(String email){
+        repository.deleteUserByEmail(email);
+    }
 }

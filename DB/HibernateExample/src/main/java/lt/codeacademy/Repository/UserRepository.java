@@ -37,8 +37,18 @@ public class UserRepository {
 //        }
     }
 
-    public void deleteUser(User user){
+    public void deleteUser(User user) {
         modifyEntity(session -> session.delete(user));
+    }
+
+    public void deleteUserByEmail(String email) {
+        modifyEntity(session -> {
+            Query query = session.createQuery("delete user where email=:email");
+            query.setParameter("email", email);
+
+            query.executeUpdate();
+        });
+
     }
 
     public List<User> getUsers() {
@@ -87,7 +97,7 @@ public class UserRepository {
         }
     }
 
-    public void updateEmailById(String email, Long id){
+    public void updateEmailById(String email, Long id) {
         Transaction transaction = null;
         try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
@@ -106,7 +116,7 @@ public class UserRepository {
         }
     }
 
-    private void modifyEntity(Consumer<Session> consumer){
+    private void modifyEntity(Consumer<Session> consumer) {
         Transaction transaction = null;
         try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();

@@ -9,9 +9,10 @@ public class Application {
         userService.showAllUsers();
 //        userService.showUsersEmails();
 //        userService.showUsers(5L);
-        userService.updateUser();
-        userService.updateUserEmailById();
+//        userService.updateUser();
+//        userService.updateUserEmailById();
 //        userService.deleteUser();
-        userService.deleteUserById(4L);
+//        userService.deleteUserById(4L);
+        userService.deleteUserByEmail("p.petraitis@gmail.com");
     }
 }
