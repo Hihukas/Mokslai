@@ -8,6 +8,8 @@ public class Application {
 //        userService.createUser();
         userService.showAllUsers();
 //        userService.showUsersEmails();
-        userService.showUsers(5L);
+//        userService.showUsers(5L);
+        userService.updateUser();
+        userService.updateUserEmailById();
     }
 }

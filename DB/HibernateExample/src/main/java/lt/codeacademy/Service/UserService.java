@@ -26,4 +26,22 @@ public class UserService {
     public void showUsers(Long id){
         System.out.println(repository.getUserById(id));
     }
+
+    public void updateUser(){
+        User user = repository.getUserById(3L);
+
+        if(user == null){
+            return;
+        }
+
+        user.setName("Petras");
+        user.setSurname("Petraitis");
+        user.setEmail("p.petraitis@gmail.com");
+
+        repository.updateUser(user);
+    }
+
+    public void updateUserEmailById(){
+        repository.updateEmailById("jonas.jonaitis@gmail.com", 4L);
+    }
 }
