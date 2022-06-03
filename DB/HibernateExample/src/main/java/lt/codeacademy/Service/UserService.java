@@ -15,7 +15,15 @@ public class UserService {
         repository.createUser(user);
     }
 
-    public void showAllUsers(){
+    public void showAllUsers() {
         repository.getUsers().forEach(System.out::println);
+    }
+
+    public void showUsersEmails() {
+        repository.getUsersEmails().forEach(System.out::println);
+    }
+
+    public void showUsers(Long id){
+        System.out.println(repository.getUserById(id));
     }
 }

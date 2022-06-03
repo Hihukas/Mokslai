@@ -41,4 +41,24 @@ public class UserRepository {
 
         return Collections.emptyList();
     }
+
+    public List<String> getUsersEmails(){
+        try(Session session = sessionFactory.openSession()){
+            return session.createQuery("Select email from User", String.class).list();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return Collections.emptyList();
+    }
+
+    public User getUserById(Long id){
+        try(Session session = sessionFactory.openSession()){
+            return session.get(User.class, id);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 }

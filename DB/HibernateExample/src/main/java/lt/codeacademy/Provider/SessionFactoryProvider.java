@@ -10,7 +10,7 @@ import java.util.Properties;
 public class SessionFactoryProvider {
 
     private static SessionFactoryProvider instance;
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
 
 
     private SessionFactoryProvider(){
