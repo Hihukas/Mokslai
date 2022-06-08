@@ -30,4 +30,17 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER) //bidirection relation
     private Set<Address> addresses;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinTable(
+//            name = "our_table",
+//            joinColumns = {
+//                    @JoinColumn(name="user_id", referencedColumnName = "id")
+//            },
+//            inverseJoinColumns = {
+//                    @JoinColumn(name="company_id", referencedColumnName = "id")
+//            }
+//    )
+    private Set<Company> companies;
+
 }

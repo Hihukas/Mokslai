@@ -2,6 +2,7 @@ package lt.codeacademy.Service;
 
 import lt.codeacademy.Data.Gender;
 import lt.codeacademy.Entity.Address;
+import lt.codeacademy.Entity.Company;
 import lt.codeacademy.Entity.Passport;
 import lt.codeacademy.Entity.User;
 import lt.codeacademy.Repository.UserRepository;
@@ -21,10 +22,16 @@ public class UserService {
         Address address1 = new Address(null, "Lithuania", "Kaunas", "Savanoarių a. 13", "LT-xxxxx");
         Set<Address> addressSet = Set.of(address, address1);
 
-        User user = new User(null, "Aleksandras", "Dudėnas", "aleks.dudenas@gmail.com", passport, addressSet);
+        Company company = new Company("Zuvis ir Ko");
+        Company company1 = new Company("Petro saldainiai");
+
+        User user = new User(null, "Aleksandras", "Dudėnas", "aleks.dudenas@gmail.com", passport, addressSet, Set.of(company1, company));
         passport.setUser(user);
         address.setUser(user);
         address1.setUser(user);
+
+//        company.setUsers(Set.of(user));
+//        company1.setUsers(Set.of(user));
         repository.createUser(user);
     }
 
