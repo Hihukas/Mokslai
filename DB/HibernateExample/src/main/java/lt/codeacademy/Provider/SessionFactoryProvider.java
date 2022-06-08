@@ -54,7 +54,7 @@ public class SessionFactoryProvider {
         properties.put(Environment.USER, "postgres");
         properties.put(Environment.PASS, "postgres");
         properties.put(Environment.SHOW_SQL, "true");
-        properties.put(Environment.HBM2DDL_AUTO, "create-drop");
+        properties.put(Environment.HBM2DDL_AUTO, "update");
 
         return properties;
     }

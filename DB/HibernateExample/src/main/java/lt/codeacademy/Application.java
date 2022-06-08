@@ -10,6 +10,7 @@ public class Application {
         userService.createUser();
 
         passportService.showAllPassports();
+        userService.showFilteredUsers();
 //        userService.showAllUsers();
 ////        userService.showUsersEmails();
 ////        userService.showUsers(5L);

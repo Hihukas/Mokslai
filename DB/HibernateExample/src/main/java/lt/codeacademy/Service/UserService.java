@@ -79,4 +79,8 @@ public class UserService {
     public void deleteUserByEmail(String email){
         repository.deleteUserByEmail(email);
     }
+
+    public void showFilteredUsers(){
+        repository.getFilteredUsers().forEach(System.out::println);
+    }
 }

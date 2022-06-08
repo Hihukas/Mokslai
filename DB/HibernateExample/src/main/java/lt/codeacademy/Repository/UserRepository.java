@@ -1,11 +1,17 @@
 package lt.codeacademy.Repository;
 
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import lt.codeacademy.Entity.User;
 import lt.codeacademy.Provider.SessionFactoryProvider;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.hibernate.query.criteria.HibernateCriteriaBuilder;
+import org.hibernate.query.criteria.JpaCriteriaQuery;
+import org.hibernate.query.criteria.JpaPredicate;
+import org.hibernate.query.criteria.JpaRoot;
 
 import java.util.Collections;
 import java.util.List;
@@ -136,4 +142,26 @@ public class UserRepository extends AbstractRepository {
 //
 //        return null;
 //    }
+
+    public List<User> getFilteredUsers() {
+        return getResult(session -> {
+            HibernateCriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            JpaCriteriaQuery<User> query = criteriaBuilder.createQuery(User.class);
+            Root<User> root = query.from(User.class);
+
+//            query.select(root); all users
+//            query.select(root).where(criteriaBuilder.like(root.get("name"), "Alek%"));
+//            query.select(root).where(criteriaBuilder.equal(root.get("id"), 2));
+
+            Predicate equal = criteriaBuilder.equal(root.get("name"), "Aleksandras");
+            Predicate like = criteriaBuilder.equal(root.get("surname"), "%ud%");
+            Predicate id = criteriaBuilder.equal(root.get("id"), 2);
+
+
+            query.select(root).where(criteriaBuilder.and(equal, like, id));
+
+            return session.createQuery(query).list();
+        });
+    }
+
 }
