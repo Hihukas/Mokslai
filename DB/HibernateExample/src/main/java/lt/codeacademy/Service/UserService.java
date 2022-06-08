@@ -15,6 +15,7 @@ public class UserService {
     public void createUser() {
         Passport passport = new Passport(null, "5644465", "LTU", Gender.MALE);
         User user = new User(null, "Aleksandras", "Dudėnas", "aleks.dudenas@gmail.com", passport);
+        passport.setUser(user);
         repository.createUser(user);
     }
 
