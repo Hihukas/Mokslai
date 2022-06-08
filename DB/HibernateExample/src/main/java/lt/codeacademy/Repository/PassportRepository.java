@@ -7,19 +7,16 @@ import org.hibernate.SessionFactory;
 
 import java.util.List;
 
-public class PassportRepository {
-    private final SessionFactory sessionFactory;
-
-    public PassportRepository() {
-        sessionFactory = SessionFactoryProvider.getInstance().getSessionFactory();
-    }
+public class PassportRepository extends AbstractRepository {
 
     public List<Passport> getPassport() {
-        try (Session session = sessionFactory.openSession()) {
-            return session.createQuery("From Passport", Passport.class).list();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+
+        return getResult(session -> session.createQuery("From Passport", Passport.class).list());
+//        try (Session session = sessionFactory.openSession()) {
+//            return session.createQuery("From Passport", Passport.class).list();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return null;
     }
 }
