@@ -8,7 +8,6 @@ import lombok.Setter;
 
 @Setter
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name= "Address")
@@ -21,4 +20,16 @@ public class Address {
     private String city;
     private String street;
     private String postCode;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public Address(Long id, String country, String city, String street, String postCode) {
+        this.id = id;
+        this.country = country;
+        this.city = city;
+        this.street = street;
+        this.postCode = postCode;
+    }
 }

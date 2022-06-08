@@ -25,7 +25,9 @@ public class User {
     @JoinColumn(name = "passport_id")
     private Passport passport;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "addresses_id")
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER) unidirection relation
+//    @JoinColumn(name = "addresses_id")
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER) //bidirection relation
     private Set<Address> addresses;
 }

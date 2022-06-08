@@ -17,10 +17,14 @@ public class UserService {
 
     public void createUser() {
         Passport passport = new Passport(null, "5644465", "LTU", Gender.MALE);
-        Set<Address> addressSet = Set.of(new Address(null, "Lithuania", "Klaipėda", "Turgaus a. 12", "LT-91246"), new Address(null, "Lithuania", "Kaunas", "Savanoarių a. 13", "LT-xxxxx"));
+        Address address = new Address(null, "Lithuania", "Klaipėda", "Turgaus a. 12", "LT-91246");
+        Address address1 = new Address(null, "Lithuania", "Kaunas", "Savanoarių a. 13", "LT-xxxxx");
+        Set<Address> addressSet = Set.of(address, address1);
 
         User user = new User(null, "Aleksandras", "Dudėnas", "aleks.dudenas@gmail.com", passport, addressSet);
         passport.setUser(user);
+        address.setUser(user);
+        address1.setUser(user);
         repository.createUser(user);
     }
 
