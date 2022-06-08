@@ -1,5 +1,7 @@
 package lt.codeacademy.Service;
 
+import lt.codeacademy.Data.Gender;
+import lt.codeacademy.Entity.Passport;
 import lt.codeacademy.Entity.User;
 import lt.codeacademy.Repository.UserRepository;
 
@@ -11,7 +13,8 @@ public class UserService {
     }
 
     public void createUser() {
-        User user = new User(null, "Aleksandras", "Dudėnas", "aleks.dudenas@gmail.com");
+        Passport passport = new Passport(null, "5644465", "LTU", Gender.MALE);
+        User user = new User(null, "Aleksandras", "Dudėnas", "aleks.dudenas@gmail.com", passport);
         repository.createUser(user);
     }
 

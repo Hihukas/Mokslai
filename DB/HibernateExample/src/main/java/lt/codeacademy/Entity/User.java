@@ -18,4 +18,8 @@ public class User {
     private String surname;
     @Column(name = "e-mail")
     private String email;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "passport_id")
+    private Passport passport;
 }

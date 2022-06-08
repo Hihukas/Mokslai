@@ -1,5 +1,6 @@
 package lt.codeacademy.Provider;
 
+import lt.codeacademy.Entity.Passport;
 import lt.codeacademy.Entity.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -22,6 +23,7 @@ public class SessionFactoryProvider {
 
         //Mapping all entities
         configuration.addAnnotatedClass(User.class);
+        configuration.addAnnotatedClass(Passport.class);
 
         sessionFactory = configuration.buildSessionFactory();
     }
@@ -47,7 +49,7 @@ public class SessionFactoryProvider {
         properties.put(Environment.USER, "postgres");
         properties.put(Environment.PASS, "postgres");
         properties.put(Environment.SHOW_SQL, "true");
-        properties.put(Environment.HBM2DDL_AUTO, "update");
+        properties.put(Environment.HBM2DDL_AUTO, "create-drop");
 
         return properties;
     }
