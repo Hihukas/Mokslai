@@ -1,5 +1,6 @@
 package lt.codeacademy.Provider;
 
+import lt.codeacademy.Entity.Address;
 import lt.codeacademy.Entity.Passport;
 import lt.codeacademy.Entity.User;
 import org.hibernate.SessionFactory;
@@ -24,6 +25,7 @@ public class SessionFactoryProvider {
         //Mapping all entities
         configuration.addAnnotatedClass(User.class);
         configuration.addAnnotatedClass(Passport.class);
+        configuration.addAnnotatedClass(Address.class);
 
         sessionFactory = configuration.buildSessionFactory();
     }
